@@ -109,18 +109,18 @@
                 </ul>
               </div>
               <div class="quote_btn-container">
-                <a href="">
+                <a href="joinwithus.jsp">
                   <i class="fa fa-user" aria-hidden="true"></i>
                   <span>
-                    Login
+                    Join With Us
                   </span>
                 </a>
-                <a href="">
+<!--                <a href="">
                   <i class="fa fa-user" aria-hidden="true"></i>
                   <span>
                     Sign Up
                   </span>
-                </a>
+                </a>-->
                 <form class="form-inline">
                   <button class="btn  my-2 my-sm-0 nav_search-btn" type="submit">
                     <i class="fa fa-search" aria-hidden="true"></i>
