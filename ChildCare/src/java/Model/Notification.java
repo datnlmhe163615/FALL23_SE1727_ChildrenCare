@@ -17,21 +17,12 @@ import lombok.Data;
 @Data
 @AllArgsConstructor
 
-public class Account {
+public class Notification {
     private int id;
-    private String email;
-    private String role;
-    private String password;
-    private String fullname;
-    private String avatar;
-    private String mobile;
-    private boolean gender;
-    private String address;
-    private boolean status;
+    private int account_id;
+    private String title;
+    private String content;
+    private Date read_at;
     private Date created_at;
     private Date updated_at;
-
-
-    
-    
 }

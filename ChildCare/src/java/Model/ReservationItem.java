@@ -17,21 +17,13 @@ import lombok.Data;
 @Data
 @AllArgsConstructor
 
-public class Account {
+public class ReservationItem {
     private int id;
-    private String email;
-    private String role;
-    private String password;
-    private String fullname;
-    private String avatar;
-    private String mobile;
-    private boolean gender;
-    private String address;
-    private boolean status;
+    private int staff_id;
+    private int reservation_id;
+    private int service_id;
+    private float service_price;
+    private int quantity;
     private Date created_at;
     private Date updated_at;
-
-
-    
-    
 }

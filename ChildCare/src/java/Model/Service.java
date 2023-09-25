@@ -17,21 +17,16 @@ import lombok.Data;
 @Data
 @AllArgsConstructor
 
-public class Account {
+public class Service {
     private int id;
-    private String email;
-    private String role;
-    private String password;
-    private String fullname;
-    private String avatar;
-    private String mobile;
-    private boolean gender;
-    private String address;
-    private boolean status;
+    private int category_id;
+    private String thumbnail;
+    private String title;
+    private float price;
+    private float sale_price;
+    private String brief_information;
+    private String decription;
+    private int status;
     private Date created_at;
     private Date updated_at;
-
-
-    
-    
 }

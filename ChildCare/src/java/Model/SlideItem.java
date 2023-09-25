@@ -17,21 +17,14 @@ import lombok.Data;
 @Data
 @AllArgsConstructor
 
-public class Account {
+public class SlideItem {
     private int id;
-    private String email;
-    private String role;
-    private String password;
-    private String fullname;
-    private String avatar;
-    private String mobile;
-    private boolean gender;
-    private String address;
-    private boolean status;
+    private int slide_id;
+    private String image;
+    private String title;
+    private String sub_title;
+    private String back_link;
+    private String decription;
     private Date created_at;
     private Date updated_at;
-
-
-    
-    
 }
