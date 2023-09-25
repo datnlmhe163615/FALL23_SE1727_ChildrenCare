@@ -27,7 +27,7 @@ public class Account {
     private String mobile;
     private boolean gender;
     private String address;
-    private boolean status;
+    private int status;
     private Date created_at;
     private Date updated_at;
 
