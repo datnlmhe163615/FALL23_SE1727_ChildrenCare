@@ -8,6 +8,8 @@ import DBContext.DBContext;
 import Model.Account;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
 
 /**
  *
@@ -44,5 +46,74 @@ public class AccountDAO extends DBContext {
         }
         return null;
 
+    }
+    public ArrayList<Account> getAccount(int index) {
+        ArrayList<Account> list = new ArrayList<>();
+        try {
+            String sql = "SELECT * FROM [Account] order by fullName, email\n"
+                    + "OFFSET ? ROWS FETCH NEXT 9 ROWS ONLY";
+            PreparedStatement ps = connection.prepareStatement(sql);
+            ps.setInt(1, (index - 1) * 6);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                list.add(new Account(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5), rs.getString(6), rs.getString(7),
+                        rs.getBoolean(8), rs.getString(9), rs.getInt(10), rs.getDate(11), rs.getDate(12)));
+            }
+        } catch (SQLException e) {
+
+        }
+        return list;
+    }
+
+    public int getNumberAccount() {
+        ArrayList<Account> list = new ArrayList<>();
+        String sql = "SELECT count(*) FROM [Account]";
+        try {
+            PreparedStatement ps = connection.prepareStatement(sql);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                return rs.getInt(1);
+            }
+        } catch (SQLException e) {
+        }
+        return 0;
+    }
+
+    public Account getAccountById(int id) {
+        try {
+            String sql = "SELECT * FROM [Account] where id = ?";
+            PreparedStatement ps = connection.prepareStatement(sql);
+            ps.setInt(1, id);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                Account acc = new Account(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5), rs.getString(6), rs.getString(7),
+                        rs.getBoolean(8), rs.getString(9), rs.getInt(10), rs.getDate(11), rs.getDate(12));
+                return acc;
+            }
+        } catch (SQLException e) {
+
+        }
+        return null;
+    }
+
+    public ArrayList<Account> searchAccount(String search, int index) {
+        ArrayList<Account> list = new ArrayList<>();
+        String sql = "SELECT * FROM [Account] where fullName like ? OR email like ? OR mobile like ? order by fullName, email\n"
+                + "OFFSET ? ROWS FETCH NEXT 9 ROWS ONLY ";
+        try {
+            PreparedStatement ps = connection.prepareStatement(sql);
+            ps.setString(1, "%" + search + "%");
+            ps.setString(2, "%" + search + "%");
+            ps.setString(3, "%" + search + "%");
+            ps.setInt(4, (index - 1) * 6);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                list.add(new Account(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5), rs.getString(6), rs.getString(7),
+                        rs.getBoolean(8), rs.getString(9), rs.getInt(10), rs.getDate(11), rs.getDate(12)));
+            }
+        } catch (SQLException e) {
+
+        }
+        return list;
     }
 }
