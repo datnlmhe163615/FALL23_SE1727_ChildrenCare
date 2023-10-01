@@ -12,6 +12,10 @@
         <servlet-name>searchAccount</servlet-name>
         <servlet-class>Controller.searchAccount</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>services</servlet-name>
+        <servlet-class>Controller.services</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>manageUser</servlet-name>
         <url-pattern>/manageUser</url-pattern>
@@ -23,6 +27,10 @@
     <servlet-mapping>
         <servlet-name>searchAccount</servlet-name>
         <url-pattern>/searchAccount</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>services</servlet-name>
+        <url-pattern>/services</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
