@@ -31,6 +31,9 @@ public class Account {
     private Date created_at;
     private Date updated_at;
 
+    public Account() {
+    }
+
 
     
     

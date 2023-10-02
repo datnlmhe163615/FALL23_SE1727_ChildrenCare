@@ -24,5 +24,10 @@ public class PostCategory {
     private String thumbnail;
     private Date created_at;
     private Date updated_at;
+
+    public PostCategory() {
+    }
+
+   
     
 }

@@ -29,4 +29,9 @@ public class Service {
     private int status;
     private Date created_at;
     private Date updated_at;
+
+    public Service() {
+    }
+    
+    
 }

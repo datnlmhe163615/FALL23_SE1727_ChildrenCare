@@ -24,4 +24,9 @@ public class ServiceCategory {
     private String decription;
     private Date created_at;
     private Date updated_at;
+
+    public ServiceCategory() {
+    }
+    
+    
 }

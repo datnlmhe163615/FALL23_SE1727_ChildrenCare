@@ -24,6 +24,46 @@
         <servlet-name>searchAccount</servlet-name>
         <url-pattern>/searchAccount</url-pattern>
     </servlet-mapping>
+    <servlet>
+        <servlet-name>HomeController</servlet-name>
+        <servlet-class>Controller.HomeController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>BlogController</servlet-name>
+        <servlet-class>Controller.BlogController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>BlogDeatailsController</servlet-name>
+        <servlet-class>Controller.BlogDeatailsController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>FeedbackControoller</servlet-name>
+        <servlet-class>Controller.FeedbackControoller</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>AdminHomeController</servlet-name>
+        <servlet-class>Controller.AdminHomeController</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>HomeController</servlet-name>
+        <url-pattern>/home</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>BlogController</servlet-name>
+        <url-pattern>/blog</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>BlogDeatailsController</servlet-name>
+        <url-pattern>/blogdeatails</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>FeedbackControoller</servlet-name>
+        <url-pattern>/feedback</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AdminHomeController</servlet-name>
+        <url-pattern>/admin</url-pattern>
+    </servlet-mapping>
     <session-config>
         <session-timeout>
             30

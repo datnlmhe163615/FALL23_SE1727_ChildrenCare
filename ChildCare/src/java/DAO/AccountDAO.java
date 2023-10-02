@@ -116,4 +116,36 @@ public class AccountDAO extends DBContext {
         }
         return list;
     }
+    
+    public ArrayList<Account> listAccountdoctor() {
+        ArrayList<Account> AcountModers = new ArrayList<>();
+        String sql = "SELECT [id]\n"
+                + "      ,[email]\n"
+                + "      ,[role]\n"
+                + "      ,[fullName]\n"
+                + "      ,[avatar]\n"
+                + "      ,[status]\n"
+                + "      ,[createdAt]\n"
+                + "      ,[updatedAt]\n"
+                + "  FROM [dbo].[Account]  where status= 3";
+
+        try ( PreparedStatement pt = connection.prepareStatement(sql)) {
+            ResultSet rs = pt.executeQuery();
+            while (rs.next()) {
+                Account acountModer = new Account();
+                acountModer.setId(rs.getInt("id"));
+                acountModer.setEmail(rs.getString("email"));
+                acountModer.setRole(rs.getString("role"));
+                acountModer.setFullname(rs.getString("fullName"));
+                acountModer.setAvatar(rs.getString("avatar"));
+                acountModer.setStatus(rs.getInt("status"));
+                acountModer.setUpdated_at(rs.getDate("updatedAt"));
+                AcountModers.add(acountModer);
+            }
+
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+        return AcountModers;
+    }
 }
