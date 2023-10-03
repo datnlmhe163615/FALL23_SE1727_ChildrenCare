@@ -25,4 +25,8 @@ public class Feedback {
     private String content;
     private Date created_at;
     private Date updated_at;
+
+    public Feedback() {
+    }
+    
 }
