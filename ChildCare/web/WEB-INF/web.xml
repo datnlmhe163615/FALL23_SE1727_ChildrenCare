@@ -12,10 +12,6 @@
         <servlet-name>searchAccount</servlet-name>
         <servlet-class>Controller.searchAccount</servlet-class>
     </servlet>
-    <servlet>
-        <servlet-name>services</servlet-name>
-        <servlet-class>Controller.services</servlet-class>
-    </servlet>
     <servlet-mapping>
         <servlet-name>manageUser</servlet-name>
         <url-pattern>/manageUser</url-pattern>
@@ -27,50 +23,6 @@
     <servlet-mapping>
         <servlet-name>searchAccount</servlet-name>
         <url-pattern>/searchAccount</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>services</servlet-name>
-        <url-pattern>/services</url-pattern>
-    </servlet-mapping>
-       <servlet>
-        <servlet-name>HomeController</servlet-name>
-        <servlet-class>Controller.HomeController</servlet-class>
-    </servlet>
-    <servlet>
-        <servlet-name>BlogController</servlet-name>
-        <servlet-class>Controller.BlogController</servlet-class>
-    </servlet>
-    <servlet>
-        <servlet-name>BlogDeatailsController</servlet-name>
-        <servlet-class>Controller.BlogDeatailsController</servlet-class>
-    </servlet>
-    <servlet>
-        <servlet-name>FeedbackControoller</servlet-name>
-        <servlet-class>Controller.FeedbackControoller</servlet-class>
-    </servlet>
-    <servlet>
-        <servlet-name>AdminHomeController</servlet-name>
-        <servlet-class>Controller.AdminHomeController</servlet-class>
-    </servlet>
-    <servlet-mapping>
-        <servlet-name>HomeController</servlet-name>
-        <url-pattern>/home</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>BlogController</servlet-name>
-        <url-pattern>/blog</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>BlogDeatailsController</servlet-name>
-        <url-pattern>/blogdeatails</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>FeedbackControoller</servlet-name>
-        <url-pattern>/feedback</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>AdminHomeController</servlet-name>
-        <url-pattern>/admin</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

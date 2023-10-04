@@ -29,8 +29,4 @@ public class Reservation {
     private float total;
     private Date created_at;
     private Date updated_at;
-
-    public Reservation() {
-    }
-    
 }
