@@ -5,6 +5,7 @@
 package Controller;
 
 import DAO.ServicesDAO;
+import Model.Service;
 import Model.ServiceCategory;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -58,11 +59,35 @@ public class services extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-       ServicesDAO dao = new ServicesDAO(); 
-       ArrayList<ServiceCategory> category = dao.getServiceCate(); 
-       request.setAttribute("category", category);
-       request.getRequestDispatcher("servicesList.jsp").forward(request, response);
-    } 
+       String mode = request.getParameter("mode");
+        if (mode == null) {
+            ServicesDAO dao = new ServicesDAO();
+            ArrayList<ServiceCategory> category = dao.getServiceCate();
+            request.setAttribute("category", category);
+            request.getRequestDispatcher("servicesCategory.jsp").forward(request, response);
+        } else {
+            String id = request.getParameter("id");
+            int cid = Integer.parseInt(id);
+            ServicesDAO dao = new ServicesDAO();
+            int total = dao.getNumberService(cid);
+            int numberPage = (int) Math.ceil((double) total / 9);
+            int index;
+            String currentPage = request.getParameter("index");
+            if (currentPage == null) {
+                index = 1;
+            } else {
+                index = Integer.parseInt(currentPage);
+            }
+            ArrayList<Service> services = dao.getService(cid, index);
+            ArrayList<ServiceCategory> category = dao.getServiceCate();
+            request.setAttribute("category", category);
+            request.setAttribute("services", services);
+            request.setAttribute("numberPage", numberPage);
+            request.setAttribute("id", id);
+            request.getRequestDispatcher("servicesList.jsp").forward(request, response);
+        }
+    }
+ 
 
     /**
      * Handles the HTTP <code>POST</code> method.
@@ -75,7 +100,7 @@ public class services extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
+        this.doGet(request, response);
     }
 
     /**
