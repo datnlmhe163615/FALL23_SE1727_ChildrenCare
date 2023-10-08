@@ -5,6 +5,8 @@
 --%>
 
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@page import="DAO.*" %>
+<%@page import="Model.*" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -130,17 +132,20 @@
         <section class="about_section layout_padding">
 
             <div class="container  ">
-                 <c:forEach items="${requestScope.blogDetai}" var="c">
+                <c:forEach items="${requestScope.blogDetai}" var="c">
                     <div class="row">
                         <div class="col-md-12">
                             <div class="detail-box">
+
                                 <div class="heading_container">
                                     <h2>
                                         <span>${c.title}</span>
                                     </h2>
-                                </div>
 
-                                <p class="description">
+                                </div>
+                                <p>${c.created_at}</p>
+                                <p>Author : ${accountDAO.getAccountById(c.author_id).getFullname()}</p>
+                                    <p class="description">
                                     ${c.content}
                                 </p>
 
