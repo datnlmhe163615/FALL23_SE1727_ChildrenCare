@@ -18,10 +18,10 @@ import lombok.Data;
 @AllArgsConstructor
 
 public class Reservation {
-    private int id;
+      private int id;
     private int customer_id;
     private int staff_id;
-    private byte email;
+    private String email;
     private String mobile;
     private boolean gender;
     private String address;
@@ -29,6 +29,10 @@ public class Reservation {
     private float total;
     private Date created_at;
     private Date updated_at;
+    private ReservationItem reservationItem;
+    private Service service;
+    private Account account;
+
 
     public Reservation() {
     }

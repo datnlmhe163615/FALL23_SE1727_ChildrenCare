@@ -18,7 +18,7 @@ import lombok.Data;
 @AllArgsConstructor
 
 public class ReservationItem {
-    private int id;
+     private int id;
     private int staff_id;
     private int reservation_id;
     private int service_id;
@@ -26,7 +26,7 @@ public class ReservationItem {
     private int quantity;
     private Date created_at;
     private Date updated_at;
-
+    private String hour;
     public ReservationItem() {
     }
     

@@ -156,7 +156,7 @@
                 </form>
             </div>
 
-            <div class="container  ">
+            <div class="container  " >
                 <c:forEach items="${requestScope.post}" var="c">
                     <div class="row" style="margin-bottom: 50px">
                         <div class="col-md-6 ">
@@ -182,11 +182,70 @@
                         </div>
 
                     </div>
+
                 </c:forEach>
+
+                <!-- Giao diện phân trang -->
+                <c:if test="${requestScope.checkpage == 0}">
+                       <ul class="pagination justify-content-center">
+                    <c:choose>
+                        <c:when test="${requestScope.totalPages <= 7}">
+                            <c:forEach begin="1" end="${requestScope.totalPages}" var="page">
+                                <li class="page-item <c:if test="${page eq requestScope.currentPage}">active</c:if>">
+                                    <a class="page-link" href="?page=${page}">${page}</a>
+                                </li>
+                            </c:forEach>
+                        </c:when>
+                        <c:otherwise>
+                            <c:choose>
+                                <c:when test="${requestScope.currentPage <= 3}">
+                                    <c:forEach begin="1" end="5" var="page">
+                                        <li class="page-item <c:if test="${page eq requestScope.currentPage}">active</c:if>">
+                                            <a class="page-link" href="?page=${page}">${page}</a>
+                                        </li>
+                                    </c:forEach>
+                                    <li class="page-item disabled"><span class="page-link">...</span></li>
+                                    <li class="page-item">
+                                        <a class="page-link" href="?page=${requestScope.totalPages}">${requestScope.totalPages}</a>
+                                    </li>
+                                </c:when>
+                                <c:when test="${requestScope.currentPage >= requestScope.totalPages - 2}">
+                                    <li class="page-item">
+                                        <a class="page-link" href="?page=1">1</a>
+                                    </li>
+                                    <li class="page-item disabled"><span class="page-link">...</span></li>
+                                        <c:forEach begin="${requestScope.totalPages - 4}" end="${requestScope.totalPages}" var="page">
+                                        <li class="page-item <c:if test="${page eq requestScope.currentPage}">active</c:if>">
+                                            <a class="page-link" href="?page=${page}">${page}</a>
+                                        </li>
+                                    </c:forEach>
+                                </c:when>
+                                <c:otherwise>
+                                    <li class="page-item">
+                                        <a class="page-link" href="?page=1">1</a>
+                                    </li>
+                                    <li class="page-item disabled"><span class="page-link">...</span></li>
+                                        <c:forEach begin="${requestScope.currentPage - 1}" end="${requestScope.currentPage + 1}" var="page">
+                                        <li class="page-item <c:if test="${page eq requestScope.currentPage}">active</c:if>">
+                                            <a class="page-link" href="?page=${page}">${page}</a>
+                                        </li>
+                                    </c:forEach>
+                                    <li class="page-item disabled"><span class="page-link">...</span></li>
+                                    <li class="page-item">
+                                        <a class="page-link" href="?page=${requestScope.totalPages}">${requestScope.totalPages}</a>
+                                    </li>
+                                </c:otherwise>
+                            </c:choose>
+                        </c:otherwise>
+                    </c:choose>
+                </ul>
+                </c:if>
+
             </div>
 
-
         </section>
+
+
 
         <!-- end about section -->
 
@@ -344,6 +403,60 @@
             </div>
         </footer>
         <!-- footer section -->
+        <script>
+            var maxPages = 5; // Số trang tối đa để hiển thị trước và sau trang hiện tại
+
+            // Sử dụng JavaScript để tính toán giá trị minValue
+            var totalPages = ${requestScope.totalPages};
+            var minValue = Math.min(totalPages, maxPages);
+
+            // Hiển thị trang phân trang
+            var pagination = document.getElementById("pagination");
+
+            // Nếu có nhiều hơn maxPages trang, hiển thị trang đầu và dấu chấm
+            if (totalPages > maxPages) {
+                var firstPageItem = document.createElement("li");
+                firstPageItem.className = "page-item";
+                firstPageItem.innerHTML = '<a class="page-link" href="?page=1">1</a>';
+
+                var ellipsisItem = document.createElement("li");
+                ellipsisItem.className = "page-item disabled";
+                ellipsisItem.innerHTML = '<span class="page-link">...</span>';
+
+                pagination.appendChild(firstPageItem);
+                pagination.appendChild(ellipsisItem);
+            }
+
+            // Hiển thị các trang trước trang hiện tại
+            for (var page = 1; page <= minValue; page++) {
+                var pageItem = document.createElement("li");
+                pageItem.className = "page-item";
+
+                if (page === ${requestScope.currentPage}) {
+                    pageItem.className += " active";
+                }
+
+                pageItem.innerHTML = '<a class="page-link" href="?page=' + page + '">' + page + '</a>';
+
+                pagination.appendChild(pageItem);
+            }
+
+            // Nếu có nhiều hơn maxPages trang, hiển thị trang cuối và dấu chấm
+            if (totalPages > maxPages) {
+                var ellipsisItemEnd = document.createElement("li");
+                ellipsisItemEnd.className = "page-item disabled";
+                ellipsisItemEnd.innerHTML = '<span class="page-link">...</span>';
+
+                var lastPageItem = document.createElement("li");
+                lastPageItem.className = "page-item";
+                lastPageItem.innerHTML = '<a class="page-link" href="?page=' + totalPages + '">' + totalPages + '</a>';
+
+                pagination.appendChild(ellipsisItemEnd);
+                pagination.appendChild(lastPageItem);
+            }
+        </script>
+
+
 
         <!-- jQery -->
         <script src="js/jquery-3.4.1.min.js"></script>
