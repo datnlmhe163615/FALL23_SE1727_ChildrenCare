@@ -115,5 +115,8 @@ public ArrayList<Service> getlistService() {
         }
         return Services;
     }
-
+    public static void main(String[] args) {
+        ServiceDBcontext bcontext = new ServiceDBcontext();
+        System.out.println(bcontext.getlistService());
+    }
 }

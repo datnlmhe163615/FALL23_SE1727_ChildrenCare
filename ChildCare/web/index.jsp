@@ -92,7 +92,7 @@
                                             <a class="nav-link" href="feedback">FeedBack</a>
                                         </li>
                                         <li class="nav-item">
-                                            <a class="nav-link" href="contact.html">Contact Us</a>
+                                            <a class="nav-link" href="medicalexamination">Medical Examination</a>
                                         </li>
                                     </ul>
                                 </div>
@@ -156,7 +156,7 @@
                                         </div>
                                         <div class="col-md-6">
                                             <div class="img-box">
-                                              
+
                                                 <img src="images/${c.image}" alt="">
                                             </div>
                                         </div>
@@ -188,53 +188,85 @@
             <div class="container">
                 <div class="row">
                     <div class="col">
-                        <form>
+                        <form method="get" action="service" onsubmit="return validateForm()">
                             <h4>
                                 BOOK <span>APPOINTMENT</span>
                             </h4>
-                            <div class="form-row ">
+                            <div class="form-row">
                                 <div class="form-group col-lg-4">
-                                    <label for="inputPatientName">Patient Name </label>
-                                    <input type="text" class="form-control" id="inputPatientName" placeholder="">
+                                    <label for="inputPatientName">Gmail</label>
+                                    <input name="gmail" type="text" class="form-control" id="inputPatientName" placeholder="">
+                                    <span style="color: red;" id="errorGmail" class="error-message"></span>
                                 </div>
                                 <div class="form-group col-lg-4">
-                                    <label for="inputDoctorName">Doctor's Name</label>
-                                    <select name="" class="form-control wide" id="inputDoctorName">
-                                        <option value="Normal distribution ">Normal distribution </option>
-                                        <option value="Normal distribution ">Normal distribution </option>
-                                        <option value="Normal distribution ">Normal distribution </option>
+                                    <label for="inputDoctorName">Service</label>
+                                    <select name="choseservice" class="form-control wide" id="inputService">
+                                        <option value="0">Choose Service</option>
+                                        <c:forEach items="${requestScope.servicelist}" var="svv">
+                                            <option value="${svv.id}">${svv.title}</option>
+                                        </c:forEach>
                                     </select>
+                                    <div> <span style="color: red;" id="errorService" class="error-message"></span>
+                                    </div>   
                                 </div>
                                 <div class="form-group col-lg-4">
-                                    <label for="inputDepartmentName">Department's Name</label>
-                                    <select name="" class="form-control wide" id="inputDepartmentName">
-                                        <option value="Normal distribution ">Normal distribution </option>
-                                        <option value="Normal distribution ">Normal distribution </option>
-                                        <option value="Normal distribution ">Normal distribution </option>
+                                    <label for="inputHour">Hour</label>
+                                    <select name="inputHour" class="form-control wide" id="inputHour">
+                                        <option value="">Choose Hour</option>
+                                        <option value="01:00">1:00 AM</option>
+                                        <option value="02:00">2:00 AM</option>
+                                        <option value="03:00">3:00 AM</option>
+                                        <option value="04:00">4:00 AM</option>
+                                        <option value="05:00">5:00 AM</option>
+                                        <option value="06:00">6:00 AM</option>
+                                        <option value="07:00">7:00 AM</option>
+                                        <option value="08:00">8:00 AM</option>
+                                        <option value="09:00">9:00 AM</option>
+                                        <option value="10:00">10:00 AM</option>
+                                        <option value="11:00">11:00 AM</option>
+                                        <option value="12:00">12:00 PM</option>
                                     </select>
+                                    <div><span style="color: red;" id="errorHour" class="error-message"></span>
+                                    </div>    
                                 </div>
                             </div>
-                            <div class="form-row ">
+
+                            <div class="form-row">
                                 <div class="form-group col-lg-4">
                                     <label for="inputPhone">Phone Number</label>
-                                    <input type="number" class="form-control" id="inputPhone" placeholder="XXXXXXXXXX">
+                                    <input name="phone" type="text" class="form-control" id="inputPhone" placeholder="XXXXXXXXXX">
+                                    <span style="color: red;" id="errorPhone" class="error-message"></span>
                                 </div>
                                 <div class="form-group col-lg-4">
-                                    <label for="inputSymptoms">Symptoms</label>
-                                    <input type="text" class="form-control" id="inputSymptoms" placeholder="">
+                                    <label for="inputSymptoms">Address</label>
+                                    <input name="address" type="text" class="form-control" id="inputAddress" placeholder="">
+                                    <span style="color: red;" id="errorAddress" class="error-message"></span>
                                 </div>
                                 <div class="form-group col-lg-4">
                                     <label for="inputDate">Choose Date </label>
                                     <div class="input-group date" id="inputDate" data-date-format="mm-dd-yyyy">
-                                        <input type="text" class="form-control" readonly>
+                                        <input name="date" type="text" class="form-control" readonly>
                                         <span class="input-group-addon date_icon">
                                             <i class="fa fa-calendar" aria-hidden="true"></i>
                                         </span>
                                     </div>
+                                    <span style="color: red;" id="errorDate" class="error-message"></span>
                                 </div>
+                                <div class="form-group col-lg-4">
+                                    <label for="inputDoctor">Doctor</label>
+                                    <select name="chosesedoctor" class="form-control wide" id="inputDoctor">
+                                        <option value="0">Choose Doctor</option>
+                                        <c:forEach items="${requestScope.accountdoctor}" var="dt">
+                                            <option value="${dt.id}">${dt.fullname}</option>
+                                        </c:forEach>
+                                    </select>
+                                    <div><span style="color: red;" id="errorDoctor" class="error-message"></span>
+                                    </div>
+                                </div>
+
                             </div>
                             <div class="btn-box">
-                                <button type="submit" class="btn ">Submit Now</button>
+                                <button type="submit" class="btn">Submit Now</button>
                             </div>
                         </form>
                     </div>
@@ -332,36 +364,36 @@
                     <div class="owl-carousel team_carousel">
                         <c:forEach items="${requestScope.accountdoctor}" var="acd">
                             <div class="item">
-                            <div class="box">
-                                <div class="img-box">
-                                    <img src="images/${acd.avatar}" alt="" />
-                                </div>
-                                <div class="detail-box">
-                                    <h5>
-                                        ${acd.fullname}
-                                    </h5>
-                                    <h6>
-                                        ${acd.role}
-                                    </h6>
-                                    <div class="social_box">
-                                        <a href="">
-                                            <i class="fa fa-facebook" aria-hidden="true"></i>
-                                        </a>
-                                        <a href="">
-                                            <i class="fa fa-twitter" aria-hidden="true"></i>
-                                        </a>
-                                        <a href="">
-                                            <i class="fa fa-linkedin" aria-hidden="true"></i>
-                                        </a>
-                                        <a href="">
-                                            <i class="fa fa-instagram" aria-hidden="true"></i>
-                                        </a>
+                                <div class="box">
+                                    <div class="img-box">
+                                        <img src="images/${acd.avatar}" alt="" />
+                                    </div>
+                                    <div class="detail-box">
+                                        <h5>
+                                            ${acd.fullname}
+                                        </h5>
+                                        <h6>
+                                            ${acd.role}
+                                        </h6>
+                                        <div class="social_box">
+                                            <a href="">
+                                                <i class="fa fa-facebook" aria-hidden="true"></i>
+                                            </a>
+                                            <a href="">
+                                                <i class="fa fa-twitter" aria-hidden="true"></i>
+                                            </a>
+                                            <a href="">
+                                                <i class="fa fa-linkedin" aria-hidden="true"></i>
+                                            </a>
+                                            <a href="">
+                                                <i class="fa fa-instagram" aria-hidden="true"></i>
+                                            </a>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
                         </c:forEach>
-                      
+
                     </div>
                 </div>
             </div>
@@ -557,6 +589,12 @@
         <!-- end info_section -->
 
 
+        <div id="overlay" class="hidden">
+            <div class="popup">
+                <p id="message">Đây là nội dung thông báo.</p>
+            </div>
+        </div>
+
         <!-- footer section -->
         <footer class="footer_section">
             <div class="container">
@@ -566,7 +604,98 @@
                 </p>
             </div>
         </footer>
+
+    
         <!-- footer section -->
+        
+
+
+
+
+        <script>
+
+
+
+            function validateForm() {
+                var serviceSelect = document.getElementById("inputService");
+                var hourSelect = document.getElementById("inputHour");
+                var phoneInput = document.getElementById("inputPhone");
+                var gmailInput = document.getElementById("inputPatientName");
+                var AddressInput = document.getElementById("inputAddress");
+                var DoctorInput = document.getElementById("inputDoctor");
+                var dateInput = document.getElementById("inputDate");
+
+                var errorService = document.getElementById("errorService");
+                var errorHour = document.getElementById("errorHour");
+                var errorPhone = document.getElementById("errorPhone");
+                var errorGmail = document.getElementById("errorGmail");
+                var errorAddress = document.getElementById("errorAddress");
+                var errorDoctor = document.getElementById("errorDoctor");
+                var errorDate = document.getElementById("errorDate");
+
+                // Check if Gmail is empty
+                if (gmailInput.value.trim() === "") {
+                    errorGmail.textContent = "Please enter your Gmail address.";
+                    return false;
+                } else {
+                    errorGmail.textContent = "";
+                }
+
+                // Check if a service is selected
+                if (serviceSelect.value === "0") {
+                    errorService.textContent = "Please choose a service.";
+                    return false;
+                } else {
+                    errorService.textContent = "";
+                }
+
+                // Check if an hour is selected
+                if (hourSelect.value === "") {
+                    errorHour.textContent = "Please choose an hour.";
+                    return false;
+                } else {
+                    errorHour.textContent = "";
+                }
+
+                // Check if a doctor is selected
+                if (DoctorInput.value === "0") {
+                    errorDoctor.textContent = "Please choose a doctor.";
+                    return false;
+                } else {
+                    errorDoctor.textContent = "";
+                }
+
+                // Check if Address is empty
+                if (AddressInput.value.trim() === "") {
+                    errorAddress.textContent = "Please enter your address.";
+                    return false;
+                } else {
+                    errorAddress.textContent = "";
+                }
+
+                // Check phone number
+                var phoneNumber = phoneInput.value.trim();
+                if (phoneNumber === "" || !/^\d{10}$/.test(phoneNumber)) {
+                    errorPhone.textContent = "Please enter a valid phone number (10 digits).";
+                    return false;
+                } else {
+                    errorPhone.textContent = "";
+                }
+
+                // Check if a date is selected
+                if (dateInput.value.trim() === "") {
+                    errorDate.textContent = "Please choose a date.";
+                    return false;
+                } else {
+                    errorDate.textContent = "";
+                }
+
+                // Check and display error messages for other input fields
+
+                return true;
+            }
+        </script>
+
 
         <!-- jQery -->
         <script src="js/jquery-3.4.1.min.js"></script>
