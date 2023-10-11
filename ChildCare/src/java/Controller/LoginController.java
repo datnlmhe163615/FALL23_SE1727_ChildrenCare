@@ -5,19 +5,21 @@
 
 package Controller;
 
+import DAO.ManageAccDAO;
+import Model.Account;
+import jakarta.servlet.RequestDispatcher;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
-import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 
 /**
  *
  * @author mihxdat
  */
-@WebServlet(name="LoginController", urlPatterns={"/login"})
 public class LoginController extends HttpServlet {
    
     /** 
@@ -30,8 +32,18 @@ public class LoginController extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        String email = request.getParameter("email");
-        String password = request.getParameter("password");
+        try (PrintWriter out = response.getWriter()) {
+            /* TODO output your page here. You may use following sample code. */
+            out.println("<!DOCTYPE html>");
+            out.println("<html>");
+            out.println("<head>");
+            out.println("<title>Servlet LoginController</title>");  
+            out.println("</head>");
+            out.println("<body>");
+            out.println("<h1>Servlet LoginController at " + request.getContextPath () + "</h1>");
+            out.println("</body>");
+            out.println("</html>");
+        }
     } 
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -58,7 +70,38 @@ public class LoginController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-        processRequest(request, response);
+        String email = request.getParameter("email");
+        String pass = request.getParameter("password");
+        ManageAccDAO accDao = new ManageAccDAO();
+        Account acc = accDao.getAccountByLogin(email, pass);
+        request.setAttribute("account", acc);
+        HttpSession session = request.getSession();
+        session.setAttribute("acc", acc);
+        if (acc == null) {
+            request.setAttribute("msg", "Invalid email or password ! ");
+            RequestDispatcher rd = request.getRequestDispatcher("login.jsp");
+            rd.forward(request, response);
+        }else{
+            RequestDispatcher rd = request.getRequestDispatcher("index.jsp");
+            rd.forward(request, response);
+        }
+        
+//        if (acc.getRole()== "customer") {
+//            RequestDispatcher rd = request.getRequestDispatcher("home.jsp");
+//            rd.forward(request, response);
+//        }
+//        if (acc.getRole()== "admin") {
+//            RequestDispatcher rd = request.getRequestDispatcher("admin");
+//            rd.forward(request, response);
+//        }
+//        if (acc.getRole()== "staff") {
+//            RequestDispatcher rd = request.getRequestDispatcher("staff");
+//            rd.forward(request, response);
+//        }
+//        if (acc.getRole()== "manager") {
+//            RequestDispatcher rd = request.getRequestDispatcher("manager");
+//            rd.forward(request, response);
+//        }
     }
 
     /** 
