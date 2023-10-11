@@ -19,12 +19,12 @@ import lombok.Data;
 
 public class Service {
     private int id;
-<<<<<<< HEAD
+
     private ServiceCategory category;
      private int category_id;
-=======
+
     private int category_id;
->>>>>>> 435d27a28765ef9183617c27c1f955d68217c7ba
+
     private String thumbnail;
     private String title;
     private float price;
@@ -34,7 +34,7 @@ public class Service {
     private int status;
     private Date created_at;
     private Date updated_at;
-<<<<<<< HEAD
+
     
     private int count;
 
@@ -162,6 +162,6 @@ public class Service {
     
     
 }
-=======
+
 }
->>>>>>> 435d27a28765ef9183617c27c1f955d68217c7ba
+
