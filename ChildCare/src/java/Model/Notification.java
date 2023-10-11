@@ -25,8 +25,4 @@ public class Notification {
     private Date read_at;
     private Date created_at;
     private Date updated_at;
-
-    public Notification() {
-    }
-    
 }

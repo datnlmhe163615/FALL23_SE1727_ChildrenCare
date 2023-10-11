@@ -29,6 +29,7 @@ public class Reservation {
     private float total;
     private Date created_at;
     private Date updated_at;
+<<<<<<< HEAD
     private ReservationItem reservationItem;
     private Service service;
     private Account account;
@@ -37,4 +38,6 @@ public class Reservation {
     public Reservation() {
     }
     
+=======
+>>>>>>> 435d27a28765ef9183617c27c1f955d68217c7ba
 }

@@ -27,9 +27,4 @@ public class Post {
     private int status;
     private Date created_at;
     private Date updated_at;
-    private String Decription;
-
-    public Post() {
-    }
-    
 }

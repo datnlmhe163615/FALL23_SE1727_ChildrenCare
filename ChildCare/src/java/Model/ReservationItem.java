@@ -26,8 +26,11 @@ public class ReservationItem {
     private int quantity;
     private Date created_at;
     private Date updated_at;
+<<<<<<< HEAD
     private String hour;
     public ReservationItem() {
     }
     
+=======
+>>>>>>> 435d27a28765ef9183617c27c1f955d68217c7ba
 }
