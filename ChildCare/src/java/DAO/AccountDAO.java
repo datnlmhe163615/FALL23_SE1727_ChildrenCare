@@ -4,7 +4,7 @@
  */
 package DAO;
 
-<<<<<<< HEAD
+
 import DBContext.DBContext;
 import Model.Account;
 import java.sql.Connection;
@@ -14,8 +14,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 
-=======
->>>>>>> 435d27a28765ef9183617c27c1f955d68217c7ba
+
 /**
  *
  * @author mihxdat
