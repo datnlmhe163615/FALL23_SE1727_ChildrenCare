@@ -102,6 +102,7 @@ public class LoginController extends HttpServlet {
 //            RequestDispatcher rd = request.getRequestDispatcher("manager");
 //            rd.forward(request, response);
 //        }
+        
     }
 
     /** 

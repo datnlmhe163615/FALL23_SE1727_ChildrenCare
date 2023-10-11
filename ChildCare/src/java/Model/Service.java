@@ -13,11 +13,18 @@ import lombok.Data;
  *
  * @author mihxdat
  */
+@Builder
+@Data
+@AllArgsConstructor
 
 public class Service {
     private int id;
+
     private ServiceCategory category;
      private int category_id;
+
+    private int category_id;
+
     private String thumbnail;
     private String title;
     private float price;
@@ -27,6 +34,7 @@ public class Service {
     private int status;
     private Date created_at;
     private Date updated_at;
+
     
     private int count;
 
@@ -154,3 +162,6 @@ public class Service {
     
     
 }
+
+}
+

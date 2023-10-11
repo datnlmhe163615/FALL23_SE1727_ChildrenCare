@@ -4,18 +4,24 @@
  */
 package DAO;
 
+
 import DBContext.DBContext;
 import Model.Account;
+import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
+
+
 /**
  *
  * @author mihxdat
  */
-public class AccountDAO extends DBContext {
+public class AccountDAO extends DBContext{
+    
+    
 
     public Account login(String email, String password) {
         String query = "select * from Account\n"
@@ -96,55 +102,4 @@ public class AccountDAO extends DBContext {
         return null;
     }
 
-    public ArrayList<Account> searchAccount(String search, int index) {
-        ArrayList<Account> list = new ArrayList<>();
-        String sql = "SELECT * FROM [Account] where fullName like ? OR email like ? OR mobile like ? order by fullName, email\n"
-                + "OFFSET ? ROWS FETCH NEXT 9 ROWS ONLY ";
-        try {
-            PreparedStatement ps = connection.prepareStatement(sql);
-            ps.setString(1, "%" + search + "%");
-            ps.setString(2, "%" + search + "%");
-            ps.setString(3, "%" + search + "%");
-            ps.setInt(4, (index - 1) * 6);
-            ResultSet rs = ps.executeQuery();
-            while (rs.next()) {
-                list.add(new Account(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5), rs.getString(6), rs.getString(7),
-                        rs.getBoolean(8), rs.getString(9), rs.getInt(10), rs.getDate(11), rs.getDate(12)));
-            }
-        } catch (SQLException e) {
-
-        }
-        return list;
     }
-     public ArrayList<Account> listAccountdoctor() {
-        ArrayList<Account> AcountModers = new ArrayList<>();
-        String sql = "SELECT [id]\n"
-                + "      ,[email]\n"
-                + "      ,[role]\n"
-                + "      ,[fullName]\n"
-                + "      ,[avatar]\n"
-                + "      ,[status]\n"
-                + "      ,[createdAt]\n"
-                + "      ,[updatedAt]\n"
-                + "  FROM [dbo].[Account]  where status= 3";
-
-        try ( PreparedStatement pt = connection.prepareStatement(sql)) {
-            ResultSet rs = pt.executeQuery();
-            while (rs.next()) {
-                Account acountModer = new Account();
-                acountModer.setId(rs.getInt("id"));
-                acountModer.setEmail(rs.getString("email"));
-                acountModer.setRole(rs.getString("role"));
-                acountModer.setFullname(rs.getString("fullName"));
-                acountModer.setAvatar(rs.getString("avatar"));
-                acountModer.setStatus(rs.getInt("status"));
-                acountModer.setUpdated_at(rs.getDate("updatedAt"));
-                AcountModers.add(acountModer);
-            }
-
-        } catch (SQLException e) {
-            System.out.println(e.getMessage());
-        }
-        return AcountModers;
-    }
-}
