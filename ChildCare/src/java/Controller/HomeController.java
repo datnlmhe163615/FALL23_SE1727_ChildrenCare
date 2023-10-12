@@ -4,7 +4,6 @@
  */
 package Controller;
 
-
 import DAO.AccountDAO;
 import DAO.BlogDBcontext;
 import DAO.ServiceCategoryDBcontext;
@@ -52,7 +51,8 @@ public class HomeController extends HttpServlet {
         ServiceCategoryDBcontext serviceCategoryDBcontext = new ServiceCategoryDBcontext();
 
         request.setAttribute("slide", bcontext.getListSlide());
-
+        request.setAttribute("servicelist", serviceCategoryDBcontext.ListServiceCategory());
+        
         Random random = new Random();
         List<Post> allBlogPosts = blogDB.ListBlog();
         int randomIndex = random.nextInt(allBlogPosts.size());
@@ -61,7 +61,6 @@ public class HomeController extends HttpServlet {
 
         List<ServiceCategory> ServiceCategoryModers = serviceCategoryDBcontext.ListServiceCategory();
         List<ServiceCategory> randomServices = new ArrayList<>();
-
 
         if (ServiceCategoryModers.size() <= 4) {
             randomServices.addAll(ServiceCategoryModers);
@@ -80,10 +79,9 @@ public class HomeController extends HttpServlet {
 
         request.setAttribute("serviceCategories", randomServices);
 
-        
         AccountDAO accountDBcontext = new AccountDAO();
         request.setAttribute("accountdoctor", accountDBcontext.listAccountdoctor());
-        
+
         request.getRequestDispatcher("index.jsp").forward(request, response);
     }
 
