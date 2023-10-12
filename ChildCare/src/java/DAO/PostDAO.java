@@ -38,9 +38,9 @@ public class PostDAO extends DBContext.DBContext {
             PreparedStatement st = connection.prepareStatement(sql);
             ResultSet rs = st.executeQuery();
             while (rs.next()) {
-                list.add(new Post(rs.getInt(1), rs.getInt(2), rs.getInt(3),
+                list.add(new Post(rs.getInt(1), rs.getInt(2), rs.getInt(3), 
                         rs.getString(4), rs.getString(5), rs.getString(6),
-                        rs.getInt(7), rs.getDate(8), rs.getDate(9)));
+                        rs.getInt(7), rs.getDate(8), rs.getDate(9), rs.getString(10)));
             }
         } catch (SQLException e) {
         }
@@ -66,9 +66,9 @@ public class PostDAO extends DBContext.DBContext {
                 st.setInt(1, id);
                 ResultSet rs = st.executeQuery();
                 while (rs.next()) {
-                    list.add(new Post(rs.getInt(1), rs.getInt(2), rs.getInt(3),
+                    list.add(new Post(rs.getInt(1), rs.getInt(2), rs.getInt(3), 
                         rs.getString(4), rs.getString(5), rs.getString(6),
-                        rs.getInt(7), rs.getDate(8), rs.getDate(9)));
+                        rs.getInt(7), rs.getDate(8), rs.getDate(9), rs.getString(10)));
                 }
             } catch (SQLException e) {
             }
@@ -94,9 +94,9 @@ public class PostDAO extends DBContext.DBContext {
             PreparedStatement st = connection.prepareStatement(sql);
             ResultSet rs = st.executeQuery();
             while (rs.next()) {
-                list.add(new Post(rs.getInt(1), rs.getInt(2), rs.getInt(3),
+                list.add(new Post(rs.getInt(1), rs.getInt(2), rs.getInt(3), 
                         rs.getString(4), rs.getString(5), rs.getString(6),
-                        rs.getInt(7), rs.getDate(8), rs.getDate(9)));
+                        rs.getInt(7), rs.getDate(8), rs.getDate(9), rs.getString(10)));
             }
         } catch (SQLException e) {
         }
@@ -115,9 +115,9 @@ public class PostDAO extends DBContext.DBContext {
         st.setString(1, "%" + keyword + "%"); // Đặt giá trị của tham số bằng từ khóa tìm kiếm
         ResultSet rs = st.executeQuery();
         while (rs.next()) {
-            list.add(new Post(rs.getInt(1), rs.getInt(2), rs.getInt(3),
+            list.add(new Post(rs.getInt(1), rs.getInt(2), rs.getInt(3), 
                         rs.getString(4), rs.getString(5), rs.getString(6),
-                        rs.getInt(7), rs.getDate(8), rs.getDate(9)));
+                        rs.getInt(7), rs.getDate(8), rs.getDate(9), rs.getString(10)));
         }
     } catch (SQLException e) {
         e.printStackTrace(); // Xử lý ngoại lệ bằng cách in ra lỗi
