@@ -28,6 +28,10 @@
         <servlet-name>services</servlet-name>
         <servlet-class>Controller.services</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>LoginController</servlet-name>
+        <servlet-class>Controller.LoginController</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>manageUser</servlet-name>
         <url-pattern>/manageUser</url-pattern>
@@ -85,6 +89,7 @@
         <url-pattern>/admin</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
+
         <servlet-name>CheckoutController</servlet-name>
         <url-pattern>/checkout</url-pattern>
     </servlet-mapping>
@@ -95,6 +100,8 @@
     <servlet-mapping>
         <servlet-name>MedicalexaminationController</servlet-name>
         <url-pattern>/medicalexamination</url-pattern>
+        <servlet-name>LoginController</servlet-name>
+        <url-pattern>/login</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
