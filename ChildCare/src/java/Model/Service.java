@@ -5,9 +5,6 @@
 package Model;
 
 import java.sql.Date;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
 
 /**
  *
@@ -32,6 +29,22 @@ public class Service {
 
     public Service() {
     }
+
+    // Tuan
+    public Service(int id, int category_id, String thumbnail, String title, float price, float sale_price, String brief_information, String decription, int status, Date created_at, Date updated_at) {
+        this.id = id;
+        this.category_id = category_id;
+        this.thumbnail = thumbnail;
+        this.title = title;
+        this.price = price;
+        this.sale_price = sale_price;
+        this.brief_information = brief_information;
+        this.decription = decription;
+        this.status = status;
+        this.created_at = created_at;
+        this.updated_at = updated_at;
+    }
+    
 
     public Service(int id, ServiceCategory category, String thumbnail, String title, float price, float sale_price, String brief_information, String decription, int status, Date created_at, Date updated_at) {
         this.id = id;
@@ -152,5 +165,5 @@ public class Service {
     }
     
     
-    
+
 }
