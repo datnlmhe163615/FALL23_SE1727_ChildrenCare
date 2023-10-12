@@ -36,11 +36,11 @@
                                     
                                     <form action="forgotpass" method="post">
                                         <h2 class="fw-bold mb-2 text-uppercase">Forgot password</h2>
-                                        <p class="text-white-50 mb-5">Hãy nhập tên đăng nhập và Email của bạn!</p>
+                                        <p class="text-white-50 mb-5">Hãy nhập Tên và Email của bạn!</p>
                                         <p class="text-white-50 mb-5"><%=request.getAttribute("msg")!=null?request.getAttribute("msg"):""%></p>
                                         <div class="form-outline form-white mb-4">
                                             <input name="name" type="name" id="typeNameX" class="form-control form-control-lg" />
-                                            <label class="form-label" for="typeNameX">Tên Ðăng Nhập</label>
+                                            <label class="form-label" for="typeNameX">Tên</label>
                                         </div>
                                         <div class="form-outline form-white mb-4">
                                             <input name="email" type="email" id="typeEmailX" class="form-control form-control-lg" />

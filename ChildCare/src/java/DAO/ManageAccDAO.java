@@ -90,6 +90,94 @@ public class ManageAccDAO {
         }
         return accounts;
     }
+    
+    public void ChangePassAccountById(int id, String newPass) {
+        try {
+            String sql = "UPDATE [account] \n"
+                    + "   SET [password] = ?\n"
+                    + " WHERE id = ?";
+            PreparedStatement stm = conn.prepareStatement(sql);
+            stm.setString(1, newPass);
+            stm.setInt(2, id);
+            stm.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+    
+    public void ChangePassAccountByEmail(String email, String newPass) {
+        try {
+            String sql = "UPDATE [account] \n"
+                    + "   SET [password] = ?\n"
+                    + " WHERE email = ?";
+            PreparedStatement stm = conn.prepareStatement(sql);
+            stm.setString(1, newPass);
+            stm.setString(2, email);
+            stm.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+    
+    public Account getAccountByEmail(String email) {
+        Account acc = new Account();
+        String sql = "select * from account \n" +
+                     "where email = ?";
+        try {
+            PreparedStatement stm = conn.prepareStatement(sql);
+            stm.setString(1, email);
+            ResultSet rs = stm.executeQuery();
+            if (rs.next()) {
+                acc.setId(rs.getInt("id"));
+                acc.setEmail(rs.getString("email"));
+                acc.setPassword(rs.getString("password"));
+                acc.setRole(rs.getString("role"));
+                acc.setFullname(rs.getString("fullname"));
+                acc.setAvatar(rs.getString("avatar"));
+                acc.setMobile(rs.getString("mobile"));
+                acc.setGender(rs.getBoolean("gender"));
+                acc.setAddress(rs.getString("address"));
+                acc.setStatus(rs.getInt("status"));
+                acc.setCreated_at(rs.getDate("createdat"));
+                acc.setUpdated_at(rs.getDate("updatedat"));
+                return acc;
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return null;
+    }
+        public Account getAccountById(int id) {
+        Account acc = new Account();
+        String sql = "select * from account where id = ?";
+        try {
+            PreparedStatement stm = conn.prepareStatement(sql);
+            stm.setInt(1, id);
+            ResultSet rs = stm.executeQuery();
+            if (rs.next()) {
+                acc.setId(rs.getInt("id"));
+                acc.setEmail(rs.getString("email"));
+                acc.setPassword(rs.getString("password"));
+                acc.setRole(rs.getString("role"));
+                acc.setFullname(rs.getString("fullname"));
+                acc.setAvatar(rs.getString("avatar"));
+                acc.setMobile(rs.getString("mobile"));
+                acc.setGender(rs.getBoolean("gender"));
+                acc.setAddress(rs.getString("address"));
+                acc.setStatus(rs.getInt("status"));
+                acc.setCreated_at(rs.getDate("createdat"));
+                acc.setUpdated_at(rs.getDate("updatedat"));
+                return acc;
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return null;
+    }
 
     public static void main(String[] args) {
         String email = "customer1@gmail.com"; // Thay bằng email thực tế
