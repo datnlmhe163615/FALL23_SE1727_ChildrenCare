@@ -94,7 +94,7 @@ public class ForgotPasswordController extends HttpServlet {
         Account acc = dao.getAccountByEmail(email);
         if (fullname.equals(acc.getFullname())) {
             dao.ChangePassAccountById(acc.getId(), "abc@123a");
-            String emailSubject = "Restore password Tuy Store";
+            String emailSubject = "Restore password Child Care";
             String emailContent = "Dear"+ acc.getFullname()+ "\nYour new password is: abc@123a\n\n ChildCare";
             try {
                 Message message = new MimeMessage(session);
