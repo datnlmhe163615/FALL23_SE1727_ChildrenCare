@@ -148,7 +148,7 @@
                         <ul class="nav nav-tabs" id="myTab" role="tablist">
                             <c:forEach var="c" items="${category}">
                                 <li class="nav-item" role="presentation">
-                                    <form action="sevices" method="get">
+                                    <form action="services" method="get">
                                         <input type="hidden" value="${c.getId()}" name="id">
                                         <input type="hidden" value="1" name="mode">
                                         <button class="nav-link" type="submit">${c.getTitle()}</button>
@@ -183,7 +183,7 @@
                                         <c:forEach var="s" items="${services}">
                                             <div style="    margin-top: 20px;" class="col-lg-4 col-md-6 col-12 mb-4 mb-lg-0">
                                                 <div class="custom-block bg-white shadow-lg">
-                                                    <a href="sevicesDetail?id=${s.getId()}">
+                                                    <a href="servicesDetail?id=${s.getId()}">
                                                         <div class="d-flex">
                                                             <div>
                                                                 <h5 class="mb-2">${s.getTitle()}</h5>
@@ -222,11 +222,11 @@
                 <c:if test="${!check.equal(hidden)}">
                 <div class="col-lg-12" style="margin-top: 50px">
                     <ul class="page-numbers">
-                        <li><a href="sevicesList?index=1&&id=${id}&&mode=1"><i class="fa fa-angle-double-left"></i></a></li>
+                        <li><a href="servicesList?index=1&&id=${id}&&mode=1"><i class="fa fa-angle-double-left"></i></a></li>
                                 <c:forEach var = "i" begin = "1" end = "${numberPage}">
-                            <li class="${param['index']==i?'active':''}"><a href="sevicesList?index=${i}&&id=${id}&&mode=1">${i}</a></li>
+                            <li class="${param['index']==i?'active':''}"><a href="servicesList?index=${i}&&id=${id}&&mode=1">${i}</a></li>
                             </c:forEach>
-                        <li><a href="sevicesList?index=${numberPage}&&id=${id}&&mode=1"><i class="fa fa-angle-double-right"></i></a></li>
+                        <li><a href="servicesList?index=${numberPage}&&id=${id}&&mode=1"><i class="fa fa-angle-double-right"></i></a></li>
                     </ul>
                 </div>
                 </c:if>

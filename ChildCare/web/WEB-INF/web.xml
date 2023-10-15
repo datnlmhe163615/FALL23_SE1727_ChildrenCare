@@ -9,6 +9,10 @@
         <servlet-class>Controller.servicesList</servlet-class>
     </servlet>
     <servlet>
+        <servlet-name>searchService</servlet-name>
+        <servlet-class>Controller.searchService</servlet-class>
+    </servlet>
+    <servlet>
         <servlet-name>servicesDetail</servlet-name>
         <servlet-class>Controller.servicesDetail</servlet-class>
     </servlet>
@@ -55,6 +59,10 @@
     <servlet-mapping>
         <servlet-name>services</servlet-name>
         <url-pattern>/services</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>searchService</servlet-name>
+        <url-pattern>/searchService</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>servicesList</servlet-name>
