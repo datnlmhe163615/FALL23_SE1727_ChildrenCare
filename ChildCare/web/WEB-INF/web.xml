@@ -4,6 +4,14 @@
         <servlet-name>CheckoutController</servlet-name>
         <servlet-class>Controller.CheckoutController</servlet-class>
     </servlet>
+        <servlet>
+        <servlet-name>servicesList</servlet-name>
+        <servlet-class>Controller.servicesList</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>servicesDetail</servlet-name>
+        <servlet-class>Controller.servicesDetail</servlet-class>
+    </servlet>
     <servlet>
         <servlet-name>ServiceController</servlet-name>
         <servlet-class>Controller.ServiceController</servlet-class>
@@ -47,6 +55,14 @@
     <servlet-mapping>
         <servlet-name>services</servlet-name>
         <url-pattern>/services</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>servicesList</servlet-name>
+        <url-pattern>/servicesList</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>servicesDetail</servlet-name>
+        <url-pattern>/servicesDetail</url-pattern>
     </servlet-mapping>
     <servlet>
         <servlet-name>HomeController</servlet-name>
