@@ -3,23 +3,9 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/D:/GITHUB/FALL23_SE1727_ChildrenCare/ChildCare/web/servicesList.jsp</file>
-            <file>file:/D:/GITHUB/FALL23_SE1727_ChildrenCare/ChildCare/src/java/DAO/ServiceCategoryDBcontext.java</file>
-            <file>file:/D:/GITHUB/FALL23_SE1727_ChildrenCare/ChildCare/src/java/DBContext/Dat_DBContext.java</file>
-            <file>file:/D:/GITHUB/FALL23_SE1727_ChildrenCare/ChildCare/web/service.jsp</file>
-            <file>file:/D:/GITHUB/FALL23_SE1727_ChildrenCare/ChildCare/nbproject/build-impl.xml</file>
-            <file>file:/D:/GITHUB/FALL23_SE1727_ChildrenCare/ChildCare/web/servicedetail.jsp</file>
-            <file>file:/D:/GITHUB/FALL23_SE1727_ChildrenCare/ChildCare/src/java/Controller/servicesDetail.java</file>
-            <file>file:/D:/GITHUB/FALL23_SE1727_ChildrenCare/ChildCare/web/servicesCategory.jsp</file>
-            <file>file:/D:/GITHUB/FALL23_SE1727_ChildrenCare/ChildCare/src/java/Controller/services.java</file>
             <file>file:/D:/GITHUB/FALL23_SE1727_ChildrenCare/ChildCare/src/java/Controller/servicesList.java</file>
-            <file>file:/D:/GITHUB/FALL23_SE1727_ChildrenCare/ChildCare/web/accountDetail.jsp</file>
-            <file>file:/D:/GITHUB/FALL23_SE1727_ChildrenCare/ChildCare/src/java/DBContext/DBContext.java</file>
-            <file>file:/D:/GITHUB/FALL23_SE1727_ChildrenCare/ChildCare/src/java/Controller/ServiceDetail.java</file>
-            <file>file:/D:/GITHUB/FALL23_SE1727_ChildrenCare/ChildCare/web/admin/style.css</file>
-            <file>file:/D:/GITHUB/FALL23_SE1727_ChildrenCare/ChildCare/src/java/DAO/ServiceDAO.java</file>
-            <file>file:/D:/GITHUB/FALL23_SE1727_ChildrenCare/ChildCare/web/service1.jsp</file>
-            <file>file:/D:/GITHUB/FALL23_SE1727_ChildrenCare/ChildCare/src/java/Model/Service.java</file>
+            <file>file:/D:/GITHUB/FALL23_SE1727_ChildrenCare/ChildCare/src/java/DAO/AccountDAO.java</file>
+            <file>file:/D:/GITHUB/FALL23_SE1727_ChildrenCare/ChildCare/web/WEB-INF/web.xml</file>
             <file>file:/D:/GITHUB/FALL23_SE1727_ChildrenCare/ChildCare/src/java/DAO/ServicesDAO.java</file>
         </group>
     </open-files>
