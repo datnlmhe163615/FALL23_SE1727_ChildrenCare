@@ -5,22 +5,19 @@
 
 package Controller;
 
-import DAO.ManageAccDAO;
-import Model.Account;
-import jakarta.servlet.RequestDispatcher;
+import DAO.ServiceDBcontext;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import jakarta.servlet.http.HttpSession;
 
 /**
  *
- * @author mihxdat
+ * @author phung
  */
-public class LoginController extends HttpServlet {
+public class ServiceController extends HttpServlet {
    
     /** 
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
@@ -37,10 +34,10 @@ public class LoginController extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet LoginController</title>");  
+            out.println("<title>Servlet ServiceController</title>");  
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet LoginController at " + request.getContextPath () + "</h1>");
+            out.println("<h1>Servlet ServiceController at " + request.getContextPath () + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -57,7 +54,26 @@ public class LoginController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-        processRequest(request, response);
+        String gamil_raw = request.getParameter("gmail");
+        String choseservice_raw = request.getParameter("choseservice");
+        String inputHour_raw = request.getParameter("inputHour");
+        String phone_raw = request.getParameter("phone");
+        String address_raw = request.getParameter("address");
+        String date_raw = request.getParameter("date");
+        String doctor_raw = request.getParameter("chosesedoctor");
+        
+        request.setAttribute("gamil_raw", gamil_raw);
+        request.setAttribute("choseservice_raw", choseservice_raw);
+        request.setAttribute("inputHour_raw", inputHour_raw);
+        request.setAttribute("phone_raw", phone_raw);
+        request.setAttribute("address_raw", address_raw);
+        request.setAttribute("date_raw", date_raw);
+        request.setAttribute("doctor_raw", doctor_raw);
+        
+        ServiceDBcontext dBcontext = new ServiceDBcontext();
+        request.setAttribute("count1", dBcontext.countService(choseservice_raw));
+        request.setAttribute("listservice", dBcontext.listService(choseservice_raw));
+        request.getRequestDispatcher("service1.jsp").forward(request, response);
     } 
 
     /** 
@@ -70,38 +86,7 @@ public class LoginController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-        String email = request.getParameter("email");
-        String pass = request.getParameter("password");
-        ManageAccDAO accDao = new ManageAccDAO();
-        Account acc = accDao.getAccountByLogin(email, pass);
-        request.setAttribute("account", acc);
-        HttpSession session = request.getSession();
-        session.setAttribute("acc", acc);
-        if (acc == null) {
-            request.setAttribute("msg", "Invalid email or password ! ");
-            RequestDispatcher rd = request.getRequestDispatcher("login.jsp");
-            rd.forward(request, response);
-        }else{
-            RequestDispatcher rd = request.getRequestDispatcher("index.jsp");
-            rd.forward(request, response);
-        }
-        
-//        if (acc.getRole()== "customer") {
-//            RequestDispatcher rd = request.getRequestDispatcher("home.jsp");
-//            rd.forward(request, response);
-//        }
-//        if (acc.getRole()== "admin") {
-//            RequestDispatcher rd = request.getRequestDispatcher("admin");
-//            rd.forward(request, response);
-//        }
-//        if (acc.getRole()== "staff") {
-//            RequestDispatcher rd = request.getRequestDispatcher("staff");
-//            rd.forward(request, response);
-//        }
-//        if (acc.getRole()== "manager") {
-//            RequestDispatcher rd = request.getRequestDispatcher("manager");
-//            rd.forward(request, response);
-//        }
+        processRequest(request, response);
     }
 
     /** 

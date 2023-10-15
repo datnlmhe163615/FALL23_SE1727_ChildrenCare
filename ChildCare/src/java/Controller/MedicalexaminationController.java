@@ -4,21 +4,20 @@
  */
 package Controller;
 
-import DAO.BlogDBcontext;
-import Model.Post;
+import DAO.ReservationDBcontex;
+import DAO.ServiceDBcontext;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import java.util.ArrayList;
 
 /**
  *
  * @author phung
  */
-public class BlogController extends HttpServlet {
+public class MedicalexaminationController extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -37,10 +36,10 @@ public class BlogController extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet BlogController</title>");
+            out.println("<title>Servlet MedicalexaminationController</title>");
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet BlogController at " + request.getContextPath() + "</h1>");
+            out.println("<h1>Servlet MedicalexaminationController at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -58,35 +57,13 @@ public class BlogController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        int checkpage = 0;
-        BlogDBcontext blogDB = new BlogDBcontext();
-        int pageSize = 2; // Số lượng bài đăng trên mỗi trang
-
-        String pageParam = request.getParameter("page");
-        int page;
-        if (pageParam != null && !pageParam.isEmpty()) {
-            try {
-                page = Integer.parseInt(pageParam);
-            } catch (NumberFormatException e) {
-                // Xử lý nếu giá trị không hợp lệ
-                // Ví dụ: trả về trang lỗi hoặc giá trị mặc định
-                page = 1; // Số trang mặc định
-            }
-        } else {
-            page = 1; // Số trang mặc định nếu tham số "page" không tồn tại
-        }
-
-       // Tính toán số trang và trang hiện tại
-        int totalPosts = blogDB.getTotalPosts(); // Thay thế bằng hàm lấy tổng số bài đăng
-        int totalPages = (int) Math.ceil((double) totalPosts / pageSize);
-        request.setAttribute("totalPages", totalPages);
-        request.setAttribute("currentPage", page);
-        ArrayList<Post> posts = blogDB.ListBlog1(page, pageSize);
-        request.setAttribute("post", posts);
-        request.setAttribute("blogcategory", blogDB.ListBlogCategory());
-        request.setAttribute("checkpage", checkpage);
-        request.getRequestDispatcher("blog.jsp").forward(request, response);
-
+        String id = request.getParameter("1");
+        ReservationDBcontex reservationDBcontex = new ReservationDBcontex();
+        ServiceDBcontext serviceDBcontext = new ServiceDBcontext();
+        request.setAttribute("listReservation", reservationDBcontex.getListReservation("1"));
+        request.setAttribute("listservice", serviceDBcontext.getlistService());
+        request.setAttribute("idaccount", 1);
+        request.getRequestDispatcher("Medical examination.jsp").forward(request, response);
     }
 
     /**
@@ -100,15 +77,19 @@ public class BlogController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String idCategory_raw = request.getParameter("idcategory");
-        String day_raw = request.getParameter("idday");
-        String search_raw = request.getParameter("search");
+        ServiceDBcontext serviceDBcontext = new ServiceDBcontext();
+        request.setAttribute("listservice", serviceDBcontext.getlistService());
+        String id_raw = request.getParameter("idcategory");
+        String date_raw = request.getParameter("date");
+        String idacount_raw = request.getParameter("id");
 
-        BlogDBcontext blogDB = new BlogDBcontext();
-        request.setAttribute("blogcategory", blogDB.ListBlogCategory());
-        request.setAttribute("post", blogDB.blogSearch(idCategory_raw, day_raw, search_raw));
+        ReservationDBcontex reservationDBcontex = new ReservationDBcontex();
 
-        request.getRequestDispatcher("blog.jsp").forward(request, response);
+        System.out.println("test" + idacount_raw);
+        System.out.println("t" + date_raw);
+        request.setAttribute("listReservation", reservationDBcontex.searchReservations(id_raw, date_raw, idacount_raw));
+        response.sendRedirect("Medical examination.jsp");
+
     }
 
     /**

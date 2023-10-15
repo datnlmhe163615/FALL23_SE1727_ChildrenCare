@@ -5,8 +5,6 @@
 --%>
 
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@page import="DAO.*" %>
-<%@page import="Model.*" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -64,6 +62,12 @@
                         </div>
                     </div>
                 </div>
+
+                <div class="loading-overlay" id="loadingOverlay">
+                    <div class="loader"></div>
+                </div>
+
+
                 <div class="header_bottom">
                     <div class="container-fluid">
                         <nav class="navbar navbar-expand-lg custom_nav-container ">
@@ -95,7 +99,7 @@
                                             <a class="nav-link" href="feedback">FeedBack</a>
                                         </li>
                                         <li class="nav-item">
-                                               <a class="nav-link" href="medicalexamination">Medical Examination</a>
+                                            <a class="nav-link" href="contact.html">Contact Us</a>
                                         </li>
                                     </ul>
                                 </div>
@@ -128,36 +132,85 @@
 
 
         <!-- about section -->
-
-        <section class="about_section layout_padding">
-
-            <div class="container  ">
-                <c:forEach items="${requestScope.blogDetai}" var="c">
-                    <div class="row">
-                        <div class="col-md-12">
-                            <div class="detail-box">
-
-                                <div class="heading_container">
-                                    <h2>
-                                        <span>${c.title}</span>
-                                    </h2>
-
+        <form action="checkout" method="POST">
+            <!-- Checkout Start -->
+            <div class="container-fluid">
+                <div class="row px-xl-5">
+                    <div class="col-lg-8">
+                        <div class="bg-light p-30 mb-5">
+                            <div class="row">
+                                <div class="col-md-6 form-group">
+                                    <label>E-mail</label>
+                                    <input class="form-control" type="text" name="gmail" value="${requestScope.gamil_raw}" placeholder="example@email.com">
                                 </div>
-                                <p>${c.created_at}</p>
-                                <p>Author : ${accountDAO.getAccountById(c.author_id).getFullname()}</p>
-                                    <p class="description">
-                                    ${c.content}
-                                </p>
+                                <div class="col-md-6 form-group">
+                                    <label>Phone number</label>
+                                    <input class="form-control"  name="phone" value="${requestScope.phone_raw}" type="text" placeholder="Enter your phone number..">
+                                </div>
+                                <div class="col-md-6 form-group">
+                                    <label>Address</label>
+                                    <input class="form-control" name="address" value="${requestScope.address_raw}" type="text" placeholder="Enter your address...">
+                                </div>
+                                <input hidden  name="doctor" value="${requestScope.doctor_raw}"/>
+                                <input hidden name="total" value="${requestScope.salary}"/>
+                                <input hidden name="serviceid" value="${requestScope.serviceid_raw}"/>
+                                <input hidden name="inputHour" value="${requestScope.inputHour_raw}"/>
+                                <input hidden name="date" value="${requestScope.date_raw}"/>
+
 
                             </div>
                         </div>
 
                     </div>
-                </c:forEach>
+                    <div class="col-lg-4">
+                        <h5 class="section-title position-relative text-uppercase mb-3"><span class="bg-secondary pr-3">Order Total</span></h5>
+                        <div class="bg-light p-30 mb-5">
+                            <div class="border-bottom">
+                                <h6 class="mb-3">Products</h6>
+                                <div class="d-flex justify-content-between">
+                                    <p>${requestScope.jobTitle}</p>
+                                    <p>${requestScope.salary} $</p>
+                                </div>
+
+
+                            </div>
+
+                            <div class="pt-2">
+                                <div class="d-flex justify-content-between mt-2">
+                                    <h5>Total</h5>
+
+                                    <h5>${requestScope.salary}$</h5>
+
+
+                                </div>
+                            </div>
+                        </div>
+                        <div class="mb-5">
+                            <h5 class="section-title position-relative text-uppercase mb-3"><span class="bg-secondary pr-3">Payment</span></h5>
+                            <div class="bg-light p-30">
+                                <!--                            <div class="form-group">
+                                                                <div class="custom-control custom-radio">
+                                                                    <input type="radio" class="custom-control-input" name="payment" id="paypal">
+                                                                    <label class="custom-control-label" for="paypal">Paypal</label>
+                                                                </div>
+                                                            </div>-->
+                                <div class="form-group">
+                                    <div class="custom-control custom-radio">
+                                        <input type="radio" class="custom-control-input" name="payment" id="directcheck">
+                                        <label class="custom-control-label" for="directcheck">Direct Check</label>
+                                    </div>
+                                </div>
+
+
+                                <input type="submit" id="placeOrderButton" class="btn btn-block btn-primary font-weight-bold py-3" value="Place Order" onclick="onSubmit()">
+
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
-
-
-        </section>
+        </form>
 
         <!-- end about section -->
 
@@ -305,6 +358,8 @@
         <!-- end info_section -->
 
 
+
+
         <!-- footer section -->
         <footer class="footer_section">
             <div class="container">
@@ -331,5 +386,39 @@
         <style>
         </style>
 
+        <style>
+            /* CSS cho hiệu ứng tải */
+            .loading-overlay {
+                display: none;
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background: rgba(255, 255, 255, 0.9);
+                z-index: 9999;
+                justify-content: center;
+                align-items: center;
+            }
+
+            .loader {
+                border: 4px solid #f3f3f3;
+                border-top: 4px solid #3498db;
+                border-radius: 50%;
+                width: 50px;
+                height: 50px;
+                animation: spin 2s linear infinite;
+            }
+
+            @keyframes spin {
+                0% {
+                    transform: rotate(0deg);
+                }
+                100% {
+                    transform: rotate(360deg);
+                }
+            }
+
+        </style>
     </body>
 </html>
