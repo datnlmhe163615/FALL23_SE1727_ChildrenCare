@@ -91,27 +91,27 @@ public class EditProfileController extends HttpServlet {
             String acc_name = request.getParameter("fullname");
             String email = request.getParameter("email");
             String address = request.getParameter("address");
-            String mobie = request.getParameter("mobie");
+            String mobile = request.getParameter("mobile");
             boolean gender = Boolean.parseBoolean(request.getParameter("gender"));
             HttpSession session = request.getSession();
             Account acc = (Account) session.getAttribute("acc");
             int acc_id = acc.getId();
             ManageAccDAO dao = new ManageAccDAO();
-            if (mobie.charAt(0) != '0') {
-                System.out.println("so dau tien" + mobie.charAt(0));
+            if (mobile.charAt(0) != '0') {
+                System.out.println("so dau tien" + mobile.charAt(0));
                 request.setAttribute("acc", dao.getAccountById(acc_id));
                 request.setAttribute("msg", "Số đầu tiên của điện thoại phải là số 0");
                 request.getRequestDispatcher("edit_profile.jsp").forward(request, response);
                 return;
             }
-            if (mobie.trim().length() != 10) {
-                System.out.println("length: " + mobie.length());
+            if (mobile.trim().length() != 10) {
+                System.out.println("length: " + mobile.length());
                 request.setAttribute("acc", dao.getAccountById(acc_id));
                 request.setAttribute("msg", "Số điện thoại phải là 10 số");
                 request.getRequestDispatcher("edit_profile.jsp").forward(request, response);
                 return;
             }
-            dao.UpdateAccountByIdNoImg(acc_id, email, acc_name, mobie, address, gender);
+            dao.UpdateAccountByIdNoImg(acc_id, email, acc_name, mobile, address, gender);
             request.setAttribute("acc", dao.getAccountById(acc_id));
             request.setAttribute("msg", "Edit succesfully");
             request.getRequestDispatcher("profile.jsp").forward(request, response);
@@ -127,20 +127,20 @@ public class EditProfileController extends HttpServlet {
             Account acc = (Account) session.getAttribute("acc");
             int acc_id = acc.getId();
             ManageAccDAO dao = new ManageAccDAO();
-            if (mobie.charAt(0) != '0') {
-                System.out.println("so dau tien" + mobie.charAt(0));
-                request.setAttribute("acc", dao.getAccountById(acc_id));
-                request.setAttribute("msg", "Số đầu tiên của điện thoại phải là số 0");
-                request.getRequestDispatcher("edit_profile.jsp").forward(request, response);
-                return;
-            }
-            if (mobie.trim().length() != 10) {
-                System.out.println("length: " + mobie.length());
-                request.setAttribute("acc", dao.getAccountById(acc_id));
-                request.setAttribute("msg", "Số điện thoại phải là 10 số");
-                request.getRequestDispatcher("edit_profile.jsp").forward(request, response);
-                return;
-            }
+//            if (mobie.charAt(0) != '0') {
+//                System.out.println("so dau tien" + mobie.charAt(0));
+//                request.setAttribute("acc", dao.getAccountById(acc_id));
+//                request.setAttribute("msg", "Số đầu tiên của điện thoại phải là số 0");
+//                request.getRequestDispatcher("edit_profile.jsp").forward(request, response);
+//                return;
+//            }
+//            if (mobie.trim().length() != 10) {
+//                System.out.println("length: " + mobie.length());
+//                request.setAttribute("acc", dao.getAccountById(acc_id));
+//                request.setAttribute("msg", "Số điện thoại phải là 10 số");
+//                request.getRequestDispatcher("edit_profile.jsp").forward(request, response);
+//                return;
+//            }
             dao.UpdateAccountById(acc_id, email, acc_name, mobie, address, gender, email);
             request.setAttribute("acc", dao.getAccountById(acc_id));
             request.setAttribute("msg", "Edit succesfully");

@@ -75,7 +75,7 @@
                                             <p class="mb-0">Phone</p>
                                         </div>
                                         <div class="col-sm-9">
-                                            <input name="mobile" class="text-muted mb-0" value="0${requestScope.acc.mobile}">
+                                            <input name="mobile" class="text-muted mb-0" value="${requestScope.acc.mobile}">
                                         </div>
                                     </div>
                                     <hr>
