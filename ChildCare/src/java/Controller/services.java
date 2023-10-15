@@ -20,7 +20,7 @@ import java.util.ArrayList;
  *
  * @author asus
  */
-public class sevices extends HttpServlet {
+public class services extends HttpServlet {
    
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
