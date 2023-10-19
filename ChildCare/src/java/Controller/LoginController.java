@@ -82,26 +82,25 @@ public class LoginController extends HttpServlet {
             RequestDispatcher rd = request.getRequestDispatcher("login.jsp");
             rd.forward(request, response);
         }else{
-            RequestDispatcher rd = request.getRequestDispatcher("index.jsp");
+            int role = Integer.parseInt(acc.getRole());
+        if (role == 3) {
+            RequestDispatcher rd = request.getRequestDispatcher("home.jsp");
             rd.forward(request, response);
         }
+        if (role == 1) {
+            RequestDispatcher rd = request.getRequestDispatcher("adminHome.jsp");
+            rd.forward(request, response);
+        }
+        if (role == 2) {
+            RequestDispatcher rd = request.getRequestDispatcher("staff");
+            rd.forward(request, response);
+        }
+        if (role == 0) {
+            RequestDispatcher rd = request.getRequestDispatcher("manager");
+            rd.forward(request, response);
+        }
+        }
         
-//        if (acc.getRole()== "customer") {
-//            RequestDispatcher rd = request.getRequestDispatcher("home.jsp");
-//            rd.forward(request, response);
-//        }
-//        if (acc.getRole()== "admin") {
-//            RequestDispatcher rd = request.getRequestDispatcher("admin");
-//            rd.forward(request, response);
-//        }
-//        if (acc.getRole()== "staff") {
-//            RequestDispatcher rd = request.getRequestDispatcher("staff");
-//            rd.forward(request, response);
-//        }
-//        if (acc.getRole()== "manager") {
-//            RequestDispatcher rd = request.getRequestDispatcher("manager");
-//            rd.forward(request, response);
-//        }
     }
 
     /** 
