@@ -45,10 +45,7 @@ public class ServiceDAO extends DBContext{
             PreparedStatement st = connection.prepareStatement(sql);
             ResultSet rs = st.executeQuery();
             while(rs.next()){
-                list.add(new Service(rs.getInt(1), rs.getInt(2), rs.getString(3),
-                        rs.getString(4), rs.getFloat(5), rs.getFloat(6),
-                        rs.getString(7), rs.getString(8), rs.getInt(9),
-                        rs.getDate(10), rs.getDate(11)));
+                list.add(new Service());
 //                new Service(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5), rs.getDate(6), rs.getDate(7), rs.getInt(8),rs.getDouble(9), rs.getDouble(10),rs.getString(11)
             }
         } catch (SQLException e) {
