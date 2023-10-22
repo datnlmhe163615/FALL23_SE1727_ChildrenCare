@@ -97,7 +97,7 @@
                         <ul class="nav nav-tabs" id="myTab" role="tablist">
                             <c:forEach var="c" items="${category}">
                                 <li class="nav-item" role="presentation">
-                                    <form action="sevices" method="get">
+                                    <form action="services" method="get">
                                         <input type="hidden" value="${c.getId()}" name="id">
                                         <input type="hidden" value="1" name="mode">
                                         <button class="nav-link" type="submit">${c.getTitle()}</button>

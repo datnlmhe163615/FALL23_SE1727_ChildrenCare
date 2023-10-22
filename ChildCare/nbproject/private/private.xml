@@ -3,54 +3,11 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-
-            <file>file:/D:/FPTU/Semester8/FALL23_SE1727_ChildrenCare/ChildCare/src/java/Controller/ForgotPasswordController.java</file>
-            <file>file:/D:/FPTU/Semester8/FALL23_SE1727_ChildrenCare/ChildCare/web/forgot_pass.jsp</file>
-            <file>file:/D:/FPTU/Semester8/FALL23_SE1727_ChildrenCare/ChildCare/src/java/DAO/ManageAccDAO.java</file>
-
-
             <file>file:/D:/GITHUB/FALL23_SE1727_ChildrenCare/ChildCare/src/java/Model/ServiceCategory.java</file>
-            <file>file:/D:/GITHUB/FALL23_SE1727_ChildrenCare/ChildCare/web/WEB-INF/web.xml</file>
-            <file>file:/D:/GITHUB/FALL23_SE1727_ChildrenCare/ChildCare/src/java/DAO/ServiceDAO.java</file>
-            <file>file:/D:/SWP391/FALL23_SE1727_ChildrenCare/ChildCare/src/java/Model/Slide.java</file>
-            <file>file:/D:/SWP391/FALL23_SE1727_ChildrenCare/ChildCare/src/java/Controller/searchAccount.java</file>
-            <file>file:/D:/SWP391/FALL23_SE1727_ChildrenCare/ChildCare/src/java/DAO/ReservationItemDBcontex.java</file>
-            <file>file:/D:/SWP391/FALL23_SE1727_ChildrenCare/ChildCare/src/java/Controller/services.java</file>
-            <file>file:/D:/SWP391/FALL23_SE1727_ChildrenCare/ChildCare/src/java/Controller/ServiceDetail.java</file>
-            <file>file:/D:/SWP391/FALL23_SE1727_ChildrenCare/ChildCare/src/java/Controller/ServiceController.java</file>
-            <file>file:/D:/SWP391/FALL23_SE1727_ChildrenCare/ChildCare/src/java/Model/ServiceMedia.java</file>
-            <file>file:/D:/SWP391/FALL23_SE1727_ChildrenCare/ChildCare/src/java/Controller/BlogController.java</file>
-            <file>file:/D:/SWP391/FALL23_SE1727_ChildrenCare/ChildCare/src/java/DAO/ServiceDBcontext.java</file>
-            <file>file:/D:/SWP391/FALL23_SE1727_ChildrenCare/ChildCare/src/java/Controller/LoginController.java</file>
-            <file>file:/D:/SWP391/FALL23_SE1727_ChildrenCare/ChildCare/src/java/Controller/BlogDeatailsController.java</file>
-            <file>file:/D:/SWP391/FALL23_SE1727_ChildrenCare/ChildCare/src/java/Controller/FeedbackControoller.java</file>
-            <file>file:/D:/SWP391/FALL23_SE1727_ChildrenCare/ChildCare/src/java/DAO/ReservationDBcontex.java</file>
-            <file>file:/D:/SWP391/FALL23_SE1727_ChildrenCare/ChildCare/src/java/Model/Service.java</file>
-            <file>file:/D:/SWP391/FALL23_SE1727_ChildrenCare/ChildCare/src/java/DAO/ServiceCategoryDBcontext.java</file>
-            <file>file:/D:/SWP391/FALL23_SE1727_ChildrenCare/ChildCare/src/java/Model/ServiceCategory.java</file>
-            <file>file:/D:/SWP391/FALL23_SE1727_ChildrenCare/ChildCare/src/java/Controller/MedicalexaminationController.java</file>
-            <file>file:/D:/SWP391/FALL23_SE1727_ChildrenCare/ChildCare/web/Blogdeatails.jsp</file>
-            <file>file:/D:/SWP391/FALL23_SE1727_ChildrenCare/ChildCare/src/java/Model/Reservation.java</file>
-            <file>file:/D:/SWP391/FALL23_SE1727_ChildrenCare/ChildCare/src/java/Controller/manageUser.java</file>
-            <file>file:/D:/SWP391/FALL23_SE1727_ChildrenCare/ChildCare/src/java/Controller/CheckoutController.java</file>
-            <file>file:/D:/SWP391/FALL23_SE1727_ChildrenCare/ChildCare/src/java/DAO/SlideDBcontext.java</file>
-            <file>file:/D:/SWP391/FALL23_SE1727_ChildrenCare/ChildCare/src/java/Model/Setting.java</file>
-            <file>file:/D:/SWP391/FALL23_SE1727_ChildrenCare/ChildCare/src/java/Controller/accountDetail.java</file>
-            <file>file:/D:/SWP391/FALL23_SE1727_ChildrenCare/ChildCare/src/java/Model/Notification.java</file>
-            <file>file:/D:/SWP391/FALL23_SE1727_ChildrenCare/ChildCare/src/java/Controller/HomeController.java</file>
-            <file>file:/D:/SWP391/FALL23_SE1727_ChildrenCare/ChildCare/src/java/DAO/ServiceDAO.java</file>
-            <file>file:/D:/SWP391/FALL23_SE1727_ChildrenCare/ChildCare/src/java/Controller/searchService.java</file>
-            <file>file:/D:/SWP391/FALL23_SE1727_ChildrenCare/ChildCare/src/java/Controller/ServiceServlet.java</file>
-            <file>file:/D:/SWP391/FALL23_SE1727_ChildrenCare/ChildCare/src/java/DAO/BlogDBcontext.java</file>
-            <file>file:/D:/SWP391/FALL23_SE1727_ChildrenCare/ChildCare/src/java/DAO/AccountDAO.java</file>
-            <file>file:/D:/SWP391/FALL23_SE1727_ChildrenCare/ChildCare/src/java/DAO/ServicesDAO.java</file>
-            <file>file:/D:/SWP391/FALL23_SE1727_ChildrenCare/ChildCare/src/java/Model/Account.java</file>
-            <file>file:/D:/SWP391/FALL23_SE1727_ChildrenCare/ChildCare/src/java/Model/SlideItem.java</file>
-            <file>file:/D:/SWP391/FALL23_SE1727_ChildrenCare/ChildCare/src/java/Model/PostCategory.java</file>
-            <file>file:/D:/SWP391/FALL23_SE1727_ChildrenCare/ChildCare/src/java/Controller/GetMedicalexaminationController.java</file>
-            <file>file:/D:/SWP391/FALL23_SE1727_ChildrenCare/ChildCare/web/Medical%20examination.jsp</file>
-            <file>file:/D:/SWP391/FALL23_SE1727_ChildrenCare/ChildCare/src/java/Model/Feedback.java</file>
-
+            <file>file:/D:/GITHUB/FALL23_SE1727_ChildrenCare/ChildCare/src/java/Controller/servicesList.java</file>
+            <file>file:/D:/GITHUB/FALL23_SE1727_ChildrenCare/ChildCare/src/java/DAO/AccountDAO.java</file>
+            <file>file:/D:/GITHUB/FALL23_SE1727_ChildrenCare/ChildCare/src/java/DAO/ServicesDAO.java</file>
+            <file>file:/D:/GITHUB/FALL23_SE1727_ChildrenCare/ChildCare/src/java/Model/Service.java</file>
         </group>
     </open-files>
 </project-private>

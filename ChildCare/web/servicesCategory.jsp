@@ -91,7 +91,7 @@
                         <ul class="nav nav-tabs" id="myTab" role="tablist">
                             <c:forEach var="c" items="${category}">
                                 <li class="nav-item" role="presentation">
-                                    <form action="sevices" method="get">
+                                    <form action="services" method="get">
                                         <input type="hidden" value="${c.getId()}" name="id">
                                         <input type="hidden" value="1" name="mode">
                                         <button class="nav-link" type="submit">${c.getTitle()}</button>
@@ -114,7 +114,7 @@
                                         <c:forEach var="c" items="${category}">
                                             <div style="    margin-top: 20px;" class="col-lg-4 col-md-6 col-12 mb-4 mb-lg-0">
                                                 <div class="custom-block bg-white shadow-lg">
-                                                    <a href="sevicesList?id=${c.getId()}">
+                                                    <a href="servicesList?id=${c.getId()}">
                                                         <div class="d-flex">
                                                             <div>
                                                                 <h5 class="mb-2">${c.getTitle()}</h5>
