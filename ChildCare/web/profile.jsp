@@ -27,7 +27,7 @@
     </head>
     
     
-
+    <jsp:include page="header.jsp"></jsp:include>
         <body id="page-top">
             <!-- Navigation-->
 
@@ -91,7 +91,7 @@
                                         <p class="mb-0">Phone</p>
                                     </div>
                                     <div class="col-sm-9">
-                                        <p class="text-muted mb-0">0${requestScope.acc.mobile}</p>
+                                        <p class="text-muted mb-0">${requestScope.acc.mobile}</p>
                                     </div>
                                 </div>
                                 <hr>

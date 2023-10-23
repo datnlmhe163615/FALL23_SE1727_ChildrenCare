@@ -63,7 +63,7 @@ public class ManageAccDAO {
             e.printStackTrace();
         }
     }
-    
+
     public ArrayList<Account> list() {
         ArrayList<Account> accounts = new ArrayList<>();
         try {
@@ -90,7 +90,7 @@ public class ManageAccDAO {
         }
         return accounts;
     }
-    
+
     public void ChangePassAccountById(int id, String newPass) {
         try {
             String sql = "UPDATE [account] \n"
@@ -104,7 +104,7 @@ public class ManageAccDAO {
             e.printStackTrace();
         }
     }
-    
+
     public void ChangePassAccountByEmail(String email, String newPass) {
         try {
             String sql = "UPDATE [account] \n"
@@ -118,11 +118,11 @@ public class ManageAccDAO {
             e.printStackTrace();
         }
     }
-    
+
     public Account getAccountByEmail(String email) {
         Account acc = new Account();
-        String sql = "select * from account \n" +
-                     "where email = ?";
+        String sql = "select * from account \n"
+                + "where email = ?";
         try {
             PreparedStatement stm = conn.prepareStatement(sql);
             stm.setString(1, email);
@@ -149,7 +149,8 @@ public class ManageAccDAO {
 
         return null;
     }
-        public Account getAccountById(int id) {
+
+    public Account getAccountById(int id) {
         Account acc = new Account();
         String sql = "select * from account where id = ?";
         try {
@@ -177,6 +178,43 @@ public class ManageAccDAO {
         }
 
         return null;
+    }
+
+    public void UpdateAccountById(int id, String email, String fullname, String mobile, String address, boolean gender, String avatar) {
+        try {
+            String sql = "UPDATE Account\n"
+                    + "SET email = ?, fullName = ?, avatar = ?, mobile = ?, gender = ?, address = ?\n"
+                    + "WHERE id = ?";
+            PreparedStatement stm = conn.prepareStatement(sql);
+            stm.setString(1, email);
+            stm.setString(2, fullname);
+            stm.setString(3, avatar);
+            stm.setString(4, mobile);
+            stm.setBoolean(5, gender);
+            stm.setString(6, address);
+            stm.setInt(7, id);
+            stm.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void UpdateAccountByIdNoImg(int id, String email, String fullname, String mobile, String address, boolean gender) {
+        try {
+            String sql = "UPDATE Account\n"
+                    + "SET email = ?, fullName = ?, mobile = ?, gender = ?, address = ?\n"
+                    + "WHERE id = ?";
+            PreparedStatement stm = conn.prepareStatement(sql);
+            stm.setString(1, email);
+            stm.setString(2, fullname);
+            stm.setString(3, mobile);
+            stm.setBoolean(4, gender);
+            stm.setString(5, address);
+            stm.setInt(6, id);
+            stm.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 
     public static void main(String[] args) {

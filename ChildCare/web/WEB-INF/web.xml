@@ -72,6 +72,10 @@
         <servlet-name>ReservationDetail</servlet-name>
         <servlet-class>Controller.ReservationDetail</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>EditProfileController</servlet-name>
+        <servlet-class>Controller.EditProfileController</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>manageUser</servlet-name>
         <url-pattern>/manageUser</url-pattern>
@@ -177,12 +181,17 @@
         <url-pattern>/profile</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
+
         <servlet-name>ReservationList</servlet-name>
         <url-pattern>/ReservationList</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>ReservationDetail</servlet-name>
         <url-pattern>/ReservationDetail</url-pattern>
+
+        <servlet-name>EditProfileController</servlet-name>
+        <url-pattern>/edit_profile</url-pattern>
+
     </servlet-mapping>
     <session-config>
         <session-timeout>
