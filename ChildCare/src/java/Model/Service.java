@@ -43,7 +43,13 @@ public class Service {
         this.created_at = created_at;
         this.updated_at = updated_at;
     }
-
+    
+    public Service(int id, String thumbnail, String title) {
+        this.id = id;
+        this.thumbnail = thumbnail;
+        this.title = title;
+    }
+    
     public int getId() {
         return id;
     }

@@ -1,3 +1,9 @@
+<%-- 
+    Document   : reservationDetail
+    Created on : Oct 24, 2023, 11:52:53 AM
+    Author     : iNFJZ
+--%>
+
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"  %>
 <!DOCTYPE html>
@@ -173,7 +179,7 @@
                         <div class="col-lg-12 p-5 bg-white rounded shadow-sm mb-5" style="    margin-top: 26px;">
                             <div style="    font-size: 30px;
                                  margin-bottom: 10px;
-                                 font-weight: 500;">Reservation List</div>
+                                 font-weight: 500;">Reservation Detail</div>
 
                             <!-- Shopping cart table -->
                             <div class="table-responsive">
@@ -181,26 +187,14 @@
                                     <thead>
                                         <tr>
                                             <th scope="col" class="border-0 bg-light">
-                                                <div class="p-2 px-3 text-uppercase">Customer</div>
+                                                <div class="p-2 px-3 text-uppercase">Services</div>
                                             </th>
                                             <th scope="col" class="border-0 bg-light">
-                                                <div class="py-2 text-uppercase">Mobile</div>
+                                                <div class="py-2 text-uppercase">Price</div>
                                             </th>
                                             <th scope="col" class="border-0 bg-light">
-                                                <div class="py-2 text-uppercase">Address</div>
-                                            </th>
-                                            <th scope="col" class="border-0 bg-light">
-                                                <div class="py-2 text-uppercase">Total</div>
-                                            </th>
-                                            <th scope="col" class="border-0 bg-light">
-                                                <div class="py-2 text-uppercase">Create Date</div>
-                                            </th>
-                                            <th scope="col" class="border-0 bg-light">
-                                                <div class="py-2 text-uppercase">Status</div>
-                                            </th>
-                                            <th scope="col" class="border-0 bg-light">
-                                                <div class="py-2 text-uppercase"></div>
-                                            </th>
+                                                <div class="py-2 text-uppercase">Quantity</div>
+                                            </th>                                     
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -208,34 +202,19 @@
                                             <tr>
                                                 <th scope="row" class="border-0">
                                                     <div class="p-2">
-                                                        <img src="./images/${r.getAccount().getAvatar()}" alt="" width="70" class="img-fluid rounded shadow-sm">
+                                                        <img src="./images/${r.getService().getThumbnail()}" alt="" width="70" class="img-fluid rounded shadow-sm">
                                                         <div class="ml-3 d-inline-block align-middle">
-                                                            <h5 class="mb-0"> <a href="#" class="text-dark d-inline-block align-middle">${r.getAccount().getFullname()}</a></h5>
-                                                         
+                                                            <h5 class="mb-0"> <a href="#" class="text-dark d-inline-block align-middle">${r.getService().getTitle()}</a></h5>                               
                                                         </div>
                                                     </div>
                                                 </th>
-                                                <td class="border-0 align-middle"><strong>${r.getMobile()}</strong></td>
-                                                <td class="border-0 align-middle"><strong>${r.getAddress()}</strong></td>
-                                                <td class="border-0 align-middle"><strong>$${r.getTotal()}</strong></td>
-                                                <td class="border-0 align-middle"><strong>${r.getCreated_at()}</strong></td>
-                                                <c:if test="${r.getStatus() == 1}"><td class="border-0 align-middle"><strong>Active</strong></td></c:if>
-                                                <c:if test="${r.getStatus() == 2}"><td class="border-0 align-middle"><strong>Unactive</strong></td></c:if>
-                                                    <td class="border-0 align-middle">
-                                                        <a href="ReservationDetail?id=${r.getId()}" class="text-dark">Detail</a></td>
+                                                <td class="border-0 align-middle"><strong>${r.getReservationItem().getService_price()}</strong></td>
+                                                <td class="border-0 align-middle"><strong><input type="number" min="1" max="50" value="${r.getReservationItem().getQuantity()}"></strong></td>
+             
                                                 </tr>
                                         </c:forEach>
                                     </tbody>
                                 </table>
-                            </div>
-                            <div class="col-lg-12">
-                                <ul class="page-numbers">
-                                    <li><a href="ReservationList?index=1"><i class="fa fa-angle-double-left"></i></a></li>
-                                            <c:forEach var = "i" begin = "1" end = "${numberPage}">
-                                        <li class="${param['index']==i?'active':''}"><a href="ReservationList?index=${i}"><span>${i}</span></a></li>
-                                                </c:forEach>
-                                    <li><a href="ReservationList?index=${numberPage}"><i class="fa fa-angle-double-right"></i></a></li>
-                                </ul>
                             </div>
                             <!-- End -->
                         </div>
@@ -412,8 +391,6 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.3.0/js/bootstrap-datepicker.js"></script>
         <!-- custom js -->
         <script src="js/custom.js"></script>
-
-
     </body>
 
 </html>

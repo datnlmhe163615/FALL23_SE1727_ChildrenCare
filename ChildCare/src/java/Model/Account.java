@@ -51,5 +51,6 @@ public class Account {
     public Account(String fullname, String avatar) {
         this.fullname = fullname;
         this.avatar = avatar;
-    } 
+    }
+    
 }
