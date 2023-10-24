@@ -1,163 +1,419 @@
-
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"  %>
 <!DOCTYPE html>
-<html lang="en">
+<html>
 
     <head>
-        <title>Reservation</title>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
-        <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700" rel="stylesheet">
-        <link href="https://fonts.googleapis.com/css?family=Josefin+Sans:400,700" rel="stylesheet">
-        <link href="https://fonts.googleapis.com/css?family=Great+Vibes" rel="stylesheet">
+        <!-- Basic -->
+        <meta charset="utf-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <!-- Mobile Metas -->
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+        <!-- Site Metas -->
+        <meta name="keywords" content="" />
+        <meta name="description" content="" />
+        <meta name="author" content="" />
+        <style>
+            ul.page-numbers {
+                text-align: center;
+            }
 
-        <link rel="stylesheet" href="reservation/css/open-iconic-bootstrap.min.css">
-        <link rel="stylesheet" href="reservation/css/animate.css">
+            ul.page-numbers li {
+                display: inline-block;
+                margin: 0px 5px;
+            }
 
-        <link rel="stylesheet" href="reservation/css/owl.carousel.min.css">
-        <link rel="stylesheet" href="reservation/css/owl.theme.default.min.css">
-        <link rel="stylesheet" href="reservation/css/magnific-popup.css">
+            ul.page-numbers li a {
+                width: 50px;
+                height: 50px;
+                display: inline-block;
+                text-align: center;
+                line-height: 50px;
+                font-size: 15px;
+                color: #7a7a7a;
+                border: 1px solid #eee;
+                font-weight: 500;
+                transition: all 0.3s;
+            }
 
-        <link rel="stylesheet" href="reservation/css/aos.css">
+            ul.page-numbers li.active a {
+                background-color: #00c6a9;
+                border-color: #00c6a9;
+                color: #fff;
+            }
 
-        <link rel="stylesheet" href="reservation/css/ionicons.min.css">
+            ul.page-numbers li a:hover {
+                color: #00c6a9;
+            }
+        </style>
 
-        <link rel="stylesheet" href="reservation/css/bootstrap-datepicker.css">
-        <link rel="stylesheet" href="reservation/css/jquery.timepicker.css">
+        <title>Mico</title>
 
 
-        <link rel="stylesheet" href="reservation/css/flaticon.css">
-        <link rel="stylesheet" href="reservation/css/icomoon.css">
-        <link rel="stylesheet" href="reservation/css/style.css">
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
-        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+        <!-- bootstrap core css -->
+        <link rel="stylesheet" type="text/css" href="css/bootstrap.css" />
+
+        <!-- fonts style -->
+        <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700;900&display=swap" rel="stylesheet">
+
+        <!--owl slider stylesheet -->
+        <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css" />
+
+        <!-- font awesome style -->
+        <link href="css/font-awesome.min.css" rel="stylesheet" />
+        <!-- nice select -->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-nice-select/1.1.0/css/nice-select.min.css" integrity="sha256-mLBIhmBvigTFWPSCtvdu6a76T+3Xyt+K571hupeFLg4=" crossorigin="anonymous" />
+        <!-- datepicker -->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.3.0/css/datepicker.css">
+        <!-- Custom styles for this template -->
+        <link href="css/style.css" rel="stylesheet" />
+        <!-- responsive style -->
+        <link href="css/responsive.css" rel="stylesheet" />
+
     </head>
 
-    <body>
-        <nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light" id="ftco-navbar">
-            <div class="container">
-                <div class="collapse navbar-collapse" id="ftco-nav">
-                    <ul class="navbar-nav ml-auto">
-                        <li class="nav-item">
-                            <form action="ProductLists" class="search-form" method="post" >
-                                <div class="form-group">
-                                    <div class="icon">
-                                        <span class="icon-search"></span>
-                                    </div>
-                                    <input type="text" class="form-control" name="search" placeholder="Search...">
+    <body class="sub_page">
+
+        <div class="hero_area">
+            <!-- header section strats -->
+            <header class="header_section">
+                <div class="header_top">
+                    <div class="container">
+                        <div class="contact_nav">
+                            <a href="">
+                                <i class="fa fa-phone" aria-hidden="true"></i>
+                                <span>
+                                    Call : +01 123455678990
+                                </span>
+                            </a>
+                            <a href="">
+                                <i class="fa fa-envelope" aria-hidden="true"></i>
+                                <span>
+                                    Email : demo@gmail.com
+                                </span>
+                            </a>
+                            <a href="">
+                                <i class="fa fa-map-marker" aria-hidden="true"></i>
+                                <span>
+                                    Location
+                                </span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="header_bottom">
+                    <div class="container-fluid">
+                        <nav class="navbar navbar-expand-lg custom_nav-container ">
+                            <a class="navbar-brand" href="index.html">
+                                <img src="images/logo.png" alt="">
+                            </a>
+                            </a>
+
+                            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                                <span class=""> </span>
+                            </button>
+
+                            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                                <div class="d-flex mr-auto flex-column flex-lg-row align-items-center">
+                                    <ul class="navbar-nav  ">
+                                        <li class="nav-item ">
+                                            <a class="nav-link" href="index.jsp">Home <span class="sr-only">(current)</span></a>
+                                        </li>
+                                        <li class="nav-item active">
+                                            <a class="nav-link" href="about.jsp"> About</a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a class="nav-link" href="treatment.jsp">Treatment</a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a class="nav-link" href="doctor.jsp">Doctors</a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a class="nav-link" href="testimonial.jsp">Testimonial</a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a class="nav-link" href="contact.jsp">Contact Us</a>
+                                        </li>
+                                    </ul>
                                 </div>
-                            </form>
-                        </li>
-                        <li class="nav-item"><a href="#" class="nav-link">Home</a></li>
-                        <li class="nav-item"><a href="#" class="nav-link">Blog</a></li>
-                        <li class="nav-item"><a href="#" class="nav-link">Treatment</a></li>         
-                        <li class="nav-item"><a href="#" class="nav-link">Doctors</a></li>
-                        <li class="nav-item"><a href="#" class="nav-link">Feedback</a></li>
-                        <li class="nav-item"><a href="#" class="nav-link">Reservation</a></li>
-                    </ul>
+                                <div class="quote_btn-container">
+                                    <a href="">
+                                        <i class="fa fa-user" aria-hidden="true"></i>
+                                        <span>
+                                            Login
+                                        </span>
+                                    </a>
+                                    <a href="">
+                                        <i class="fa fa-user" aria-hidden="true"></i>
+                                        <span>
+                                            Sign Up
+                                        </span>
+                                    </a>
+                                    <form class="form-inline">
+                                        <button class="btn  my-2 my-sm-0 nav_search-btn" type="submit">
+                                            <i class="fa fa-search" aria-hidden="true"></i>
+                                        </button>
+                                    </form>
+                                </div>
+                            </div>
+                        </nav>
+                    </div>
+                </div>
+            </header>
+            <!-- end header section -->
+        </div>
+
+
+        <!-- about section -->
+
+        <div class="px-4 px-lg-0">
+            <div class="pb-5">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-lg-12 p-5 bg-white rounded shadow-sm mb-5" style="    margin-top: 26px;">
+                            <div style="    font-size: 30px;
+                                 margin-bottom: 10px;
+                                 font-weight: 500;">Reservation List</div>
+
+                            <!-- Shopping cart table -->
+                            <div class="table-responsive">
+                                <table class="table">
+                                    <thead>
+                                        <tr>
+                                            <th scope="col" class="border-0 bg-light">
+                                                <div class="p-2 px-3 text-uppercase">Customer</div>
+                                            </th>
+                                            <th scope="col" class="border-0 bg-light">
+                                                <div class="py-2 text-uppercase">Mobile</div>
+                                            </th>
+                                            <th scope="col" class="border-0 bg-light">
+                                                <div class="py-2 text-uppercase">Address</div>
+                                            </th>
+                                            <th scope="col" class="border-0 bg-light">
+                                                <div class="py-2 text-uppercase">Total</div>
+                                            </th>
+                                            <th scope="col" class="border-0 bg-light">
+                                                <div class="py-2 text-uppercase">Create Date</div>
+                                            </th>
+                                            <th scope="col" class="border-0 bg-light">
+                                                <div class="py-2 text-uppercase">Status</div>
+                                            </th>
+                                            <th scope="col" class="border-0 bg-light">
+                                                <div class="py-2 text-uppercase"></div>
+                                            </th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <c:forEach items="${reservation}" var="r">
+                                            <tr>
+                                                <th scope="row" class="border-0">
+                                                    <div class="p-2">
+                                                        <img src="./images/${r.getAccount().getAvatar()}" alt="" width="70" class="img-fluid rounded shadow-sm">
+                                                        <div class="ml-3 d-inline-block align-middle">
+                                                            <h5 class="mb-0"> <a href="#" class="text-dark d-inline-block align-middle">${r.getAccount().getFullname()}</a></h5>
+                                                         
+                                                        </div>
+                                                    </div>
+                                                </th>
+                                                <td class="border-0 align-middle"><strong>${r.getMobile()}</strong></td>
+                                                <td class="border-0 align-middle"><strong>${r.getAddress()}</strong></td>
+                                                <td class="border-0 align-middle"><strong>$${r.getTotal()}</strong></td>
+                                                <td class="border-0 align-middle"><strong>${r.getCreated_at()}</strong></td>
+                                                <c:if test="${r.getStatus() == 1}"><td class="border-0 align-middle"><strong>Active</strong></td></c:if>
+                                                <c:if test="${r.getStatus() == 2}"><td class="border-0 align-middle"><strong>Unactive</strong></td></c:if>
+                                                    <td class="border-0 align-middle">
+                                                        <a href="ReservationDetail?id=${r.getId()}" class="text-dark">Detail</a></td>
+                                                </tr>
+                                        </c:forEach>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div class="col-lg-12">
+                                <ul class="page-numbers">
+                                    <li><a href="ReservationList?index=1"><i class="fa fa-angle-double-left"></i></a></li>
+                                            <c:forEach var = "i" begin = "1" end = "${numberPage}">
+                                        <li class="${param['index']==i?'active':''}"><a href="ReservationList?index=${i}"><span>${i}</span></a></li>
+                                                </c:forEach>
+                                    <li><a href="ReservationList?index=${numberPage}"><i class="fa fa-angle-double-right"></i></a></li>
+                                </ul>
+                            </div>
+                            <!-- End -->
+                        </div>
+                    </div>
                 </div>
             </div>
-        </nav>
-        <!-- END nav -->
+        </div>
+        <!-- end about section -->
 
-        <section class="home-slider owl-carousel">
 
-            <div class="slider-item" style="background-image: url(reservation/images/bg_3.jpg);" data-stellar-background-ratio="0.5">
-                <div class="overlay"></div>
-                <div class="container">
-                    <div class="row slider-text justify-content-center align-items-center">
-
-                        <div class="col-md-7 col-sm-12 text-center ftco-animate">
-                            <h1 class="mb-3 mt-5 bread">Reservation</h1>
+        <!-- info section -->
+        <section class="info_section ">
+            <div class="container">
+                <div class="info_top">
+                    <div class="info_logo">
+                        <a href="">
+                            <img src="images/logo.png" alt="">
+                        </a>
+                    </div>
+                    <div class="info_form">
+                        <form action="">
+                            <input type="email" placeholder="Your email">
+                            <button>
+                                Subscribe
+                            </button>
+                        </form>
+                    </div>
+                </div>
+                <div class="info_bottom layout_padding2">
+                    <div class="row info_main_row">
+                        <div class="col-md-6 col-lg-3">
+                            <h5>
+                                Address
+                            </h5>
+                            <div class="info_contact">
+                                <a href="">
+                                    <i class="fa fa-map-marker" aria-hidden="true"></i>
+                                    <span>
+                                        Location
+                                    </span>
+                                </a>
+                                <a href="">
+                                    <i class="fa fa-phone" aria-hidden="true"></i>
+                                    <span>
+                                        Call +01 1234567890
+                                    </span>
+                                </a>
+                                <a href="">
+                                    <i class="fa fa-envelope"></i>
+                                    <span>
+                                        demo@gmail.com
+                                    </span>
+                                </a>
+                            </div>
+                            <div class="social_box">
+                                <a href="">
+                                    <i class="fa fa-facebook" aria-hidden="true"></i>
+                                </a>
+                                <a href="">
+                                    <i class="fa fa-twitter" aria-hidden="true"></i>
+                                </a>
+                                <a href="">
+                                    <i class="fa fa-linkedin" aria-hidden="true"></i>
+                                </a>
+                                <a href="">
+                                    <i class="fa fa-instagram" aria-hidden="true"></i>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-lg-3">
+                            <div class="info_links">
+                                <h5>
+                                    Useful link
+                                </h5>
+                                <div class="info_links_menu">
+                                    <a href="index.html">
+                                        Home
+                                    </a>
+                                    <a class="active" href="about.html">
+                                        About
+                                    </a>
+                                    <a href="treatment.html">
+                                        Treatment
+                                    </a>
+                                    <a href="doctor.html">
+                                        Doctors
+                                    </a>
+                                    <a href="testimonial.html">
+                                        Testimonial
+                                    </a>
+                                    <a href="contact.html">
+                                        Contact us
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-lg-3">
+                            <div class="info_post">
+                                <h5>
+                                    LATEST POSTS
+                                </h5>
+                                <div class="post_box">
+                                    <div class="img-box">
+                                        <img src="images/post1.jpg" alt="">
+                                    </div>
+                                    <p>
+                                        Normal
+                                        distribution
+                                    </p>
+                                </div>
+                                <div class="post_box">
+                                    <div class="img-box">
+                                        <img src="images/post2.jpg" alt="">
+                                    </div>
+                                    <p>
+                                        Normal
+                                        distribution
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-lg-3">
+                            <div class="info_post">
+                                <h5>
+                                    News
+                                </h5>
+                                <div class="post_box">
+                                    <div class="img-box">
+                                        <img src="images/post3.jpg" alt="">
+                                    </div>
+                                    <p>
+                                        Normal
+                                        distribution
+                                    </p>
+                                </div>
+                                <div class="post_box">
+                                    <div class="img-box">
+                                        <img src="images/post4.png" alt="">
+                                    </div>
+                                    <p>
+                                        Normal
+                                        distribution
+                                    </p>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </section>
-        <div id="main">
+        <!-- end info_section -->
+
+
+        <!-- footer section -->
+        <footer class="footer_section">
             <div class="container">
-                <h1 class="title-page">Reservation List</h1>
-                <div class="group-tabs">
-                    <!-- Nav tabs -->
-                    <ul class="nav nav-tabs" role="tablist">
-                        <li role="presentation" class="active"><a href="#all" aria-controls="all" role="tab" data-toggle="tab">All</a></li>
-                    </ul>
-
-                    <!-- Tab panes -->
-                    <div class="tab-content">
-                        <div role="tabpanel" class="tab-pane active" id="all">
-                            <section class="ftco-section ftco-cart">
-                                <div class="container">
-                                    <div class="row">
-                                        <div class="col-md-12 ftco-animate">
-                                            <div class="cart-list">
-                                                <table class="table">
-                                                    <thead class="thead-primary">
-                                                        <tr class="text-center">                                                        
-                                                            <th>STT</th>
-                                                            <th>Order Date</th>
-                                                            <th>Order Name</th>
-                                                            <th>Status</th>
-                                                            <th colspan="2">Action</th>
-                                                        </tr>
-                                                    </thead>
-                                                    <tbody>
-                                                        <c:forEach items="${requestScope.list}" var="i" varStatus="idx">
-                                                            <tr class="text-center">           
-                                                                <td>${idx.index}</td>
-                                                                <td>${i.formatDate()}</td>
-                                                                <td>${i.orderName}</td>
-                                                                <td>${i.status.name}</td>
-                                                                <td><a href="orderDetail?id=${i.id}">Detail</a></td>
-                                                                <c:if test="${i.status.id == 1}">
-                                                                    <td><a href="changeStatus?id=${i.id}">Cancel</a></td>
-                                                                </c:if>
-                                                            </tr>
-                                                        </c:forEach>
-                                                    </tbody>
-                                                </table>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="row justify-content-end">
-                                        <div class="col col-lg-3 col-md-6 mt-5 cart-wrap ftco-animate">
-                                            <p class="text-center"><a href="Home" class="btn btn-primary py-3 px-4">Back to home</a></p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </section>
-                        </div>
-           
-                    </div>
-                </div>
+                <p>
+                    &copy; <span id="displayYear"></span> All Rights Reserved By
+                    <a href="https://html.design/">Free Html Templates</a>
+                </p>
             </div>
-        </div>
+        </footer>
+        <!-- footer section -->
+
+        <!-- jQery -->
+        <script src="js/jquery-3.4.1.min.js"></script>
+        <!-- bootstrap js -->
+        <script src="js/bootstrap.js"></script>
+        <!-- nice select -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-nice-select/1.1.0/js/jquery.nice-select.min.js" integrity="sha256-Zr3vByTlMGQhvMfgkQ5BtWRSKBGa2QlspKYJnkjZTmo=" crossorigin="anonymous"></script>
+        <!-- owl slider -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>
+        <!-- datepicker -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.3.0/js/bootstrap-datepicker.js"></script>
+        <!-- custom js -->
+        <script src="js/custom.js"></script>
 
 
-        <script src="reservation/js/jquery-migrate-3.0.1.min.js"></script>
-        <script src="reservation/js/popper.min.js"></script>
-        <script src="reservation/js/bootstrap.min.js"></script>
-        <script src="reservation/js/jquery.easing.1.3.js"></script>
-        <script src="reservation/js/jquery.waypoints.min.js"></script>
-        <script src="reservation/js/jquery.stellar.min.js"></script>
-        <script src="reservation/js/owl.carousel.min.js"></script>
-        <script src="reservation/js/jquery.magnific-popup.min.js"></script>
-        <script src="reservation/js/aos.js"></script>
-        <script src="reservation/js/jquery.animateNumber.min.js"></script>
-        <script src="reservation/js/bootstrap-datepicker.js"></script>
-        <script src="reservation/js/jquery.timepicker.min.js"></script>
-        <script src="reservation/js/scrollax.min.js"></script>
-        <script
-        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBVWaKrjvy3MaE7SQ74_uJiULgl1JY0H2s&sensor=false"></script>
-        <script src="js/google-map.js"></script>
-        <script src="js/main.js"></script>
-        <script type="text/javascript">
-            function updateCart(i) {
-                var value = $('#' + i).val();
-                window.location.href = "${pageContext.request.contextPath}/updateCart?idx=" + i + "&quantity=" + value;
-            }
-        </script>
     </body>
 
 </html>
