@@ -57,8 +57,6 @@ public class Reservation {
         this.service = service;
     }
     
-    
-
     public int getId() {
         return id;
     }
@@ -170,10 +168,5 @@ public class Reservation {
     public void setAccount(Account account) {
         this.account = account;
     }
-    
-    
-    
-    
-    
     
 }
