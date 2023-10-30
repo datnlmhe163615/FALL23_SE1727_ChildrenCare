@@ -67,7 +67,7 @@ public class ManageAccDAO {
     public ArrayList<Account> list() {
         ArrayList<Account> accounts = new ArrayList<>();
         try {
-            String sql = "select acc_id, fullname, email, gender, phone, address, role_id from account";
+            String sql = "select id, email, role, fullname, mobile, gender, address, status from account";
             PreparedStatement stm = conn.prepareStatement(sql);
             ResultSet rs = stm.executeQuery();
             while (rs.next()) {
@@ -76,13 +76,10 @@ public class ManageAccDAO {
                 acc.setEmail(rs.getString("email"));
                 acc.setRole(rs.getString("role"));
                 acc.setFullname(rs.getString("fullname"));
-                acc.setAvatar(rs.getString("avatar"));
                 acc.setMobile(rs.getString("mobile"));
                 acc.setGender(rs.getBoolean("gender"));
                 acc.setAddress(rs.getString("address"));
                 acc.setStatus(rs.getInt("status"));
-                acc.setCreated_at(rs.getDate("createdat"));
-                acc.setUpdated_at(rs.getDate("updatedat"));
                 accounts.add(acc);
             }
         } catch (SQLException e) {
@@ -211,6 +208,49 @@ public class ManageAccDAO {
             stm.setBoolean(4, gender);
             stm.setString(5, address);
             stm.setInt(6, id);
+            stm.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+    
+        public ArrayList<Account> ListRoleId() {
+        ArrayList<Account> accounts = new ArrayList<>();
+        try {
+            String sql = "select distinct [role] from account";
+            PreparedStatement stm = conn.prepareStatement(sql);
+            ResultSet rs = stm.executeQuery();
+            while (rs.next()) {
+                Account acc = new Account();
+                acc.setRole(rs.getString("role"));
+                accounts.add(acc);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return accounts;
+    }
+        
+        public void DeleteAccountById(int id) {
+        try {
+            String sql = "DELETE FROM [account]\n"
+                    + "WHERE id =?";
+            PreparedStatement stm = conn.prepareStatement(sql);
+            stm.setInt(1, id);
+            stm.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void UpdateRoleAccountById(String id, String role) {
+        try {
+            String sql = "UPDATE [account] \n"
+                    + "   SET [role] = ?\n"
+                    + " WHERE id = ?";
+            PreparedStatement stm = conn.prepareStatement(sql);
+            stm.setString(1, role);
+            stm.setString(2, id);
             stm.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
