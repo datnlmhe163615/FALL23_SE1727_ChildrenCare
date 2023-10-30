@@ -59,7 +59,6 @@ public class ActionAccountController extends HttpServlet {
     throws ServletException, IOException {
         HttpSession session = request.getSession();
         Account account =(Account) session.getAttribute("acc");
-//        int role = Integer.parseInt(account.getRole());
         if(account == null){
             response.sendRedirect("index.jsp");
             return;
