@@ -64,6 +64,7 @@ public class ActionAccountController extends HttpServlet {
             response.sendRedirect("index.jsp");
             return;
         }
+        
         String action = request.getParameter("action");
         if(action.equals("edit")){
             ManageAccDAO dao = new ManageAccDAO();
