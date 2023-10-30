@@ -7,7 +7,6 @@ package Controller;
 
 import DAO.ManageAccDAO;
 import Model.Account;
-import jakarta.servlet.RequestDispatcher;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
@@ -15,12 +14,13 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
+import java.util.ArrayList;
 
 /**
  *
  * @author mihxdat
  */
-public class LoginController extends HttpServlet {
+public class ActionAccountController extends HttpServlet {
    
     /** 
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
@@ -37,10 +37,10 @@ public class LoginController extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet LoginController</title>");  
+            out.println("<title>Servlet ActionAccountController</title>");  
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet LoginController at " + request.getContextPath () + "</h1>");
+            out.println("<h1>Servlet ActionAccountController at " + request.getContextPath () + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -57,7 +57,23 @@ public class LoginController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-        processRequest(request, response);
+        HttpSession session = request.getSession();
+        Account account =(Account) session.getAttribute("acc");
+        if(account == null){
+            response.sendRedirect("index.jsp");
+            return;
+        }
+        
+        String action = request.getParameter("action");
+        if(action.equals("edit")){
+            ManageAccDAO dao = new ManageAccDAO();
+            ArrayList<Account> roles = dao.ListRoleId();
+            ArrayList<Account> accounts = dao.list();
+            request.setAttribute("roles", roles);
+            request.setAttribute("accounts", accounts);
+            request.setAttribute("action", "edit");
+            request.getRequestDispatcher("user.jsp").forward(request, response);
+        }
     } 
 
     /** 
@@ -70,37 +86,31 @@ public class LoginController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-        String email = request.getParameter("email");
-        String pass = request.getParameter("password");
-        ManageAccDAO accDao = new ManageAccDAO();
-        Account acc = accDao.getAccountByLogin(email, pass);
-        request.setAttribute("account", acc);
-        HttpSession session = request.getSession();
-        session.setAttribute("acc", acc);
-        if (acc == null) {
-            request.setAttribute("msg", "Invalid email or password ! ");
-            RequestDispatcher rd = request.getRequestDispatcher("login.jsp");
-            rd.forward(request, response);
-        }else{
-            int role = Integer.parseInt(acc.getRole());
-        if (role == 3) {
-            RequestDispatcher rd = request.getRequestDispatcher("index.jsp");
-            rd.forward(request, response);
-        }
-        if (role == 1) {
-            RequestDispatcher rd = request.getRequestDispatcher("adminHome.jsp");
-            rd.forward(request, response);
-        }
-        if (role == 2) {
-            RequestDispatcher rd = request.getRequestDispatcher("staff");
-            rd.forward(request, response);
-        }
-        if (role == 0) {
-            RequestDispatcher rd = request.getRequestDispatcher("manager");
-            rd.forward(request, response);
-        }
+        CheckAdmin(request, response);
+        String action = request.getParameter("action");
+        ManageAccDAO dao = new ManageAccDAO();
+        
+        if(action.equals("delete")){  
+            int id = Integer.parseInt(request.getParameter("id"));  
+            dao.DeleteAccountById(id);
+            ArrayList<Account> accounts = dao.list();
+            request.setAttribute("accounts", accounts);
+            request.getRequestDispatcher("user.jsp").forward(request, response);
         }
         
+        if(action.equals("promote")){
+            String[] indexs = request.getParameterValues("index");
+            for (String index : indexs) {
+                String acc_id = request.getParameter("acc_id"+index);
+                String role = request.getParameter("role"+index);
+                dao.UpdateRoleAccountById(acc_id, role);
+            }
+            
+            ArrayList<Account> accounts = dao.list();
+            request.setAttribute("accounts", accounts);
+            request.setAttribute("action", null);
+            request.getRequestDispatcher("user.jsp").forward(request, response);
+        }
     }
 
     /** 
@@ -111,5 +121,15 @@ public class LoginController extends HttpServlet {
     public String getServletInfo() {
         return "Short description";
     }// </editor-fold>
+    
+    public static void CheckAdmin(HttpServletRequest request, HttpServletResponse response) throws IOException{
+        HttpSession session = request.getSession();
+        Account account =(Account) session.getAttribute("acc");
+        int role = Integer.parseInt(account.getRole());
+        if(account == null || role != 1){
+            response.sendRedirect("home");
+            return;
+        }
+    }
 
 }
