@@ -105,6 +105,7 @@ public class ActionAccountController extends HttpServlet {
                 String role = request.getParameter("role"+index);
                 dao.UpdateRoleAccountById(acc_id, role);
             }
+            
             ArrayList<Account> accounts = dao.list();
             request.setAttribute("accounts", accounts);
             request.setAttribute("action", null);
