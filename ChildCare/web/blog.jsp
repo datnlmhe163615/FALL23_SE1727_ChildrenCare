@@ -68,7 +68,7 @@
                             <a class="navbar-brand" href="index.html">
                                 <img src="images/logo.png" alt="">
                             </a>
-                            </a>
+                        
 
                             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                                 <span class=""> </span>
@@ -93,7 +93,7 @@
                                             <a class="nav-link" href="feedback">FeedBack</a>
                                         </li>
                                         <li class="nav-item">
-                                            <a class="nav-link" href="contact.html">Contact Us</a>
+                                               <a class="nav-link" href="medicalexamination">Medical Examination</a>
                                         </li>
                                     </ul>
                                 </div>

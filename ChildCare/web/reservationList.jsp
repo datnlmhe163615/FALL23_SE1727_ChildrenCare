@@ -1,12 +1,8 @@
-<%-- 
-    Document   : service
-    Created on : Sep 27, 2023, 9:27:14 PM
-    Author     : ADMIN
---%>
-
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"  %>
 <!DOCTYPE html>
 <html>
+
     <head>
         <!-- Basic -->
         <meta charset="utf-8" />
@@ -17,13 +13,46 @@
         <meta name="keywords" content="" />
         <meta name="description" content="" />
         <meta name="author" content="" />
+        <style>
+            ul.page-numbers {
+                text-align: center;
+            }
+
+            ul.page-numbers li {
+                display: inline-block;
+                margin: 0px 5px;
+            }
+
+            ul.page-numbers li a {
+                width: 50px;
+                height: 50px;
+                display: inline-block;
+                text-align: center;
+                line-height: 50px;
+                font-size: 15px;
+                color: #7a7a7a;
+                border: 1px solid #eee;
+                font-weight: 500;
+                transition: all 0.3s;
+            }
+
+            ul.page-numbers li.active a {
+                background-color: #00c6a9;
+                border-color: #00c6a9;
+                color: #fff;
+            }
+
+            ul.page-numbers li a:hover {
+                color: #00c6a9;
+            }
+        </style>
 
         <title>Mico</title>
 
 
         <!-- bootstrap core css -->
         <link rel="stylesheet" type="text/css" href="css/bootstrap.css" />
-        
+
         <!-- fonts style -->
         <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700;900&display=swap" rel="stylesheet">
 
@@ -36,15 +65,17 @@
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-nice-select/1.1.0/css/nice-select.min.css" integrity="sha256-mLBIhmBvigTFWPSCtvdu6a76T+3Xyt+K571hupeFLg4=" crossorigin="anonymous" />
         <!-- datepicker -->
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.3.0/css/datepicker.css">
-        <!-- Custom styles for this template 
-        <link href="css/style.css" rel="stylesheet" />-->
+        <!-- Custom styles for this template -->
+        <link href="css/style.css" rel="stylesheet" />
         <!-- responsive style -->
         <link href="css/responsive.css" rel="stylesheet" />
+
     </head>
 
-    <div class="sub_page"> 
+    <body class="sub_page">
+
         <div class="hero_area">
-            <!-- header section starts -->
+            <!-- header section strats -->
             <header class="header_section">
                 <div class="header_top">
                     <div class="container">
@@ -76,7 +107,7 @@
                             <a class="navbar-brand" href="index.html">
                                 <img src="images/logo.png" alt="">
                             </a>
-                      
+                            </a>
 
                             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                                 <span class=""> </span>
@@ -129,235 +160,93 @@
                     </div>
                 </div>
             </header>
+            <!-- end header section -->
+        </div>
 
-        </div> 
-    </div>
 
-    <!-- end header section -->
-    <body>
-        <div class="banner">
-            <!--======== Shop Section ========-->
-            <section class="vs-product-wrapper space-page">
+        <!-- about section -->
+
+        <div class="px-4 px-lg-0">
+            <div class="pb-5">
                 <div class="container">
-                    <div class="vs-sort-bar mb-40">
-                        <div class="row gy-20 align-items-center">
-                            <div class="col-xl-3 col-md-4">
-                                <div class="product-search">
-                                    <div class="widget widget_search">
-                                        <form class="search-form">
-                                            <input type="text" placeholder="Search Here">
-                                            <button type="submit"><i class="far fa-search"></i></button>
-                                        </form>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-sm-auto">
-                                <span class="show-product">Showing 1–9 of 12 results</span>
-                            </div>
-                            <div class="col-sm-auto ms-auto">
-                                <select class="form-select sortby" name="sortby" id="sortby">
-                                    <option>Sort by Latest</option>
-                                    <option>Sort by Oldest</option>
-                                    <option>Sort by Ascending</option>
-                                    <option>Sort by Descending</option>
-                                </select>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row gy-40 flex-column-reverse flex-lg-row">
-                        <div class="col-xl-3 col-lg-4">
-                            <div class="sidebar-area shop-sidebar">
-                                <div class="widget widget_price_filter">
-                                    <h4 class="widget_title">Price Filter</h4>
-                                    <div class="price_slider_wrapper">
-                                        <div class="price_label">
-                                            Price: <span class="from">$0</span> — <span class="to">$70</span>
-                                        </div>
-                                        <div class="price_slider"></div>
-                                        <button type="submit" class="button">Filter</button>
-                                    </div>
-                                </div>
+                    <div class="row">
+                        <div class="col-lg-12 p-5 bg-white rounded shadow-sm mb-5" style="    margin-top: 26px;">
+                            <div style="    font-size: 30px;
+                                 margin-bottom: 10px;
+                                 font-weight: 500;">Reservation List</div>
 
-                                <div class="widget widget_categories">
-                                    <h4 class="widget_title">Categories</h4>
-                                    <ul>
-                                        <c:forEach items="${requestScope.listC}" var="c">
-                                            <li><a href="shop.html">${c.categoryName}</a> <span>(10)</span></li>
-                                            <li><a href="shop.html">${c.categoryName}</a> <span>(10)</span></li>
-                                            <li><a href="shop.html">${c.categoryName}</a> <span>(10)</span></li>
-                                            <li><a href="shop.html">${c.categoryName}</a> <span>(10)</span></li>
-                                            <li><a href="shop.html">${c.categoryName}</a> <span>(10)</span></li>
-                                            <li><a href="shop.html">${c.categoryName}</a> <span>(10)</span></li>
+                            <!-- Shopping cart table -->
+                            <div class="table-responsive">
+                                <table class="table">
+                                    <thead>
+                                        <tr>
+                                            <th scope="col" class="border-0 bg-light">
+                                                <div class="p-2 px-3 text-uppercase">Customer</div>
+                                            </th>
+                                            <th scope="col" class="border-0 bg-light">
+                                                <div class="py-2 text-uppercase">Mobile</div>
+                                            </th>
+                                            <th scope="col" class="border-0 bg-light">
+                                                <div class="py-2 text-uppercase">Address</div>
+                                            </th>
+                                            <th scope="col" class="border-0 bg-light">
+                                                <div class="py-2 text-uppercase">Total</div>
+                                            </th>
+                                            <th scope="col" class="border-0 bg-light">
+                                                <div class="py-2 text-uppercase">Create Date</div>
+                                            </th>
+                                            <th scope="col" class="border-0 bg-light">
+                                                <div class="py-2 text-uppercase">Status</div>
+                                            </th>
+                                            <th scope="col" class="border-0 bg-light">
+                                                <div class="py-2 text-uppercase"></div>
+                                            </th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <c:forEach items="${reservation}" var="r">
+                                            <tr>
+                                                <th scope="row" class="border-0">
+                                                    <div class="p-2">
+                                                        <img src="./images/${r.getAccount().getAvatar()}" alt="" width="70" class="img-fluid rounded shadow-sm">
+                                                        <div class="ml-3 d-inline-block align-middle">
+                                                            <h5 class="mb-0"> <a href="#" class="text-dark d-inline-block align-middle">${r.getAccount().getFullname()}</a></h5>
+                                                         
+                                                        </div>
+                                                    </div>
+                                                </th>
+                                                <td class="border-0 align-middle"><strong>${r.getMobile()}</strong></td>
+                                                <td class="border-0 align-middle"><strong>${r.getAddress()}</strong></td>
+                                                <td class="border-0 align-middle"><strong>$${r.getTotal()}</strong></td>
+                                                <td class="border-0 align-middle"><strong>${r.getCreated_at()}</strong></td>
+                                                <c:if test="${r.getStatus() == 1}"><td class="border-0 align-middle"><strong>Active</strong></td></c:if>
+                                                <c:if test="${r.getStatus() == 2}"><td class="border-0 align-middle"><strong>Unactive</strong></td></c:if>
+                                                    <td class="border-0 align-middle">
+                                                        <a href="ReservationDetail?id=${r.getId()}" class="text-dark">Detail</a></td>
+                                                </tr>
                                         </c:forEach>
-                                    </ul>
-                                </div>
-
-                                <div class="widget widget_tag_cloud wow fadeInUp" data-wow-delay="0.1s">
-                                    <h4 class="widget_title">Tags</h4>
-                                    <div class="tagcloud">
-                                        <a href="shop.html">Dental,</a>
-                                        <a href="shop.html">Health examination,</a>
-                                        <a href="shop.html">Eye examination,</a>
-                                        <a href="shop.html">Care for newborns,</a>
-                                        <a href="shop.html">Medical test,</a>
-                                        <a href="shop.html">obstetrics and gynecology,</a>
-                                        <a href="shop.html">Wooden,</a>
-                                        <a href="shop.html">Ear - nose - throat</a>
-                                    </div>
-                                </div>
+                                    </tbody>
+                                </table>
                             </div>
-                        </div>
-                        <div class="col-xl-9 col-lg-8">
-                            <div >
-                                <!--class="row gy-30"-->
-                                <!-- Single Item -->
-                                <c:forEach items="${requestScope.listS}" var="s">
-                                    <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
-                                        <div class="service-box" data-overlay="title" data-opacity="6">
-                                            
-                                            <div class="service-img">
-                                                <img src="${s.thumbnail}" alt="service">
-                                            </div>
-                                            <div class="service-content">
-                                                <div class="service-icon">
-                                                    <img src="assets/images/logo.png" alt="icon">
-                                                </div>
-                                                <h3 class="service-title"><a href="detail?serviceID=${s.id}">${s.tilte}Root canal treatment</a></h3>
-                                                <p class="service-text">${s.briefInfo}<pre><p>When you go for a dental check-up, your dentist should ask
-             questions about your general health and medications. Many health conditions have
-             an effect on your oral health and vice versa. Some medicines can affect your mouth
-             or need to be taken into consideration before dental treatment.
-            
-            Your dentist will check each tooth using small instruments, such as a mirror and
-             probe (a fine, pick-like tool). The dentist looks for issues such as tooth decay,
-             gum disease and other conditions.
-                        </p></pre></p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </c:forEach>
-                            </div>
-
-                            <div class="vs-pagination mt-60">
-                                <ul>
-                                    <c:set var="page" value="${requestScope.page}"/>
-                                    <c:forEach begin="${1}" end="${requestScope.num}" var="i">
-                                        <li><a href="service?page=${i}" class="${i==page?"active":""}">${i}</a></li>
-                                    </c:forEach>
+                            <div class="col-lg-12">
+                                <ul class="page-numbers">
+                                    <li><a href="ReservationList?index=1"><i class="fa fa-angle-double-left"></i></a></li>
+                                            <c:forEach var = "i" begin = "1" end = "${numberPage}">
+                                        <li class="${param['index']==i?'active':''}"><a href="ReservationList?index=${i}"><span>${i}</span></a></li>
+                                                </c:forEach>
+                                    <li><a href="ReservationList?index=${numberPage}"><i class="fa fa-angle-double-right"></i></a></li>
                                 </ul>
                             </div>
+                            <!-- End -->
                         </div>
                     </div>
-                    <div class="NewSer col-xl col-lg-8">
-                        <style>
-                            .NewSer{ background-color: #9EDDFF}
-                        </style>
-                <h1>News Services</h1>
-                <div class="row">
-                    <c:forEach items="${requestScope.listS}" var="s">
-                    <div >
-                        <!--class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.1s"-->
-                        <div class="service-box" data-overlay="title" data-opacity="6">
-                           <h3 class="service-title"><a href="detail?serviceID=${s.id}">${s.tilte}Root canal treatment</a></h3>
-                           <div class="service-img">
-<!--                                <img src="${s.thumbnail}" alt="service">-->
-                               <img src="assets/images/logo.png" alt="service">
-                            </div>
-                            <div class="service-content">
-                                <div class="service-icon">
-                                    <!--<img src="assets/img/icon/sr-1.png" alt="icon">-->
-                                    <img src="assets/images/logo.png" alt="icon">
-                                </div>
-                                
-                                <p class="service-text">${s.briefInfo}<pre><p>When you go for a dental check-up, your dentist should ask
-             questions about your general health and medications. Many health conditions have
-             an effect on your oral health and vice versa. Some medicines can affect your mouth
-             or need to be taken into consideration before dental treatment.
-            
-            Your dentist will check each tooth using small instruments, such as a mirror and
-             probe (a fine, pick-like tool). The dentist looks for issues such as tooth decay,
-             gum disease and other conditions.
-                        </p></pre></p>
-                            </div>
-                        </div>
-                    </div>
-                </c:forEach>
                 </div>
-                
-            </div>                  
-                </div>
-            </section>
-                           
-
-        </div></section>
-            <section class="book_section layout_padding">
-    <div class="container">
-      <div class="row">
-        <div class="col">
-          <form>
-            <h4>
-              BOOK <span>APPOINTMENT</span>
-            </h4>
-            <div class="form-row ">
-              <div class="form-group col-lg-4">
-                <label for="inputPatientName">Patient Name </label>
-                <input type="text" class="form-control" id="inputPatientName" placeholder="">
-              </div>
-              <div class="form-group col-lg-4">
-                <label for="inputDoctorName">Doctor's Name</label>
-                <select name="" class="form-control wide" id="inputDoctorName">
-                  <option value="Normal distribution ">Normal distribution </option>
-                  <option value="Normal distribution ">Normal distribution </option>
-                  <option value="Normal distribution ">Normal distribution </option>
-                </select>
-              </div>
-              <div class="form-group col-lg-4">
-                <label for="inputDepartmentName">Department's Name</label>
-                <select name="" class="form-control wide" id="inputDepartmentName">
-                  <option value="Normal distribution ">Normal distribution </option>
-                  <option value="Normal distribution ">Normal distribution </option>
-                  <option value="Normal distribution ">Normal distribution </option>
-                </select>
-              </div>
             </div>
-            <div class="form-row ">
-              <div class="form-group col-lg-4">
-                <label for="inputPhone">Phone Number</label>
-                <input type="number" class="form-control" id="inputPhone" placeholder="XXXXXXXXXX">
-              </div>
-              <div class="form-group col-lg-4">
-                <label for="inputSymptoms">Symptoms</label>
-                <input type="text" class="form-control" id="inputSymptoms" placeholder="">
-              </div>
-              <div class="form-group col-lg-4">
-                <label for="inputDate">Choose Date </label>
-                <div class="input-group date" id="inputDate" data-date-format="mm-dd-yyyy">
-                  <input type="text" class="form-control" readonly>
-                  <span class="input-group-addon date_icon">
-                    <i class="fa fa-calendar" aria-hidden="true"></i>
-                  </span>
-                </div>
-              </div>
-            </div>
-            <div class="btn-box">
-              <button type="submit" class="btn ">Submit Now</button>
-            </div>
-          </form>
         </div>
-      </div>
-    </div>
-  </section>
-                </div>
-            </form>
-        </div>
+        <!-- end about section -->
 
-        <div>
 
-        </div>
-    </body>
-
-    <!-- footer section -->
-    <footer class="footer_section">
+        <!-- info section -->
         <section class="info_section ">
             <div class="container">
                 <div class="info_top">
@@ -497,6 +386,34 @@
                 </div>
             </div>
         </section>
-    </footer>
-    <!-- footer section -->
+        <!-- end info_section -->
+
+
+        <!-- footer section -->
+        <footer class="footer_section">
+            <div class="container">
+                <p>
+                    &copy; <span id="displayYear"></span> All Rights Reserved By
+                    <a href="https://html.design/">Free Html Templates</a>
+                </p>
+            </div>
+        </footer>
+        <!-- footer section -->
+
+        <!-- jQery -->
+        <script src="js/jquery-3.4.1.min.js"></script>
+        <!-- bootstrap js -->
+        <script src="js/bootstrap.js"></script>
+        <!-- nice select -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-nice-select/1.1.0/js/jquery.nice-select.min.js" integrity="sha256-Zr3vByTlMGQhvMfgkQ5BtWRSKBGa2QlspKYJnkjZTmo=" crossorigin="anonymous"></script>
+        <!-- owl slider -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>
+        <!-- datepicker -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.3.0/js/bootstrap-datepicker.js"></script>
+        <!-- custom js -->
+        <script src="js/custom.js"></script>
+
+
+    </body>
+
 </html>

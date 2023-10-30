@@ -1,12 +1,8 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
- */
+
 package Controller;
 
-import DAO.ServicesDAO;
-import Model.ServiceCategory;
-import Model.ServiceMedia;
+import DAO.ReservationDAO;
+import Model.Reservation;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
@@ -17,21 +13,18 @@ import java.util.ArrayList;
 
 /**
  *
- * @author asus
+ * @author iNFJZ
  */
-public class sevicesDetail extends HttpServlet {
+public class ReservationDetail extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        ServicesDAO dao = new ServicesDAO();
         String id = request.getParameter("id");
-        int sid = Integer.parseInt(id);
-        ServiceMedia media = dao.getServiceById(sid);
-        ArrayList<ServiceCategory> category = dao.getServiceCate();
-        request.setAttribute("category", category);
-        request.setAttribute("media", media);
-        request.getRequestDispatcher("servicesDetail.jsp").forward(request, response);
+        ReservationDAO dao = new ReservationDAO();
+        ArrayList<Reservation> list = dao.getReservationDetail(Integer.parseInt(id));
+        request.setAttribute("reservation", list);
+        request.getRequestDispatcher("reservationDetail.jsp").forward(request, response);
     }
 
     @Override
