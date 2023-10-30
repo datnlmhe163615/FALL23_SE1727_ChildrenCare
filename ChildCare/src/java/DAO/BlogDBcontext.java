@@ -38,6 +38,51 @@ public class BlogDBcontext extends DBContext.DBContext {
         return categoryModers;
     }
 
+    public int getTotalPosts() {
+        String sql = " select count(*) from Post";
+        try ( PreparedStatement pt = connection.prepareStatement(sql)) {
+            ResultSet rs = pt.executeQuery();
+            while (rs.next()) {
+                return rs.getInt(1);
+            }
+
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+        return 0;
+    }
+
+    public ArrayList<Post> ListBlog1(int page, int pageSize) {
+        ArrayList<Post> BlogModers = new ArrayList<>();
+        String sql = "SELECT [id], [authorId], [categoryId], [title], [thumbnail], [content], [createdAt], [describe]\n"
+                + "FROM [dbo].[Post]\n"
+                + "ORDER BY [id] DESC\n"
+                + "OFFSET ? ROWS\n"
+                + "FETCH NEXT ? ROWS ONLY;";
+
+        try ( PreparedStatement pt = connection.prepareStatement(sql)) {
+            int offset = (page - 1) * pageSize;
+            pt.setInt(1, offset);
+            pt.setInt(2, pageSize);
+            ResultSet rs = pt.executeQuery();
+            while (rs.next()) {
+                Post blogModer = new Post();
+                blogModer.setId(rs.getInt("id"));
+                blogModer.setTitle(rs.getString("title"));
+                blogModer.setAuthor_id(rs.getInt("authorId"));
+                blogModer.setCategory_id(rs.getInt("categoryId"));
+                blogModer.setThumbnail(rs.getString("thumbnail"));
+                blogModer.setContent(rs.getString("content"));
+                blogModer.setCreated_at(rs.getDate("createdAt"));
+                blogModer.setDecription(rs.getString("describe"));
+                BlogModers.add(blogModer);
+            }
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+        return BlogModers;
+    }
+
     public ArrayList<Post> ListBlog() {
         ArrayList<Post> BlogModers = new ArrayList<>();
         String sql = "SELECT [id]\n"
@@ -70,7 +115,6 @@ public class BlogDBcontext extends DBContext.DBContext {
         }
         return BlogModers;
     }
-
     public ArrayList<Post> blogDetails(String id) {
         ArrayList<Post> BlogModers = new ArrayList<>();
         String sql = "SELECT [id]\n"
@@ -105,68 +149,68 @@ public class BlogDBcontext extends DBContext.DBContext {
         return BlogModers;
     }
 
-public ArrayList<Post> blogSearch(String idcategory, String idday, String search) {
-    ArrayList<Post> BlogModers = new ArrayList<>();
+    public ArrayList<Post> blogSearch(String idcategory, String idday, String search ) {
+        ArrayList<Post> BlogModers = new ArrayList<>();
 
-    String sql = "SELECT [id]\n" +
-            "      ,[authorId]\n" +
-            "      ,[categoryId]\n" +
-            "      ,[title]\n" +
-            "      ,[thumbnail]\n" +
-            "      ,[content]\n" +
-            "      ,[createdAt]\n" +
-            "      ,[describe]\n" +
-            "  FROM [dbo].[Post]\n" +
-            "  WHERE 1=1"; // 1=1 để bắt đầu điều kiện
+        String sql = "SELECT [id]\n"
+                + "      ,[authorId]\n"
+                + "      ,[categoryId]\n"
+                + "      ,[title]\n"
+                + "      ,[thumbnail]\n"
+                + "      ,[content]\n"
+                + "      ,[createdAt]\n"
+                + "      ,[describe]\n"
+                + "  FROM [dbo].[Post]\n"
+                + "  WHERE 1=1"; // 1=1 để bắt đầu điều kiện
 
-    try (PreparedStatement pt = connection.prepareStatement(sql)) {
+        try ( PreparedStatement pt = connection.prepareStatement(sql)) {
 
-        if (!search.isEmpty()) {
-            sql += " AND [title] LIKE ?";
-        }
+            if (!search.isEmpty()) {
+                sql += " AND [title] LIKE ?";
+            }
 
-        if (!idcategory.isEmpty()) {
-            String[] categoryIds = idcategory.split(",");
-            sql += " AND [categoryId] IN (";
-            for (int i = 0; i < categoryIds.length; i++) {
-                sql += "?";
-                if (i < categoryIds.length - 1) {
-                    sql += ",";
+            if (!idcategory.isEmpty()) {
+                String[] categoryIds = idcategory.split(",");
+                sql += " AND [categoryId] IN (";
+                for (int i = 0; i < categoryIds.length; i++) {
+                    sql += "?";
+                    if (i < categoryIds.length - 1) {
+                        sql += ",";
+                    }
+                }
+                sql += ")";
+            }
+
+            if (!idday.isEmpty()) {
+                if (idday.equals("1")) {
+                    sql += " ORDER BY [createdAt] DESC";
+                } else if (idday.equals("2")) {
+                    sql += " ORDER BY [createdAt] ASC";
                 }
             }
-            sql += ")";
-        }
 
-        if (!idday.isEmpty()) {
-            if (idday.equals("1")) {
-                sql += " ORDER BY [createdAt] DESC";
-            } else if (idday.equals("2")) {
-                sql += " ORDER BY [createdAt] ASC";
+            // Create the prepared statement
+            PreparedStatement preparedStatement = connection.prepareStatement(sql);
+
+            // Set parameters for search
+            int parameterIndex = 1;
+            if (!search.isEmpty()) {
+                preparedStatement.setString(parameterIndex++, "%" + search + "%");
             }
-        }
 
-        // Create the prepared statement
-        PreparedStatement preparedStatement = connection.prepareStatement(sql);
-
-        // Set parameters for search
-        int parameterIndex = 1;
-        if (!search.isEmpty()) {
-            preparedStatement.setString(parameterIndex++, "%" + search + "%");
-        }
-
-        // Set parameters for category IDs
-        if (!idcategory.isEmpty()) {
-            String[] categoryIds = idcategory.split(",");
-            for (String categoryId : categoryIds) {
-                preparedStatement.setString(parameterIndex++, categoryId);
+            // Set parameters for category IDs
+            if (!idcategory.isEmpty()) {
+                String[] categoryIds = idcategory.split(",");
+                for (String categoryId : categoryIds) {
+                    preparedStatement.setString(parameterIndex++, categoryId);
+                }
             }
-        }
 
-        ResultSet rs = preparedStatement.executeQuery();
+            ResultSet rs = preparedStatement.executeQuery();
 
-        while (rs.next()) {
-            Post blogModer = new Post();
-            blogModer.setId(rs.getInt("id"));
+            while (rs.next()) {
+                Post blogModer = new Post();
+                blogModer.setId(rs.getInt("id"));
                 blogModer.setTitle(rs.getString("title"));
                 blogModer.setAuthor_id(rs.getInt("authorId"));
                 blogModer.setCategory_id(rs.getInt("categoryId"));
@@ -174,13 +218,13 @@ public ArrayList<Post> blogSearch(String idcategory, String idday, String search
                 blogModer.setContent(rs.getString("content"));
                 blogModer.setCreated_at(rs.getDate("createdAt"));
                 blogModer.setDecription(rs.getString("describe"));
-            BlogModers.add(blogModer);
+                BlogModers.add(blogModer);
+            }
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
         }
-    } catch (SQLException e) {
-        System.out.println(e.getMessage());
+
+        return BlogModers;
     }
 
-    return BlogModers;
-}
-    
 }

@@ -4,10 +4,6 @@
  */
 package DAO;
 
-/**
- *
- * @author phung
- */
 public class ReservationItemDBcontex extends DBContext.DBContext{
     
 }

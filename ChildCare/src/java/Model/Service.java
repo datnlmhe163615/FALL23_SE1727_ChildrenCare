@@ -17,7 +17,6 @@ import lombok.Data;
 public class Service {
     private int id;
     private ServiceCategory category;
-     private int category_id;
     private String thumbnail;
     private String title;
     private float price;
@@ -27,8 +26,6 @@ public class Service {
     private int status;
     private Date created_at;
     private Date updated_at;
-    
-    private int count;
 
     public Service() {
     }
@@ -46,23 +43,13 @@ public class Service {
         this.created_at = created_at;
         this.updated_at = updated_at;
     }
-
-    public int getCategory_id() {
-        return category_id;
+    
+    public Service(int id, String thumbnail, String title) {
+        this.id = id;
+        this.thumbnail = thumbnail;
+        this.title = title;
     }
-
-    public void setCategory_id(int category_id) {
-        this.category_id = category_id;
-    }
-
-    public int getCount() {
-        return count;
-    }
-
-    public void setCount(int count) {
-        this.count = count;
-    }
-
+    
     public int getId() {
         return id;
     }

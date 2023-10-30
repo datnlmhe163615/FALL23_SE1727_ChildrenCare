@@ -10,10 +10,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-/**
- *
- * @author phung
- */
 public class ServiceCategoryDBcontext extends DBContext.DBContext  {
 
     public ArrayList<ServiceCategory> ListServiceCategory() {

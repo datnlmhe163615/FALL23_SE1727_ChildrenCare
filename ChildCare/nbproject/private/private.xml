@@ -7,8 +7,22 @@
             <file>file:/D:/FPTU/Semester8/FALL23_SE1727_ChildrenCare/ChildCare/src/java/Controller/ActionAccountController.java</file>
             <file>file:/D:/FPTU/Semester8/FALL23_SE1727_ChildrenCare/ChildCare/src/java/Controller/SearchManagementController.java</file>
             <file>file:/D:/FPTU/Semester8/FALL23_SE1727_ChildrenCare/ChildCare/src/java/DAO/ManageAccDAO.java</file>
+<<<<<<< HEAD
             <file>file:/D:/FPTU/Semester8/FALL23_SE1727_ChildrenCare/ChildCare/src/java/Controller/AccountController.java</file>
             <file>file:/D:/FPTU/Semester8/FALL23_SE1727_ChildrenCare/ChildCare/web/admin_sidebar.jsp</file>
+=======
+            <file>file:/D:/FPTU/Semester8/FALL23_SE1727_ChildrenCare/ChildCare/src/java/DAO/PostDAO.java</file>
+            <file>file:/D:/FPTU/Semester8/FALL23_SE1727_ChildrenCare/ChildCare/src/java/DAO/ReservationDBcontex.java</file>
+            <file>file:/D:/FPTU/Semester8/FALL23_SE1727_ChildrenCare/ChildCare/web/adminHome.jsp</file>
+            <file>file:/D:/FPTU/Semester8/FALL23_SE1727_ChildrenCare/ChildCare/src/java/Controller/AdminHomeController.java</file>
+            <file>file:/D:/FPTU/Semester8/FALL23_SE1727_ChildrenCare/ChildCare/src/java/DAO/ServiceDBcontext.java</file>
+            <file>file:/D:/FPTU/Semester8/FALL23_SE1727_ChildrenCare/ChildCare/src/java/DAO/ManageAccDAO.java</file>
+            <file>file:/D:/FPTU/Semester8/FALL23_SE1727_ChildrenCare/ChildCare/web/edit_profile.jsp</file>
+            <file>file:/D:/FPTU/Semester8/FALL23_SE1727_ChildrenCare/ChildCare/web/WEB-INF/web.xml</file>
+            <file>file:/D:/FPTU/Semester8/FALL23_SE1727_ChildrenCare/ChildCare/src/java/Controller/LoginController.java</file>
+            <file>file:/D:/FPTU/Semester8/FALL23_SE1727_ChildrenCare/ChildCare/src/java/DAO/ServiceDAO.java</file>
+            <file>file:/D:/FPTU/Semester8/FALL23_SE1727_ChildrenCare/ChildCare/src/java/DAO/ReservationDAO.java</file>
+>>>>>>> 9103802aa046f39d4d1fedf0d48a3f4b152a821f
         </group>
     </open-files>
 </project-private>

@@ -16,12 +16,7 @@
         <meta name="author" content="">
 
         <title>Services</title>
-        <link href="services/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-        <!-- Additional CSS Files -->
-        <link rel="stylesheet" href="services/assets/css/fontawesome.css">
-        <link rel="stylesheet" href="services/assets/css/templatemo-stand-blog.css">
-        <link rel="stylesheet" href="services/assets/css/owl.css">
-        <link rel="preconnect" href="https://fonts.googleapis.com">
+
         <!-- CSS FILES -->        
         <link rel="preconnect" href="https://fonts.googleapis.com">
 
@@ -33,62 +28,7 @@
 
         <link href="services/css/bootstrap-icons.css" rel="stylesheet">
 
-        <link href="services/css/templatemo-topic-listing.css" rel="stylesheet"> 
-        <style>
-            .wrapper{
-                height: 100%;
-            }
-            .search-area{
-                display: flex;
-                justify-content: center;
-                height: 100%;
-            }
-            .single-search {
-                margin-bottom: auto;
-                margin-top: auto;
-                height: 40px;
-                background-color: #fafafa;
-                border-radius: 30px;
-                padding: 10px;
-                box-shadow: 0 8px 10px rgba(0,0,0,0.3);
-            }
-            .custom-input{
-                border: 0;
-                outline: 0;
-                width: 0;
-                transition: width 0.4s linear;
-                background: #fafafa;
-            }
-            input::placeholder {
-                color: #262626;
-                font-size: 20px;
-            }
-            .icon-area {
-                justify-content: center;
-                align-items: center;
-                border-radius: 50%;
-                height: 40px;
-                width: 40px;
-                float: right;
-                display: flex;
-                text-decoration: none;
-                color: #262626;
-                margin: -11px 0px 0px 10px;
-                border: saddlebrown;
-                background: #fafafa;
-            }
-            .single-search:hover > .custom-input{
-                padding: 0 10px;
-                width: 500px;
-                caret-color:#262626;
-                transition: width 0.4s linear;
-            }
-            .single-search:hover > .icon-area{
-                background: white;
-                color: #262626;
-            }
-
-        </style>
+        <link href="services/css/templatemo-topic-listing.css" rel="stylesheet">    
     </head>
     <body id="top">
         <main>
@@ -138,11 +78,14 @@
                 <div class="container" style="    background: royalblue;
                      padding-top: 16px;">
                     <div class="row">
+
                         <div class="col-12 text-center">
-                            <h2 class="mb-4" style="color: white">Service List</h2>
+                            <h2 class="mb-4" style="color: white">Service Category</h2>
                         </div>
+
                     </div>
                 </div>
+
                 <div class="container-fluid">
                     <div class="row">
                         <ul class="nav nav-tabs" id="myTab" role="tablist">
@@ -160,7 +103,6 @@
                     </div>
                 </div>
 
-
                 <div class="container">
                     <div class="row">
 
@@ -168,48 +110,20 @@
                             <div class="tab-content" id="myTabContent">
                                 <div class="tab-pane fade show active" id="design-tab-pane" role="tabpanel" aria-labelledby="design-tab" tabindex="0">
                                     <div class="row">
-                                        <form action="searchService" method="post">
-                                            <div class="wrapper">
-                                                <div class="search-area">
-                                                    <div class="single-search">
 
-                                                        <input class="custom-input" type="text" name="search" placeholder="Search......">
-                                                        <button type="submit" class="icon-area"><i class="fa fa-search"></i></button>
-
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </form>
-                                        <c:forEach var="s" items="${services}">
+                                        <c:forEach var="c" items="${category}">
                                             <div style="    margin-top: 20px;" class="col-lg-4 col-md-6 col-12 mb-4 mb-lg-0">
                                                 <div class="custom-block bg-white shadow-lg">
-                                                    <a href="servicesDetail?id=${s.getId()}">
+                                                    <a href="servicesList?id=${c.getId()}">
                                                         <div class="d-flex">
                                                             <div>
-                                                                <h5 class="mb-2">${s.getTitle()}</h5>
-                                                                <p class="mb-0">${s.getBrief_information()}</p>
+                                                                <h5 class="mb-2">${c.getTitle()}</h5>
+
+                                                                <p class="mb-0">${c.getDecription()}</p>
                                                             </div>
-                                                            <span style="margin-right: 5px;
-                                                                  background-color: gray;
-                                                                  color: black;" class="badge bg-finance rounded-pill ms-auto">${s.getPrice()}$</span>
-                                                            <span class="badge bg-finance rounded-pill ms-auto">${s.getSale_price()}$</span>
                                                         </div>
-                                                        <img src="${s.getThumbnail()}" class="custom-block-image img-fluid" alt="">
+                                                        <img src="${c.getThumbnail()}" class="custom-block-image img-fluid" alt="">
                                                     </a>
-                                                    <p><a style="
-                                                          height: 100%;
-                                                          width: 132px;
-                                                          border-radius: 16px;
-                                                          border: none;
-                                                          color: #fff;
-                                                          font-size: 18px;
-                                                          font-weight: 500;
-                                                          letter-spacing: 1px;
-                                                          background: lightpink;
-                                                          text-align: center;
-                                                          margin-top: 10px;
-                                                          margin-left: 13rem;
-                                                          " href="#" >Booking</a></p>
                                                 </div>
                                             </div>
                                         </c:forEach>
@@ -218,18 +132,6 @@
                             </div>
                         </div>
                     </div>
-                </div>
-                <c:if test="${!check.equal(hidden)}">
-                <div class="col-lg-12" style="margin-top: 50px">
-                    <ul class="page-numbers">
-                        <li><a href="servicesList?index=1&&id=${id}&&mode=1"><i class="fa fa-angle-double-left"></i></a></li>
-                                <c:forEach var = "i" begin = "1" end = "${numberPage}">
-                            <li class="${param['index']==i?'active':''}"><a href="servicesList?index=${i}&&id=${id}&&mode=1">${i}</a></li>
-                            </c:forEach>
-                        <li><a href="servicesList?index=${numberPage}&&id=${id}&&mode=1"><i class="fa fa-angle-double-right"></i></a></li>
-                    </ul>
-                </div>
-                </c:if>
             </section>
         </main>
 
