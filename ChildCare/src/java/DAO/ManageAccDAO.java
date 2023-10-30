@@ -71,6 +71,7 @@ public class ManageAccDAO {
             String sql = "select id, email, role, fullname, mobile, gender, address, status from account";
             PreparedStatement stm = conn.prepareStatement(sql);
             ResultSet rs = stm.executeQuery();
+            
             while (rs.next()) {
                 Account acc = new Account();
                 acc.setId(rs.getInt("id"));
