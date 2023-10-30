@@ -57,6 +57,7 @@ public class AccountController extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
         ManageAccDAO dao = new ManageAccDAO();
+        
         ArrayList<Account> accounts = dao.list();
         request.setAttribute("accounts", accounts);
         request.setAttribute("action", null);
