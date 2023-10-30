@@ -96,6 +96,7 @@ public class ActionAccountController extends HttpServlet {
             request.setAttribute("accounts", accounts);
             request.getRequestDispatcher("user.jsp").forward(request, response);
         }
+        
         if(action.equals("promote")){
             String[] indexs = request.getParameterValues("index");
             for (String index : indexs) {
