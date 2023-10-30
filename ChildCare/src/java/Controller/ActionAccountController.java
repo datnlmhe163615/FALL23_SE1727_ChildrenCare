@@ -89,6 +89,7 @@ public class ActionAccountController extends HttpServlet {
         CheckAdmin(request, response);
         String action = request.getParameter("action");
         ManageAccDAO dao = new ManageAccDAO();
+        
         if(action.equals("delete")){  
             int id = Integer.parseInt(request.getParameter("id"));  
             dao.DeleteAccountById(id);
