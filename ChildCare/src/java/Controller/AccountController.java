@@ -59,6 +59,7 @@ public class AccountController extends HttpServlet {
         ManageAccDAO dao = new ManageAccDAO();
         
         ArrayList<Account> accounts = dao.list();
+        
         request.setAttribute("accounts", accounts);
         request.setAttribute("action", null);
         request.getRequestDispatcher("user.jsp").forward(request, response);
