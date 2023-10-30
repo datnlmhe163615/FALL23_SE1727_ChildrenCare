@@ -66,6 +66,7 @@ public class ManageAccDAO {
 
     public ArrayList<Account> list() {
         ArrayList<Account> accounts = new ArrayList<>();
+        
         try {
             String sql = "select id, email, role, fullname, mobile, gender, address, status from account";
             PreparedStatement stm = conn.prepareStatement(sql);
