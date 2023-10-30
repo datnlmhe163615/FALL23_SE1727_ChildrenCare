@@ -258,6 +258,33 @@ public class ManageAccDAO {
             e.printStackTrace();
         }
     }
+    
+    public ArrayList<Account> listByName(String acc_name) {
+        ArrayList<Account> accounts = new ArrayList<>();
+        try {
+            String sql = "select id, email, role, fullname, mobile, gender, address, status from account where fullname like ?";
+            PreparedStatement stm = conn.prepareStatement(sql);
+            String fullname = "%" + acc_name + "%";
+            stm.setString(1, fullname);
+            ResultSet rs = stm.executeQuery();
+            while (rs.next()) {
+                Account acc = new Account();
+                acc.setId(rs.getInt("id"));
+                acc.setEmail(rs.getString("email"));
+                acc.setRole(rs.getString("role"));
+                acc.setFullname(rs.getString("fullname"));
+                acc.setMobile(rs.getString("mobile"));
+                acc.setGender(rs.getBoolean("gender"));
+                acc.setAddress(rs.getString("address"));
+                acc.setStatus(rs.getInt("status"));
+                accounts.add(acc);             
+            }
+            return accounts;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
 
     public static void main(String[] args) {
         String email = "customer1@gmail.com"; // Thay bằng email thực tế
