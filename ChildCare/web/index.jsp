@@ -104,6 +104,9 @@
                                         </span>
                                     </a>
                                     <a href="">
+
+
+                                    <a href="register">
                                         <i class="fa fa-user" aria-hidden="true"></i>
                                         <span>
                                             Sign Up
@@ -114,6 +117,7 @@
                                             <i class="fa fa-search" aria-hidden="true"></i>
                                         </button>
                                     </form>
+                                    
                                 </div>
                             </div>
                         </nav>

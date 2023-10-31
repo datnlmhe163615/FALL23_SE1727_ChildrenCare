@@ -66,23 +66,22 @@ public class ManageAccDAO {
 
     public ArrayList<Account> list() {
         ArrayList<Account> accounts = new ArrayList<>();
+        
         try {
-            String sql = "select acc_id, fullname, email, gender, phone, address, role_id from account";
+            String sql = "select id, email, role, fullname, mobile, gender, address, status from account";
             PreparedStatement stm = conn.prepareStatement(sql);
             ResultSet rs = stm.executeQuery();
+            
             while (rs.next()) {
                 Account acc = new Account();
                 acc.setId(rs.getInt("id"));
                 acc.setEmail(rs.getString("email"));
                 acc.setRole(rs.getString("role"));
                 acc.setFullname(rs.getString("fullname"));
-                acc.setAvatar(rs.getString("avatar"));
                 acc.setMobile(rs.getString("mobile"));
                 acc.setGender(rs.getBoolean("gender"));
                 acc.setAddress(rs.getString("address"));
                 acc.setStatus(rs.getInt("status"));
-                acc.setCreated_at(rs.getDate("createdat"));
-                acc.setUpdated_at(rs.getDate("updatedat"));
                 accounts.add(acc);
             }
         } catch (SQLException e) {
@@ -215,6 +214,76 @@ public class ManageAccDAO {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+    }
+    
+        public ArrayList<Account> ListRoleId() {
+        ArrayList<Account> accounts = new ArrayList<>();
+        try {
+            String sql = "select distinct [role] from account";
+            PreparedStatement stm = conn.prepareStatement(sql);
+            ResultSet rs = stm.executeQuery();
+            while (rs.next()) {
+                Account acc = new Account();
+                acc.setRole(rs.getString("role"));
+                accounts.add(acc);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return accounts;
+    }
+        
+        public void DeleteAccountById(int id) {
+        try {
+            String sql = "DELETE FROM [account]\n"
+                    + "WHERE id =?";
+            PreparedStatement stm = conn.prepareStatement(sql);
+            stm.setInt(1, id);
+            stm.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void UpdateRoleAccountById(String id, String role) {
+        try {
+            String sql = "UPDATE [account] \n"
+                    + "   SET [role] = ?\n"
+                    + " WHERE id = ?";
+            PreparedStatement stm = conn.prepareStatement(sql);
+            stm.setString(1, role);
+            stm.setString(2, id);
+            stm.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+    
+    public ArrayList<Account> listByName(String acc_name) {
+        ArrayList<Account> accounts = new ArrayList<>();
+        try {
+            String sql = "select id, email, role, fullname, mobile, gender, address, status from account where fullname like ?";
+            PreparedStatement stm = conn.prepareStatement(sql);
+            String fullname = "%" + acc_name + "%";
+            stm.setString(1, fullname);
+            ResultSet rs = stm.executeQuery();
+            while (rs.next()) {
+                Account acc = new Account();
+                acc.setId(rs.getInt("id"));
+                acc.setEmail(rs.getString("email"));
+                acc.setRole(rs.getString("role"));
+                acc.setFullname(rs.getString("fullname"));
+                acc.setMobile(rs.getString("mobile"));
+                acc.setGender(rs.getBoolean("gender"));
+                acc.setAddress(rs.getString("address"));
+                acc.setStatus(rs.getInt("status"));
+                accounts.add(acc);             
+            }
+            return accounts;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 
     public static void main(String[] args) {
