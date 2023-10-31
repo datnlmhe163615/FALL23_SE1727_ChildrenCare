@@ -2,53 +2,58 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
  */
-
 package Controller;
 
 import DAO.ManageAccDAO;
 import Model.Account;
-import jakarta.servlet.RequestDispatcher;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import jakarta.servlet.http.HttpSession;
+import java.util.ArrayList;
 
 /**
  *
  * @author mihxdat
  */
-public class LoginController extends HttpServlet {
-   
-    /** 
-     * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
+public class RegisterController extends HttpServlet {
+
+    public static final char SPACE = ' ';
+    public static final char TAB = '\t';
+    public static final char BREAK_LINE = '\n';
+
+    /**
+     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
+     * methods.
+     *
      * @param request servlet request
      * @param response servlet response
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-    throws ServletException, IOException {
+            throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        try (PrintWriter out = response.getWriter()) {
+        try ( PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet LoginController</title>");  
+            out.println("<title>Servlet RegisterController</title>");
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet LoginController at " + request.getContextPath () + "</h1>");
+            out.println("<h1>Servlet RegisterController at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
-    } 
+    }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
-    /** 
+    /**
      * Handles the HTTP <code>GET</code> method.
+     *
      * @param request servlet request
      * @param response servlet response
      * @throws ServletException if a servlet-specific error occurs
@@ -56,12 +61,13 @@ public class LoginController extends HttpServlet {
      */
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
-    throws ServletException, IOException {
-        processRequest(request, response);
-    } 
+            throws ServletException, IOException {
+        request.getRequestDispatcher("register.jsp").forward(request, response);
+    }
 
-    /** 
+    /**
      * Handles the HTTP <code>POST</code> method.
+     *
      * @param request servlet request
      * @param response servlet response
      * @throws ServletException if a servlet-specific error occurs
@@ -69,42 +75,41 @@ public class LoginController extends HttpServlet {
      */
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
-    throws ServletException, IOException {
+            throws ServletException, IOException {
+        String fullname = request.getParameter("fullname");
         String email = request.getParameter("email");
-        String pass = request.getParameter("password");
-        ManageAccDAO accDao = new ManageAccDAO();
-        Account acc = accDao.getAccountByLogin(email, pass);
-        request.setAttribute("account", acc);
-        HttpSession session = request.getSession();
-        session.setAttribute("acc", acc);
-        if (acc == null) {
-            request.setAttribute("msg", "Invalid email or password ! ");
-            RequestDispatcher rd = request.getRequestDispatcher("login.jsp");
-            rd.forward(request, response);
-        }else{
-            int role = Integer.parseInt(acc.getRole());
-        if (role == 3) {
-            RequestDispatcher rd = request.getRequestDispatcher("home.jsp");
-            rd.forward(request, response);
+        String password = request.getParameter("password");
+        String re_password = request.getParameter("re_password");
+        ManageAccDAO dao = new ManageAccDAO();
+        ArrayList<Account> accounts = dao.list();
+        if (fullname.equals("") || email.equals("") || password.equals("") || re_password.equals("")) {
+            request.setAttribute("msg", "Please fill all blank");
+            request.getRequestDispatcher("register.jsp").forward(request, response);          
         }
-        if (role == 1) {
-            RequestDispatcher rd = request.getRequestDispatcher("adminHome.jsp");
-            rd.forward(request, response);
+        if (password.length() < 8 || re_password.length() < 8) {
+                request.setAttribute("msg", "Your Password must be at least 8 characters");
+                request.getRequestDispatcher("register.jsp").forward(request, response);
         }
-        if (role == 2) {
-            RequestDispatcher rd = request.getRequestDispatcher("staff");
-            rd.forward(request, response);
+        else if (!password.equals(re_password)) {
+            request.setAttribute("msg", "your password and confirm password are NOT the same");
+            request.getRequestDispatcher("register.jsp").forward(request, response);
         }
-        if (role == 0) {
-            RequestDispatcher rd = request.getRequestDispatcher("manager");
-            rd.forward(request, response);
+        for (Account account : accounts) {
+            if (email.equals(account.getEmail())) {
+                request.setAttribute("msg", "This email already exist");
+                request.getRequestDispatcher("register.jsp").forward(request, response);
+            }
         }
+        if (password.equals(re_password)) {
+            dao.RegisterNewAccount(email, password, fullname);
+            request.setAttribute("msg", "Register successful please login!!");
+            request.getRequestDispatcher("login.jsp").forward(request, response);
         }
-        
     }
 
-    /** 
+    /**
      * Returns a short description of the servlet.
+     *
      * @return a String containing servlet description
      */
     @Override

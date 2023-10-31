@@ -31,5 +31,5 @@ public class Post {
 
     public Post() {
     }
-    
+     private String Describe;
 }

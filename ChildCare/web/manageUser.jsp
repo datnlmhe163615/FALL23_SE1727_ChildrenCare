@@ -116,7 +116,7 @@
                                 <li class="page-item disabled"><a href="manageUser?index=1">Previous</a></li>
                                     <c:forEach var = "i" begin = "1" end = "${numberPage}">
                                     <li class="${param['index']==i?'page-item active':''}"><a class="page-link" href="manageUser?index=${i}"><span>${i}</span></a></li>
-                                            </c:forEach>
+                                    </c:forEach>
                                 <li class="page-item"><a href="manageUser?index=${numberPage}" class="page-link">Next</a></li>
                             </ul>
                         </div>

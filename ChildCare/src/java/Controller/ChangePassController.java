@@ -7,7 +7,6 @@ package Controller;
 
 import DAO.ManageAccDAO;
 import Model.Account;
-import jakarta.servlet.RequestDispatcher;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
@@ -20,7 +19,7 @@ import jakarta.servlet.http.HttpSession;
  *
  * @author mihxdat
  */
-public class LoginController extends HttpServlet {
+public class ChangePassController extends HttpServlet {
    
     /** 
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
@@ -37,10 +36,10 @@ public class LoginController extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet LoginController</title>");  
+            out.println("<title>Servlet ChangePassController</title>");  
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet LoginController at " + request.getContextPath () + "</h1>");
+            out.println("<h1>Servlet ChangePassController at " + request.getContextPath () + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -70,37 +69,41 @@ public class LoginController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-        String email = request.getParameter("email");
-        String pass = request.getParameter("password");
-        ManageAccDAO accDao = new ManageAccDAO();
-        Account acc = accDao.getAccountByLogin(email, pass);
-        request.setAttribute("account", acc);
+        String oldpass = request.getParameter("oldpass");
+        String newpass = request.getParameter("newpass");
+        String renewpass = request.getParameter("renewpass");
         HttpSession session = request.getSession();
-        session.setAttribute("acc", acc);
-        if (acc == null) {
-            request.setAttribute("msg", "Invalid email or password ! ");
-            RequestDispatcher rd = request.getRequestDispatcher("login.jsp");
-            rd.forward(request, response);
-        }else{
-            int role = Integer.parseInt(acc.getRole());
-        if (role == 3) {
-            RequestDispatcher rd = request.getRequestDispatcher("home.jsp");
-            rd.forward(request, response);
+        Account acc = (Account) session.getAttribute("acc");
+        int acc_id = acc.getId();
+        ManageAccDAO accDao = new ManageAccDAO();
+        if (oldpass.equals("") || newpass.equals("") || renewpass.equals("")) {
+            request.setAttribute("msg", "Không được để trống thông tin");
+            request.getRequestDispatcher("change_pass.jsp").forward(request, response);
         }
-        if (role == 1) {
-            RequestDispatcher rd = request.getRequestDispatcher("adminHome.jsp");
-            rd.forward(request, response);
+        if (newpass.length() < 8 || newpass.length() < 8) {
+            request.setAttribute("msg", "Your Password must be at least 8 characters");
+            request.getRequestDispatcher("change_pass.jsp").forward(request, response);
+            return;
         }
-        if (role == 2) {
-            RequestDispatcher rd = request.getRequestDispatcher("staff");
-            rd.forward(request, response);
+        if (!oldpass.equals(acc.getPassword())) {
+            request.setAttribute("msg", "Mật khẩu cũ không đúng");
+            request.getRequestDispatcher("change_pass.jsp").forward(request, response);
+            return;
         }
-        if (role == 0) {
-            RequestDispatcher rd = request.getRequestDispatcher("manager");
-            rd.forward(request, response);
+        if (newpass.equals(renewpass)) {
+            if (!oldpass.equals(newpass)) {
+                accDao.ChangePassAccountById(acc_id, newpass);
+                request.setAttribute("msg", "Đổi mật khẩu thành công");
+                request.setAttribute("acc", accDao.getAccountById(acc_id));
+                request.getRequestDispatcher("profile.jsp").forward(request, response);
+            } else {
+                request.setAttribute("msg", "Mật khẩu cũ và mới giống nhau");
+                request.getRequestDispatcher("change_pass.jsp").forward(request, response);
+            }
+        } else {
+            request.setAttribute("msg", "Mật khẩu mới và mật khẩu nhập lại không giống nhau");
+            request.getRequestDispatcher("change_pass.jsp").forward(request, response);
         }
-        }
-        
     }
 
     /** 

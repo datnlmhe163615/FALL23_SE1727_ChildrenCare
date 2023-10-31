@@ -7,20 +7,25 @@ package Controller;
 
 import DAO.ManageAccDAO;
 import Model.Account;
-import jakarta.servlet.RequestDispatcher;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import jakarta.servlet.http.HttpSession;
+import java.util.Properties;
+import javax.mail.Message;
+import javax.mail.PasswordAuthentication;
+import javax.mail.Session;
+import javax.mail.Transport;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeMessage;
 
 /**
  *
  * @author mihxdat
  */
-public class LoginController extends HttpServlet {
+public class ForgotPasswordController extends HttpServlet {
    
     /** 
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
@@ -37,10 +42,10 @@ public class LoginController extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet LoginController</title>");  
+            out.println("<title>Servlet ForgotPasswordController</title>");  
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet LoginController at " + request.getContextPath () + "</h1>");
+            out.println("<h1>Servlet ForgotPasswordController at " + request.getContextPath () + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -57,7 +62,7 @@ public class LoginController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-        processRequest(request, response);
+        request.getRequestDispatcher("forgot_pass.jsp").forward(request, response);
     } 
 
     /** 
@@ -70,37 +75,46 @@ public class LoginController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
+        final String username = "abcxyz132002@gmail.com";
+        final String password = "abcxyz123";
+        ManageAccDAO dao = new ManageAccDAO();
+        Properties prop = new Properties();
+        prop.put("mail.smtp.host", "smtp.gmail.com");
+        prop.put("mail.smtp.port", "587");
+        prop.put("mail.smtp.auth", "true");
+        prop.put("mail.smtp.starttls.enable", "true");
+        Session session = Session.getInstance(prop, new javax.mail.Authenticator() {
+            @Override
+            protected PasswordAuthentication getPasswordAuthentication() {
+                return new PasswordAuthentication(username, password);
+            }
+        });
+        String fullname = request.getParameter("name");
         String email = request.getParameter("email");
-        String pass = request.getParameter("password");
-        ManageAccDAO accDao = new ManageAccDAO();
-        Account acc = accDao.getAccountByLogin(email, pass);
-        request.setAttribute("account", acc);
-        HttpSession session = request.getSession();
-        session.setAttribute("acc", acc);
-        if (acc == null) {
-            request.setAttribute("msg", "Invalid email or password ! ");
-            RequestDispatcher rd = request.getRequestDispatcher("login.jsp");
-            rd.forward(request, response);
+        Account acc = dao.getAccountByEmail(email);
+        if (fullname.equals(acc.getFullname())) {
+            dao.ChangePassAccountById(acc.getId(), "abc@123a");
+            String emailSubject = "Restore password Child Care";
+            String emailContent = "Dear"+ acc.getFullname()+ "\nYour new password is: abc@123a\n\n ChildCare";
+            try {
+                Message message = new MimeMessage(session);
+                message.setFrom(new InternetAddress(username));
+                message.setRecipient(
+                        Message.RecipientType.TO,
+                        new InternetAddress(email)
+                );
+                message.setSubject(emailSubject);
+                message.setText(emailContent);
+                Transport.send(message);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            request.setAttribute("msg", "Hãy kiểm tra email của bạn");
+            request.getRequestDispatcher("login.jsp").forward(request, response);
         }else{
-            int role = Integer.parseInt(acc.getRole());
-        if (role == 3) {
-            RequestDispatcher rd = request.getRequestDispatcher("home.jsp");
-            rd.forward(request, response);
+            request.setAttribute("msg", "Tên trong tài khoản không giống tên đã nhập hãy nhập lại");
+            request.getRequestDispatcher("forgot_pass.jsp").forward(request, response);
         }
-        if (role == 1) {
-            RequestDispatcher rd = request.getRequestDispatcher("adminHome.jsp");
-            rd.forward(request, response);
-        }
-        if (role == 2) {
-            RequestDispatcher rd = request.getRequestDispatcher("staff");
-            rd.forward(request, response);
-        }
-        if (role == 0) {
-            RequestDispatcher rd = request.getRequestDispatcher("manager");
-            rd.forward(request, response);
-        }
-        }
-        
     }
 
     /** 

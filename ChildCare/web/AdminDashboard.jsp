@@ -37,7 +37,9 @@
         <link rel="stylesheet" href="css/apex-charts.css" />
         <script src="js/helpers.js"></script>
         <script src="js/config.js"></script>
-        </head>
+
+
+
     <body>
         <!-- Layout wrapper -->
         <div class="layout-wrapper layout-content-navbar" style="margin-top: 20px">
@@ -214,7 +216,10 @@
                                     </div>
 
                                     <div class="card-body" style="max-height: 300px; overflow-y: auto;">
+
                                         <c:forEach var="c" items="${requestScope.newestAccounts}">
+                                       <c:forEach var="c" items="${requestScope.newestAccounts}">
+
                                             <div class="d-flex flex-wrap justify-content-between align-items-center mb-4">
                                                 <div class="d-flex align-items-center">
                                                     <div class="avatar me-3" style="margin-top: -20px">
@@ -279,7 +284,11 @@
 
                                     </div>
                                     <div class="card-body" style="max-height: 300px; overflow-y: auto;">
+
                                         <c:forEach var="entry" items="${requestScope.feedbackList}">
+
+                                      <c:forEach var="entry" items="${requestScope.feedbackList}">
+
 
                                             <div class="d-flex flex-wrap justify-content-between align-items-center mb-4">
                                                 <div class="d-flex align-items-center">
@@ -372,12 +381,12 @@
 
         <!-- Overlay -->
         <div class="layout-overlay layout-menu-toggle"></div>
-    </div>
+  
     <!-- / Layout wrapper -->
 
     <!-- Core JS -->
     <!-- build:js assets/vendor/js/core.js -->
-   
+
     <script src="../assets/vendor/libs/jquery/jquery.js"></script>
     <script src="../assets/vendor/libs/popper/popper.js"></script>
     <script src="../assets/vendor/js/bootstrap.js"></script>
@@ -407,6 +416,29 @@
                                         document.getElementById("input_from").setAttribute("max", currentDate.toISOString().split('T')[0]);
                                         document.getElementById("input_to").setAttribute("max", currentDate.toISOString().split('T')[0]);
     </script>
+<script>
+function validateForm() {
+    var fromDate = new Date(document.getElementById("input_from").value);
+    var toDate = new Date(document.getElementById("input_to").value);
+    var currentDate = new Date();
+
+    if (fromDate >= toDate) {
+        alert("Ngày bắt đầu (From) phải nhỏ hơn ngày kết thúc (To).");
+        return false;
+    }
+
+    if (fromDate > currentDate) {
+        alert("Ngày bắt đầu (From) không được lớn hơn ngày hiện tại.");
+        return false;
+    }
+
+    return true;
+}
+
+// Không cho phép người dùng chọn ngày lớn hơn ngày hiện tại
+document.getElementById("input_from").setAttribute("max", currentDate.toISOString().split('T')[0]);
+document.getElementById("input_to").setAttribute("max", currentDate.toISOString().split('T')[0]);
+</script>
     <!-- endbuild -->
 
     <!-- Vendors JS -->

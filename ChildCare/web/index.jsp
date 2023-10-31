@@ -104,9 +104,16 @@
                                         </span>
                                     </a>
                                     <a href="">
+                                    <a href="register">
                                         <i class="fa fa-user" aria-hidden="true"></i>
                                         <span>
                                             Sign Up
+                                        </span>
+                                    </a>
+                                                      <a href="profile">
+                                        <i class="fa fa-user" aria-hidden="true"></i>
+                                        <span>
+                                            Profile
                                         </span>
                                     </a>
                                     <form class="form-inline">
