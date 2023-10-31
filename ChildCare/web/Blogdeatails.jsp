@@ -1,7 +1,7 @@
 <%-- 
     Document   : blog
     Created on : Sep 29, 2023, 2:40:32 PM
-    Author     : phung
+    Author     : hp
 --%>
 
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
@@ -95,7 +95,7 @@
                                             <a class="nav-link" href="feedback">FeedBack</a>
                                         </li>
                                         <li class="nav-item">
-                                               <a class="nav-link" href="medicalexamination">Medical Examination</a>
+                                            <a class="nav-link" href="contact.html">Contact Us</a>
                                         </li>
                                     </ul>
                                 </div>

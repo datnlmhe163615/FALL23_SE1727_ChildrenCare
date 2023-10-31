@@ -1,9 +1,10 @@
 <%-- 
     Document   : Feedback
     Created on : Sep 30, 2023, 8:46:38 PM
-    Author     : phung
+    Author     : hp
 --%>
 
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -28,8 +29,12 @@
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.3.0/css/datepicker.css">
         <!-- Custom styles for this template -->
         <link href="css/style.css" rel="stylesheet" />
+        <link href="css/test.css" rel="stylesheet" />
+
         <!-- responsive style -->
         <link href="css/responsive.css" rel="stylesheet" />
+        <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+
     </head>
     <body class="sub_page">
 
@@ -74,11 +79,11 @@
 
                             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                                 <div class="d-flex mr-auto flex-column flex-lg-row align-items-center">
-                                    <ul class="navbar-nav  ">
-                                        <li class="nav-item ">
+                                       <ul class="navbar-nav  ">
+                                        <li class="nav-item active">
                                             <a class="nav-link" href="home">Home <span class="sr-only">(current)</span></a>
                                         </li>
-                                        <li class="nav-item active">
+                                        <li class="nav-item">
                                             <a class="nav-link" href="blog"> Blog</a>
                                         </li>
                                         <li class="nav-item">
@@ -91,7 +96,7 @@
                                             <a class="nav-link" href="feedback">FeedBack</a>
                                         </li>
                                         <li class="nav-item">
-                                            <a class="nav-link" href="contact.html">Contact Us</a>
+                                            <a class="nav-link" href="medicalexamination">Medical Examination</a>
                                         </li>
                                     </ul>
                                 </div>
@@ -125,33 +130,153 @@
 
 
         <!-- client section -->
-        <section class="client_section layout_padding">
+        <section class="client_section layout_padding" style="padding: 15px 0  !important" >
             <div class="container">
                 <div class="heading_container">
-                    <h2>
-                        <span>Feedback List</span>
-                    </h2>
+                    <span style="color: blue">Home&nbsp;&nbsp;&nbsp;>&nbsp;&nbsp;&nbsp;Feedback List</span>                
                 </div>
             </div>
-            <div class="container px-0">
-                <div id="customCarousel2" class="carousel  carousel-fade" data-ride="carousel">
-                    <ul class="feedback-list">
-                        <!-- Phần tử phản hồi 1 -->
-                        <li class="feedback-item">
-                            <h3>Người phản hồi: John Doe</h3>
-                            <p>Dịch vụ: <span class="service-name">Dịch vụ A</span></p>
-                            <p>Xếp hạng: <span class="rating">★★★★★☆</span></p>
-                            <div class="description">
-                                <p>Phả Phản Phả Phản hồi rất tốt về dịcPhả Phản hồi rất tốt về dịch vụ A. Rất hài lòng với chất lượng Phả Phản hồi rất tốt về dịch vụ A. Rất hài lòng với chất lượng Phả Phản hồi rất tốt về dịch vụ A. Rất hài lòng với chất lượng Phả Phản hồi rất tốt về dịch vụ A. Rất hài lòng với chất lượng h vụ A. Rất hài lòng với chất lượng Phả Phản hồi rất tốt về dịch vụ A. Rất hài lòng với chất lượng Phả Phản hồi rất tốt về dịch vụ A. Rất hài lòng với chất lượng Phả Phản hồi rất tốt về dịch vụ A. Rất hài lòng với chất lượng Phả Phản hồi rất tốt về dịch vụ A. Rất hài lòng với chất lượng  hồi rất tốt về dịch vụ A. Rất hài lòng với chất lượng và dịch vụ khách hàng.</p>
-                                <button onclick="toggleDescription()">More</button>
+
+            <div class="feedback-container" style="    display: flex;
+                 justify-content: center;
+                 align-items: center; flex-wrap: wrap;">
+                <div class="s002">
+                    <form action="feedback" method="Post">
+                        <fieldset>
+                            <legend>SEARCH FEEDBACK</legend>
+                        </fieldset>
+                        <div class="feedback-form">
+                            <div class="feedback-search">
+                                <input id="search" type="text" placeholder="What are you looking for?" name="textSearch"/>
                             </div>
-                            <div class="feedback-images">
-                                <img src="download.jpg" alt="Hình ảnh 4">
-                                <img src="download.jpg" alt="Hình ảnh 4">
+                            <div class="service-choice">            
+                                <select data-trigger="" name="serviceFilter">
+                                    <option value="">Service</option>
+                                    <c:forEach items="${requestScope.services}" var="c">
+                                        <option value="${c.getId()}">${c.getTitle()}</option>
+                                    </c:forEach>
+
+                                </select>
                             </div>
-                        </li>
-                    </ul>
+                            <div class="point-choice">
+                                <select data-trigger="" name="pointFilter">
+                                    <option value="">  Point</option>
+                                    <option value="1">1 point</option>
+                                    <option value="2">2 point</option>
+                                    <option value="3">3 point</option>
+                                    <option value="4">4 point</option>
+                                    <option value="5">5 point</option>
+                                </select>
+                            </div>
+                            <div class="point-choice">
+                                <select data-trigger="" name="sortBy">
+                                    <option value="">  Sort By</option>
+                                    <option value="fullName">Name</option>
+                                    <option value="serviceId">Service</option>
+                                    <option value="point">Point</option>
+                                </select>
+                            </div>
+                            <div class="point-choice">
+                                <select data-trigger="" name="sortOption">
+                                    <option value="">Option</option>
+                                    <option value="DESC" >Decrease</option>
+                                    <option value="ASC">Increase</option>
+
+                                </select>
+                            </div>
+                            <div class="search-button" >
+                                <button class="search" type="submit">SEARCH</button>
+                            </div>
+                        </div>
+                    </form>
                 </div>
+                <c:forEach var="entry" items="${requestScope.feedbackList}">
+                          
+                    <c:set var="imageList" value="${entry.value}" />
+                    <c:set var="c" value="${c + 1}" />
+                    <div class="feedback">
+                        <div class="column image">
+                            <img class="avatar" src="images/avatar1.jpg" alt="Avatar" style="width:90px;    border-radius: 50%;
+                                 display: block;
+                                 margin: 0 auto">
+                            <c:if test="${entry.key.point == 1}">
+                                <div class="star">
+                                    <i class='bx bxs-star' style="color: gold;"></i>
+                                    <i class='bx bx-star'></i>
+                                    <i class='bx bx-star'></i>
+                                    <i class='bx bx-star'></i>
+                                    <i class='bx bx-star'></i>
+                                </div>
+                            </c:if>
+
+                            <c:if test="${entry.key.point == 2}">
+                                <div class="star">
+                                    <i class='bx bxs-star' style="color: gold;"></i>
+                                    <i class='bx bxs-star' style="color: gold;"></i>
+                                    <i class='bx bx-star'></i>
+                                    <i class='bx bx-star'></i>
+                                    <i class='bx bx-star'></i>
+                                </div>
+                            </c:if>
+
+                            <c:if test="${entry.key.point == 3}">
+                                <div class="star">
+                                    <i class='bx bxs-star' style="color: gold;"></i>
+                                    <i class='bx bxs-star' style="color: gold;"></i>
+                                    <i class='bx bxs-star' style="color: gold;"></i>
+                                    <i class='bx bx-star'></i>
+                                    <i class='bx bx-star'></i>
+                                </div>
+                            </c:if>
+
+                            <c:if test="${entry.key.point == 4}">
+                                <div class="star">
+                                    <i class='bx bxs-star' style="color: gold;"></i>
+                                    <i class='bx bxs-star' style="color: gold;"></i>
+                                    <i class='bx bxs-star' style="color: gold;"></i>
+                                    <i class='bx bxs-star' style="color: gold;"></i>
+                                    <i class='bx bx-star'></i>
+                                </div>
+                            </c:if>
+                            <c:if test="${entry.key.point == 5}">
+                                <div class="star">
+                                    <i class='bx bxs-star' style="color: gold;"></i>
+                                    <i class='bx bxs-star' style="color: gold;"></i>
+                                    <i class='bx bxs-star' style="color: gold;"></i>
+                                    <i class='bx bxs-star' style="color: gold;"></i>
+                                    <i class='bx bxs-star' style="color: gold;"></i>
+                                </div>
+                            </c:if>
+
+                        </div>
+                        <div class="column detail">
+                            <a href="feedbackdetail?id=${entry.key.id}"> <p id="content${c}" style="max-height: 50px;
+                               overflow: hidden;">${entry.key.content}</p></a>
+                            <div style=" margin-top: 5px">
+                                <c:forEach var="img" items="${imageList}">
+                                    <img src="images/${img.thumString}" style="width: 50px" />
+                                </c:forEach>
+                            </div>
+                            <p class="more${c}" onclick="toggleContent(${c})" id="more_text">More</p>
+                            <div class="information">
+                                <div class="column1">
+                                    <h6 class="u-custom-font u-text u-text-font u-text-5">By <span class="name">${entry.key.customerName}</span></h6>
+                                </div>
+                                <div class="column2">
+                                    <h6 class="u-text u-text-6">Last update: ${entry.key.updated_at}</h6>
+                                </div>
+                            </div>
+                            <div class="service">
+                                <span class="service-name">Service: ${entry.key.serviceName}</span>
+                            </div>
+                        </div>
+                    </div>
+                </c:forEach>
+
+
+
+
+
             </div>
         </section>
         <!-- end client section -->
@@ -300,15 +425,15 @@
         <!-- end info_section -->
 
         <style>
-            /* CSS cho nút "More" */
-            .description button {
+            #more_text{
                 background: transparent; /* Đặt nền trong suốt */
-                color: blue; /* Đặt màu chữ màu xanh */
+                color: #17a2b8; /* Đặt màu chữ màu xanh */
                 border: none; /* Xóa đường viền */
                 cursor: pointer;
+                margin-top: 10px
 
             }
-            .description button:focus {
+            #more_text:focus {
                 outline: none;
             }
         </style>
@@ -336,29 +461,22 @@
         <!-- custom js -->
         <script src="js/custom.js"></script>
 
+
         <script>
-                                    var fullText; // Đặt biến fullText ở ngoài để nó có phạm vi toàn cục
-                                    var description = document.querySelector(".description p");
-                                    var shortText = description.textContent.substring(0, 100); // Đặt chiều dài cần hiển thị ban đầu (ở đây là 100 ký tự)
-                                    var button = document.querySelector(".description button");
-                                    var isHidden = false; // Biến để theo dõi trạng thái ẩn/hiển thị nội dung
 
-                                    document.addEventListener("DOMContentLoaded", function () {
-                                        fullText = description.textContent; // Gán giá trị cho biến fullText khi tài liệu đã tải
-                                        description.textContent = shortText; // Hiển thị một phần của nội dung ban đầu
-                                    });
+                                function toggleContent(c) {
+                                    var contentElement = document.getElementById("content" + c);
+                                    var moreButton = document.querySelector(".more" + c);
 
-                                    function toggleDescription() {
-                                        if (isHidden) {
-                                            description.textContent = shortText; // Hiển thị chỉ một phần của nội dung
-                                            button.textContent = "More"; // Thay đổi nội dung của nút thành "More"
-                                            isHidden = false; // Đặt lại trạng thái ẩn
-                                        } else {
-                                            description.textContent = fullText; // Hiển thị toàn bộ nội dung
-                                            button.textContent = "Hide"; // Thay đổi nội dung của nút thành "Hide"
-                                            isHidden = true; // Đặt trạng thái ẩn
-                                        }
+                                    if (contentElement.style.maxHeight === "none" || contentElement.style.maxHeight === "") {
+                                        contentElement.style.maxHeight = "50px";
+                                        moreButton.textContent = "More";
+                                    } else {
+                                        contentElement.style.maxHeight = "none";
+                                        moreButton.textContent = "Less";
                                     }
+                                }
+
         </script>
 
         <style>
