@@ -20,6 +20,7 @@ import java.util.ArrayList;
  */
 public class manageUser extends HttpServlet {
 
+    
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
