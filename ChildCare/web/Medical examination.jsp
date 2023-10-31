@@ -1,7 +1,7 @@
 <%-- 
     Document   : Medical examination
     Created on : Oct 8, 2023, 10:31:38 AM
-    Author     : phung
+    Author     : hp
 --%>
 
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
@@ -91,11 +91,11 @@
 
                             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                                 <div class="d-flex mr-auto flex-column flex-lg-row align-items-center">
-                                    <ul class="navbar-nav  ">
-                                        <li class="nav-item ">
+                                      <ul class="navbar-nav  ">
+                                        <li class="nav-item active">
                                             <a class="nav-link" href="home">Home <span class="sr-only">(current)</span></a>
                                         </li>
-                                        <li class="nav-item active">
+                                        <li class="nav-item">
                                             <a class="nav-link" href="blog"> Blog</a>
                                         </li>
                                         <li class="nav-item">
@@ -108,7 +108,7 @@
                                             <a class="nav-link" href="feedback">FeedBack</a>
                                         </li>
                                         <li class="nav-item">
-                                               <a class="nav-link" href="medicalexamination">Medical Examination</a>
+                                            <a class="nav-link" href="medicalexamination">Medical Examination</a>
                                         </li>
                                     </ul>
                                 </div>
@@ -162,7 +162,7 @@
 
 
                                     <form id="searchForm" action="GetMedicalexamination" method="get">
-                                        <input name="id" value="${requestScope.idaccount} "  hidden/>
+                                       <input name="id" value="${sessionScope.id}" hidden/>
                                         <div class="d-flex align-items-center">
                                             <!-- Dropdown select cho idcategory -->
                                             <div class="custom-select-container mr-2">

@@ -1,6 +1,6 @@
 <%-- 
-    Document   : blog
-    Created on : Sep 29, 2023, 2:40:32 PM
+    Document   : newjsp
+    Created on : Sep 29, 2023, 12:51:54 PM
     Author     : hp
 --%>
 
@@ -10,9 +10,7 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Blog</title>
-
-
+        <title>Home</title>
         <!-- bootstrap core css -->
         <link rel="stylesheet" type="text/css" href="css/bootstrap.css" />
 
@@ -32,8 +30,11 @@
         <link href="css/style.css" rel="stylesheet" />
         <!-- responsive style -->
         <link href="css/responsive.css" rel="stylesheet" />
+        <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,700" rel="stylesheet">
+
     </head>
-    <body class="sub_page">
+    <body>
 
         <div class="hero_area">
             <!-- header section strats -->
@@ -68,7 +69,7 @@
                             <a class="navbar-brand" href="index.html">
                                 <img src="images/logo.png" alt="">
                             </a>
-                            </a>
+
 
                             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                                 <span class=""> </span>
@@ -77,10 +78,10 @@
                             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                                 <div class="d-flex mr-auto flex-column flex-lg-row align-items-center">
                                     <ul class="navbar-nav  ">
-                                        <li class="nav-item ">
+                                        <li class="nav-item active">
                                             <a class="nav-link" href="home">Home <span class="sr-only">(current)</span></a>
                                         </li>
-                                        <li class="nav-item active">
+                                        <li class="nav-item">
                                             <a class="nav-link" href="blog"> Blog</a>
                                         </li>
                                         <li class="nav-item">
@@ -93,7 +94,7 @@
                                             <a class="nav-link" href="feedback">FeedBack</a>
                                         </li>
                                         <li class="nav-item">
-                                            <a class="nav-link" href="contact.html">Contact Us</a>
+                                            <a class="nav-link" href="medicalexamination">Medical Examination</a>
                                         </li>
                                     </ul>
                                 </div>
@@ -122,133 +123,107 @@
                 </div>
             </header>
             <!-- end header section -->
+            <!-- slider section -->
+            <!-- slider section -->
+
+            <!-- end slider section -->
         </div>
 
 
-        <!-- about section -->
-
-        <section class="about_section layout_padding">
-
-            <div class="d-flex align-items-center justify-content-between mb-4" style="margin-left:  20px">
-
-                <div class="d-flex align-items-center">
-
-                </div> 
-                <form action="blog" method="post">
-                    <div class="d-flex align-items-center">
-                        <select id="filterStatus" name="idcategory" class="mr-2">
-                            <option value="" name="0">All</option>
-                            <c:forEach items="${requestScope.blogcategory}" var="c">
-                                <option value="${c.id}" name="0" ${c.id == param.idcategory ? 'selected' : ''}>${c.title}</option>
-                            </c:forEach>
-                        </select>
-
-                        <select id="filterStatus" name="idday" class="mr-2">
-                            <option value="1" name="1" ${param.idday == '1' ? 'selected' : ''}>New</option>
-                            <option value="2" name="2" ${param.idday == '2' ? 'selected' : ''}>Old</option>
-                        </select>
 
 
-                        <input type="text" style="margin-right: 20px" name="search" id="searchInput" placeholder="Search..." onkeyup="searchBlog()" class="form-control">
-                        <button style="margin-right: 20px;" type="submit" class="btn btn-primary">Search</button>
+        <section class="about_section">
+            <div class="container">
+                <div class="card">
+                    <div class="container-fliud">
+                        <div class="wrapper row">
+                            <div class="preview col-md-6">
 
-                    </div>
-                </form>
-            </div>
+                                <div class="preview-pic tab-content">
+                                    <c:forEach items="${requestScope.feedbackListimgtop}" var="c1">
+                                        <div class="tab-pane active" id="pic-1"><img src="images/${c1.thumString}"/></div>
 
-            <div class="container  " >
-                <c:forEach items="${requestScope.post}" var="c">
-                    <div class="row" style="margin-bottom: 50px">
-                        <div class="col-md-6 ">
-                            <div class="img-box">
-                                <img src="images/${c.thumbnail}" alt="">
-                            </div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="detail-box">
-                                <div class="heading_container">
-                                    <h2>
-                                        <span>${c.title}</span>
-                                    </h2>
+                                    </c:forEach>
+
                                 </div>
+                                <ul class="preview-thumbnail nav nav-tabs">
+                                    <c:forEach items="${requestScope.feedbackListimg}" var="c">
+                                        <li><a data-target="#pic-2" data-toggle="tab"><img src="images/${c.thumString}" /></a></li>
+                                            </c:forEach>  
+                                </ul>
 
-                                <p class="description">
-                                    ${c.decription}
-                                </p>
-                                <a href="blogdeatails?id=${c.id}">
-                                    Read More
-                                </a>
                             </div>
-                        </div>
+                            <c:forEach var="entry" items="${requestScope.feedbackList1}">
+                                <c:set var="imageList" value="${entry.value}" />
+                                <c:set var="c" value="${c + 1}" />
+                                <div class="details col-md-6">
+                                        <h3 class="product-title">${entry.key.customerName}</h3><p>email: ${entry.key.useremail}</p>
+                                    <div class="rating">
+                                        <div class="stars">
 
-                    </div>
 
-                </c:forEach>
 
-                <!-- Giao diện phân trang -->
-                <c:if test="${requestScope.checkpage == 0}">
-                       <ul class="pagination justify-content-center">
-                    <c:choose>
-                        <c:when test="${requestScope.totalPages <= 7}">
-                            <c:forEach begin="1" end="${requestScope.totalPages}" var="page">
-                                <li class="page-item <c:if test="${page eq requestScope.currentPage}">active</c:if>">
-                                    <a class="page-link" href="?page=${page}">${page}</a>
-                                </li>
+                                            <c:if test="${entry.key.point == 1}">
+                                                <span class="fa fa-star checked"></span>
+                                                <span class="fa fa-star "></span>
+                                                <span class="fa fa-star "></span>
+                                                <span class="fa fa-star"></span>
+                                                <span class="fa fa-star"></span>
+                                            </c:if>
+
+                                            <c:if test="${entry.key.point == 2}">
+                                                <span class="fa fa-star checked"></span>
+                                                <span class="fa fa-star checked"></span>
+                                                <span class="fa fa-star "></span>
+                                                <span class="fa fa-star"></span>
+                                                <span class="fa fa-star"></span>
+                                            </c:if>
+
+                                            <c:if test="${entry.key.point == 3}">
+                                                <span class="fa fa-star checked"></span>
+                                                <span class="fa fa-star checked"></span>
+                                                <span class="fa fa-star checked"></span>
+                                                <span class="fa fa-star"></span>
+                                                <span class="fa fa-star"></span>
+                                            </c:if>
+
+                                            <c:if test="${entry.key.point == 4}">
+                                                <span class="fa fa-star checked"></span>
+                                                <span class="fa fa-star checked"></span>
+                                                <span class="fa fa-star checked"></span>
+                                                <span class="fa fa-star checked"></span>
+                                                <span class="fa fa-star"></span>
+                                            </c:if>
+                                            <c:if test="${entry.key.point == 5}">
+                                                <span class="fa fa-star checked"></span>
+                                                <span class="fa fa-star checked"></span>
+                                                <span class="fa fa-star checked"></span>
+                                                <span class="fa fa-star checked"></span>
+                                                <span class="fa fa-star checked"></span>
+                                            </c:if>
+
+
+                                        </div>
+
+                                    </div>
+                                    <p class="product-description">${entry.key.content}</p>
+                                    <h4 class="price">service: <span> ${entry.key.serviceName}</span></h4>
+                                     
+
+                                </div>
                             </c:forEach>
-                        </c:when>
-                        <c:otherwise>
-                            <c:choose>
-                                <c:when test="${requestScope.currentPage <= 3}">
-                                    <c:forEach begin="1" end="5" var="page">
-                                        <li class="page-item <c:if test="${page eq requestScope.currentPage}">active</c:if>">
-                                            <a class="page-link" href="?page=${page}">${page}</a>
-                                        </li>
-                                    </c:forEach>
-                                    <li class="page-item disabled"><span class="page-link">...</span></li>
-                                    <li class="page-item">
-                                        <a class="page-link" href="?page=${requestScope.totalPages}">${requestScope.totalPages}</a>
-                                    </li>
-                                </c:when>
-                                <c:when test="${requestScope.currentPage >= requestScope.totalPages - 2}">
-                                    <li class="page-item">
-                                        <a class="page-link" href="?page=1">1</a>
-                                    </li>
-                                    <li class="page-item disabled"><span class="page-link">...</span></li>
-                                        <c:forEach begin="${requestScope.totalPages - 4}" end="${requestScope.totalPages}" var="page">
-                                        <li class="page-item <c:if test="${page eq requestScope.currentPage}">active</c:if>">
-                                            <a class="page-link" href="?page=${page}">${page}</a>
-                                        </li>
-                                    </c:forEach>
-                                </c:when>
-                                <c:otherwise>
-                                    <li class="page-item">
-                                        <a class="page-link" href="?page=1">1</a>
-                                    </li>
-                                    <li class="page-item disabled"><span class="page-link">...</span></li>
-                                        <c:forEach begin="${requestScope.currentPage - 1}" end="${requestScope.currentPage + 1}" var="page">
-                                        <li class="page-item <c:if test="${page eq requestScope.currentPage}">active</c:if>">
-                                            <a class="page-link" href="?page=${page}">${page}</a>
-                                        </li>
-                                    </c:forEach>
-                                    <li class="page-item disabled"><span class="page-link">...</span></li>
-                                    <li class="page-item">
-                                        <a class="page-link" href="?page=${requestScope.totalPages}">${requestScope.totalPages}</a>
-                                    </li>
-                                </c:otherwise>
-                            </c:choose>
-                        </c:otherwise>
-                    </c:choose>
-                </ul>
-                </c:if>
-
+                        </div>
+                    </div>
+                </div>
             </div>
-
         </section>
-
-
 
         <!-- end about section -->
 
+
+
+
+        <!-- end contact section -->
 
         <!-- info section -->
         <section class="info_section ">
@@ -315,10 +290,10 @@
                                     Useful link
                                 </h5>
                                 <div class="info_links_menu">
-                                    <a href="index.html">
+                                    <a class="active" href="index.html">
                                         Home
                                     </a>
-                                    <a class="active" href="about.html">
+                                    <a href="about.html">
                                         About
                                     </a>
                                     <a href="treatment.html">
@@ -393,6 +368,12 @@
         <!-- end info_section -->
 
 
+        <div id="overlay" class="hidden">
+            <div class="popup">
+                <p id="message">Đây là nội dung thông báo.</p>
+            </div>
+        </div>
+
         <!-- footer section -->
         <footer class="footer_section">
             <div class="container">
@@ -402,59 +383,12 @@
                 </p>
             </div>
         </footer>
+
+
         <!-- footer section -->
-        <script>
-            var maxPages = 5; // Số trang tối đa để hiển thị trước và sau trang hiện tại
 
-            // Sử dụng JavaScript để tính toán giá trị minValue
-            var totalPages = ${requestScope.totalPages};
-            var minValue = Math.min(totalPages, maxPages);
 
-            // Hiển thị trang phân trang
-            var pagination = document.getElementById("pagination");
 
-            // Nếu có nhiều hơn maxPages trang, hiển thị trang đầu và dấu chấm
-            if (totalPages > maxPages) {
-                var firstPageItem = document.createElement("li");
-                firstPageItem.className = "page-item";
-                firstPageItem.innerHTML = '<a class="page-link" href="?page=1">1</a>';
-
-                var ellipsisItem = document.createElement("li");
-                ellipsisItem.className = "page-item disabled";
-                ellipsisItem.innerHTML = '<span class="page-link">...</span>';
-
-                pagination.appendChild(firstPageItem);
-                pagination.appendChild(ellipsisItem);
-            }
-
-            // Hiển thị các trang trước trang hiện tại
-            for (var page = 1; page <= minValue; page++) {
-                var pageItem = document.createElement("li");
-                pageItem.className = "page-item";
-
-                if (page === ${requestScope.currentPage}) {
-                    pageItem.className += " active";
-                }
-
-                pageItem.innerHTML = '<a class="page-link" href="?page=' + page + '">' + page + '</a>';
-
-                pagination.appendChild(pageItem);
-            }
-
-            // Nếu có nhiều hơn maxPages trang, hiển thị trang cuối và dấu chấm
-            if (totalPages > maxPages) {
-                var ellipsisItemEnd = document.createElement("li");
-                ellipsisItemEnd.className = "page-item disabled";
-                ellipsisItemEnd.innerHTML = '<span class="page-link">...</span>';
-
-                var lastPageItem = document.createElement("li");
-                lastPageItem.className = "page-item";
-                lastPageItem.innerHTML = '<a class="page-link" href="?page=' + totalPages + '">' + totalPages + '</a>';
-
-                pagination.appendChild(ellipsisItemEnd);
-                pagination.appendChild(lastPageItem);
-            }
-        </script>
 
 
 
@@ -470,7 +404,214 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.3.0/js/bootstrap-datepicker.js"></script>
         <!-- custom js -->
         <script src="js/custom.js"></script>
+
+
         <style>
+
+            /*****************globals*************/
+            body {
+                font-family: 'open sans';
+                overflow-x: hidden;
+            }
+
+            img {
+                max-width: 100%;
+            }
+
+            .preview {
+                display: -webkit-box;
+                display: -webkit-flex;
+                display: -ms-flexbox;
+                display: flex;
+                -webkit-box-orient: vertical;
+                -webkit-box-direction: normal;
+                -webkit-flex-direction: column;
+                -ms-flex-direction: column;
+                flex-direction: column;
+            }
+            @media screen and (max-width: 996px) {
+                .preview {
+                    margin-bottom: 20px;
+                }
+            }
+
+            .preview-pic {
+                -webkit-box-flex: 1;
+                -webkit-flex-grow: 1;
+                -ms-flex-positive: 1;
+                flex-grow: 1;
+            }
+
+            .preview-thumbnail.nav-tabs {
+                border: none;
+                margin-top: 15px;
+            }
+            .preview-thumbnail.nav-tabs li {
+                width: 18%;
+                margin-right: 2.5%;
+            }
+            .preview-thumbnail.nav-tabs li img {
+                max-width: 100%;
+                display: block;
+            }
+            .preview-thumbnail.nav-tabs li a {
+                padding: 0;
+                margin: 0;
+            }
+            .preview-thumbnail.nav-tabs li:last-of-type {
+                margin-right: 0;
+            }
+
+            .tab-content {
+                overflow: hidden;
+            }
+            .tab-content img {
+                width: 100%;
+                -webkit-animation-name: opacity;
+                animation-name: opacity;
+                -webkit-animation-duration: .3s;
+                animation-duration: .3s;
+            }
+
+            .card {
+                margin-top: 50px;
+                background: #eee;
+                padding: 3em;
+                line-height: 1.5em;
+            }
+
+            @media screen and (min-width: 997px) {
+                .wrapper {
+                    display: -webkit-box;
+                    display: -webkit-flex;
+                    display: -ms-flexbox;
+                    display: flex;
+                }
+            }
+
+            .details {
+                display: -webkit-box;
+                display: -webkit-flex;
+                display: -ms-flexbox;
+                display: flex;
+                -webkit-box-orient: vertical;
+                -webkit-box-direction: normal;
+                -webkit-flex-direction: column;
+                -ms-flex-direction: column;
+                flex-direction: column;
+            }
+
+            .colors {
+                -webkit-box-flex: 1;
+                -webkit-flex-grow: 1;
+                -ms-flex-positive: 1;
+                flex-grow: 1;
+            }
+
+            .product-title, .price, .sizes, .colors {
+                text-transform: UPPERCASE;
+                font-weight: bold;
+            }
+
+            .checked, .price span {
+                color: #ff9f1a;
+            }
+
+            .product-title, .rating, .product-description, .price, .vote, .sizes {
+                margin-bottom: 15px;
+            }
+
+            .product-title {
+                margin-top: 0;
+            }
+
+            .size {
+                margin-right: 10px;
+            }
+            .size:first-of-type {
+                margin-left: 40px;
+            }
+
+            .color {
+                display: inline-block;
+                vertical-align: middle;
+                margin-right: 10px;
+                height: 2em;
+                width: 2em;
+                border-radius: 2px;
+            }
+            .color:first-of-type {
+                margin-left: 20px;
+            }
+
+            .add-to-cart, .like {
+                background: #ff9f1a;
+                padding: 1.2em 1.5em;
+                border: none;
+                text-transform: UPPERCASE;
+                font-weight: bold;
+                color: #fff;
+                -webkit-transition: background .3s ease;
+                transition: background .3s ease;
+            }
+            .add-to-cart:hover, .like:hover {
+                background: #b36800;
+                color: #fff;
+            }
+
+            .not-available {
+                text-align: center;
+                line-height: 2em;
+            }
+            .not-available:before {
+                font-family: fontawesome;
+                content: "\f00d";
+                color: #fff;
+            }
+
+            .orange {
+                background: #ff9f1a;
+            }
+
+            .green {
+                background: #85ad00;
+            }
+
+            .blue {
+                background: #0076ad;
+            }
+
+            .tooltip-inner {
+                padding: 1.3em;
+            }
+
+            @-webkit-keyframes opacity {
+                0% {
+                    opacity: 0;
+                    -webkit-transform: scale(3);
+                    transform: scale(3);
+                }
+                100% {
+                    opacity: 1;
+                    -webkit-transform: scale(1);
+                    transform: scale(1);
+                }
+            }
+
+            @keyframes opacity {
+                0% {
+                    opacity: 0;
+                    -webkit-transform: scale(3);
+                    transform: scale(3);
+                }
+                100% {
+                    opacity: 1;
+                    -webkit-transform: scale(1);
+                    transform: scale(1);
+                }
+            }
+
+            /*# sourceMappingURL=style.css.map */
         </style>
 
     </body>
