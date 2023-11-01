@@ -25,7 +25,7 @@ import java.util.Random;
  *
  * @author hp
  */
-public class HomeController_1 extends HttpServlet {
+public class HomeController extends HttpServlet {
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {

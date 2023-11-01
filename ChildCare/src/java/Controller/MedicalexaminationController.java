@@ -20,7 +20,7 @@ import org.apache.catalina.User;
  *
  * @author hp
  */
-public class MedicalexaminationController_1 extends HttpServlet {
+public class MedicalexaminationController extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>

@@ -1,8 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
- */
-
 package Controller;
 
 import DAO.ServiceDBcontext;
@@ -15,7 +10,7 @@ import jakarta.servlet.http.HttpServletResponse;
 
 /**
  *
- * @author phung
+ * @author hp
  */
 public class ServiceController extends HttpServlet {
    
@@ -73,7 +68,7 @@ public class ServiceController extends HttpServlet {
         ServiceDBcontext dBcontext = new ServiceDBcontext();
         request.setAttribute("count1", dBcontext.countService(choseservice_raw));
         request.setAttribute("listservice", dBcontext.listService(choseservice_raw));
-        request.getRequestDispatcher("service1.jsp").forward(request, response);
+        request.getRequestDispatcher("service.jsp").forward(request, response);
     } 
 
     /** 

@@ -20,7 +20,7 @@ import jakarta.servlet.http.HttpServletResponse;
  * @author hp
  */
 @WebServlet(name="GetMedicalexaminationController", urlPatterns={"/GetMedicalexamination"})
-public class GetMedicalexaminationController_1 extends HttpServlet {
+public class GetMedicalexaminationController extends HttpServlet {
    
     /** 
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
