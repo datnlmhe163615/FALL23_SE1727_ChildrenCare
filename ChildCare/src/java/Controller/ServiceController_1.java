@@ -1,14 +1,6 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
- */
-
 package Controller;
 
-
-import DAO.AccountDAO;
-import DAO.BlogDBcontext;
-import Model.Account;
+import DAO.ServiceDBcontext;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
@@ -20,7 +12,7 @@ import jakarta.servlet.http.HttpServletResponse;
  *
  * @author hp
  */
-public class BlogDeatailsController extends HttpServlet {
+public class ServiceController_1 extends HttpServlet {
    
     /** 
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
@@ -37,10 +29,10 @@ public class BlogDeatailsController extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet BlogDeatailsController</title>");  
+            out.println("<title>Servlet ServiceController</title>");  
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet BlogDeatailsController at " + request.getContextPath () + "</h1>");
+            out.println("<h1>Servlet ServiceController at " + request.getContextPath () + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -57,15 +49,26 @@ public class BlogDeatailsController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-        AccountDAO accountDAO = new AccountDAO();
-        String id = request.getParameter("id");
-         BlogDBcontext blogDB = new BlogDBcontext();
-         request.setAttribute("blogDetai", blogDB.blogDetails(id));
-         request.setAttribute("accountDAO", accountDAO);
-//         Account a = new Account();
-//         a.getFullname()
+        String gamil_raw = request.getParameter("gmail");
+        String choseservice_raw = request.getParameter("choseservice");
+        String inputHour_raw = request.getParameter("inputHour");
+        String phone_raw = request.getParameter("phone");
+        String address_raw = request.getParameter("address");
+        String date_raw = request.getParameter("date");
+        String doctor_raw = request.getParameter("chosesedoctor");
         
-        request.getRequestDispatcher("Blogdeatails.jsp").forward(request, response);
+        request.setAttribute("gamil_raw", gamil_raw);
+        request.setAttribute("choseservice_raw", choseservice_raw);
+        request.setAttribute("inputHour_raw", inputHour_raw);
+        request.setAttribute("phone_raw", phone_raw);
+        request.setAttribute("address_raw", address_raw);
+        request.setAttribute("date_raw", date_raw);
+        request.setAttribute("doctor_raw", doctor_raw);
+        
+        ServiceDBcontext dBcontext = new ServiceDBcontext();
+        request.setAttribute("count1", dBcontext.countService(choseservice_raw));
+        request.setAttribute("listservice", dBcontext.listService(choseservice_raw));
+        request.getRequestDispatcher("service.jsp").forward(request, response);
     } 
 
     /** 

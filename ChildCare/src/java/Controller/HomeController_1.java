@@ -10,6 +10,7 @@ import DAO.ServiceCategoryDBcontext;
 import DAO.SlideDBcontext;
 import Model.Post;
 import Model.ServiceCategory;
+import jakarta.servlet.RequestDispatcher;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
@@ -22,9 +23,9 @@ import java.util.Random;
 
 /**
  *
- * @author phung
+ * @author hp
  */
-public class HomeController extends HttpServlet {
+public class HomeController_1 extends HttpServlet {
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -52,7 +53,7 @@ public class HomeController extends HttpServlet {
 
         request.setAttribute("slide", bcontext.getListSlide());
         request.setAttribute("servicelist", serviceCategoryDBcontext.ListServiceCategory());
-        
+
         Random random = new Random();
         List<Post> allBlogPosts = blogDB.ListBlog();
         int randomIndex = random.nextInt(allBlogPosts.size());
@@ -96,7 +97,43 @@ public class HomeController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+       BlogDBcontext blogDB = new BlogDBcontext();
+        SlideDBcontext bcontext = new SlideDBcontext();
+        ServiceCategoryDBcontext serviceCategoryDBcontext = new ServiceCategoryDBcontext();
+
+        request.setAttribute("slide", bcontext.getListSlide());
+        request.setAttribute("servicelist", serviceCategoryDBcontext.ListServiceCategory());
+
+        Random random = new Random();
+        List<Post> allBlogPosts = blogDB.ListBlog();
+        int randomIndex = random.nextInt(allBlogPosts.size());
+        Post randomBlogPost = allBlogPosts.get(randomIndex);
+        request.setAttribute("postRandom", randomBlogPost);
+
+        List<ServiceCategory> ServiceCategoryModers = serviceCategoryDBcontext.ListServiceCategory();
+        List<ServiceCategory> randomServices = new ArrayList<>();
+
+        if (ServiceCategoryModers.size() <= 4) {
+            randomServices.addAll(ServiceCategoryModers);
+        } else {
+            // Sử dụng một danh sách tạm thời để chứa tất cả các phần tử
+            List<ServiceCategory> tempList = new ArrayList<>(ServiceCategoryModers);
+
+            // Lấy ngẫu nhiên 4 phần tử và thêm vào danh sách randomServices
+            for (int i = 0; i < 4; i++) {
+                int randomIndex1 = random.nextInt(tempList.size());
+                ServiceCategory randomServiceCt = tempList.get(randomIndex1);
+                randomServices.add(randomServiceCt);
+                tempList.remove(randomIndex1);
+            }
+        }
+
+        request.setAttribute("serviceCategories", randomServices);
+
+        AccountDAO accountDBcontext = new AccountDAO();
+        request.setAttribute("accountdoctor", accountDBcontext.listAccountdoctor());
+
+        request.getRequestDispatcher("index.jsp").forward(request, response);
     }
 
     /**

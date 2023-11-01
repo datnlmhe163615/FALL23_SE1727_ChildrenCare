@@ -4,25 +4,25 @@
  */
 package Controller;
 
-import DAO.ManageAccDAO;
-import Model.Account;
+import DAO.FeedbackDAO;
+import DAO.ServiceDAO;
+import Model.Feedback;
+import Model.FeedbackImg;
+import Model.Service;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import java.util.ArrayList;
+import java.util.LinkedHashMap;
+import java.util.List;
 
 /**
  *
- * @author mihxdat
+ * @author hp
  */
-public class RegisterController extends HttpServlet {
-
-    public static final char SPACE = ' ';
-    public static final char TAB = '\t';
-    public static final char BREAK_LINE = '\n';
+public class feedbackdetailController extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -41,10 +41,10 @@ public class RegisterController extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet RegisterController</title>");
+            out.println("<title>Servlet feedbackdetailController</title>");
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet RegisterController at " + request.getContextPath() + "</h1>");
+            out.println("<h1>Servlet feedbackdetailController at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -62,7 +62,18 @@ public class RegisterController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        request.getRequestDispatcher("register.jsp").forward(request, response);
+        FeedbackDAO fdao = new FeedbackDAO();
+        int id = Integer.parseInt(request.getParameter("id"));
+        ServiceDAO sdao = new ServiceDAO();
+        request.setAttribute("feedbackListimg", fdao.getImgForFeedback(id));
+        request.setAttribute("feedbackListimgtop", fdao.getImgForFeedbacktop(id));
+        
+        List<Service> services = sdao.getAllServices();
+        LinkedHashMap<Feedback, List<FeedbackImg>> feedbackMap = fdao.getAllFeedbackbydi(id);
+        request.setAttribute("feedbackList1", feedbackMap);
+        request.setAttribute("services", services);
+        
+        request.getRequestDispatcher("feedbackdetail.jsp").forward(request, response);
     }
 
     /**
@@ -76,35 +87,7 @@ public class RegisterController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String fullname = request.getParameter("fullname");
-        String email = request.getParameter("email");
-        String password = request.getParameter("password");
-        String re_password = request.getParameter("re_password");
-        ManageAccDAO dao = new ManageAccDAO();
-        ArrayList<Account> accounts = dao.list();
-        if (fullname.equals("") || email.equals("") || password.equals("") || re_password.equals("")) {
-            request.setAttribute("msg", "Please fill all blank");
-            request.getRequestDispatcher("register.jsp").forward(request, response);          
-        }
-        if (password.length() < 8 || re_password.length() < 8) {
-                request.setAttribute("msg", "Your Password must be at least 8 characters");
-                request.getRequestDispatcher("register.jsp").forward(request, response);
-        }
-        else if (!password.equals(re_password)) {
-            request.setAttribute("msg", "your password and confirm password are NOT the same");
-            request.getRequestDispatcher("register.jsp").forward(request, response);
-        }
-        for (Account account : accounts) {
-            if (email.equals(account.getEmail())) {
-                request.setAttribute("msg", "This email already exist");
-                request.getRequestDispatcher("register.jsp").forward(request, response);
-            }
-        }
-        if (password.equals(re_password)) {
-            dao.RegisterNewAccount(email, password, fullname);
-            request.setAttribute("msg", "Register successful please login!!");
-            request.getRequestDispatcher("login.jsp").forward(request, response);
-        }
+        processRequest(request, response);
     }
 
     /**

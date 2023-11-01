@@ -4,21 +4,29 @@
  */
 package Controller;
 
-import DAO.BlogDBcontext;
-import Model.Post;
+import DAO.FeedbackDAO;
+import DAO.ServiceDAO;
+import Model.Feedback;
+import Model.FeedbackImg;
+import Model.Service;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import java.util.ArrayList;
+import java.sql.SQLException;
+import java.util.LinkedHashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
  * @author hp
  */
-public class BlogController extends HttpServlet {
+public class FeedbackController extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -37,10 +45,10 @@ public class BlogController extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet BlogController</title>");
+            out.println("<title>Servlet FeedbackController</title>");
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet BlogController at " + request.getContextPath() + "</h1>");
+            out.println("<h1>Servlet FeedbackController at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -58,34 +66,14 @@ public class BlogController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        int checkpage = 0;
-        BlogDBcontext blogDB = new BlogDBcontext();
-        int pageSize = 2 ;// Số lượng bài đăng trên mỗi trang
+        FeedbackDAO fdao = new FeedbackDAO();
+        ServiceDAO sdao = new ServiceDAO();
 
-        String pageParam = request.getParameter("page");
-        int page;
-        if (pageParam != null && !pageParam.isEmpty()) {
-            try {
-                page = Integer.parseInt(pageParam);
-            } catch (NumberFormatException e) {
-                // Xử lý nếu giá trị không hợp lệ
-                // Ví dụ: trả về trang lỗi hoặc giá trị mặc định
-                page = 1; // Số trang mặc định
-            }
-        } else {
-            page = 1; // Số trang mặc định nếu tham số "page" không tồn tại
-        }
-
-// Tính toán số trang và trang hiện tại
-        int totalPosts = blogDB.getTotalPosts(); // Thay thế bằng hàm lấy tổng số bài đăng
-        int totalPages = (int) Math.ceil((double) totalPosts / pageSize);
-        request.setAttribute("totalPages", totalPages);
-        request.setAttribute("currentPage", page);
-        ArrayList<Post> posts = blogDB.ListBlog1(page, pageSize);
-        request.setAttribute("post", posts);
-        request.setAttribute("blogcategory", blogDB.ListBlogCategory());
-        request.setAttribute("checkpage", checkpage);
-        request.getRequestDispatcher("blog.jsp").forward(request, response);
+        List<Service> services = sdao.getAllServices();
+        LinkedHashMap<Feedback, List<FeedbackImg>> feedbackMap = fdao.getAllFeedback();
+        request.setAttribute("feedbackList", feedbackMap);
+        request.setAttribute("services", services);
+        request.getRequestDispatcher("Feedback.jsp").forward(request, response);
 
     }
 
@@ -100,15 +88,27 @@ public class BlogController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String idCategory_raw = request.getParameter("idcategory");
-        String day_raw = request.getParameter("idday");
-        String search_raw = request.getParameter("search");
+        FeedbackDAO fdao = new FeedbackDAO();
+        ServiceDAO sdao = new ServiceDAO();
 
-        BlogDBcontext blogDB = new BlogDBcontext();
-        request.setAttribute("blogcategory", blogDB.ListBlogCategory());
-        request.setAttribute("post", blogDB.blogSearch(idCategory_raw, day_raw, search_raw));
+        List<Service> services = sdao.getAllServices();
+        String textSearch = request.getParameter("textSearch");
+        String pointFilter = request.getParameter("pointFilter");
+        String serviceFilter = request.getParameter("serviceFilter");
+        String sortBy = request.getParameter("sortBy");
+        String sortOption = request.getParameter("sortOption");
+        System.out.println(serviceFilter);
 
-        request.getRequestDispatcher("blog.jsp").forward(request, response);
+        try {
+            LinkedHashMap<Feedback, List<FeedbackImg>> feedbacksearchsList = fdao.searchFeedback(textSearch, pointFilter, serviceFilter,  sortBy, sortOption);
+            System.out.println("size" + feedbacksearchsList.size());
+            request.setAttribute("feedbackList", feedbacksearchsList);
+            request.setAttribute("services", services);
+            request.getRequestDispatcher("Feedback.jsp").forward(request, response);
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+
     }
 
     /**

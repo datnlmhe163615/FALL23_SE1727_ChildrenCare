@@ -5,6 +5,7 @@
 package Controller;
 
 import DAO.ReservationDBcontex;
+import Model.Account;
 import Model.Reservation;
 import Model.ReservationItem;
 import java.io.IOException;
@@ -13,6 +14,7 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 import java.nio.charset.StandardCharsets;
 import java.sql.Timestamp;
 
@@ -22,7 +24,7 @@ import java.util.Date;
 
 /**
  *
- * @author phung
+ * @author hp
  */
 public class CheckoutController extends HttpServlet {
 
@@ -100,9 +102,13 @@ public class CheckoutController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        HttpSession session = request.getSession();
+        Account account = (Account) session.getAttribute("acc");
+        int userId = account.getId();
+        String userIdString = Integer.toString(userId);
         ReservationDBcontex bcontex = new ReservationDBcontex();
 
-        String id = request.getParameter("1");
+        String id = request.getParameter(userIdString);
         String gender_raw = request.getParameter("1");
         String gamil_raw = request.getParameter("gmail");
         String status_raw = request.getParameter("1");
@@ -121,7 +127,7 @@ public class CheckoutController extends HttpServlet {
         ReservationItem reservationItem = new ReservationItem();
 
         // Gán giá trị cho các trường của Reservation
-        reservation.setCustomer_id(Integer.parseInt("1"));
+        reservation.setCustomer_id(Integer.parseInt(userIdString));
         reservation.setStaff_id(Integer.parseInt(doctor_raw));
         reservation.setEmail(gamil_raw);
         reservation.setStatus(Integer.parseInt("1"));
@@ -146,10 +152,9 @@ public class CheckoutController extends HttpServlet {
         }
         reservationItem.setHour(inputHour_raw);
 
-       
         bcontex.insReservation(reservation, reservationItem);
         response.sendRedirect("home");
-        
+
     }
 
     /**
