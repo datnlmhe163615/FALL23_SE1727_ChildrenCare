@@ -193,17 +193,16 @@
         <url-pattern>/profile</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-
         <servlet-name>ReservationList</servlet-name>
         <url-pattern>/ReservationList</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>ReservationDetail</servlet-name>
         <url-pattern>/ReservationDetail</url-pattern>
-
+    </servlet-mapping>
+    <servlet-mapping>
         <servlet-name>EditProfileController</servlet-name>
         <url-pattern>/edit_profile</url-pattern>
-
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>ActionAccountController</servlet-name>
