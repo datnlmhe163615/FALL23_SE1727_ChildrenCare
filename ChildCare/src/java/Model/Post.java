@@ -18,6 +18,7 @@ import lombok.Data;
 @AllArgsConstructor
 
 public class Post {
+
     private int id;
     private int author_id;
     private int category_id;
@@ -27,9 +28,9 @@ public class Post {
     private int status;
     private Date created_at;
     private Date updated_at;
-    private String Decription;
+    private String decription;
 
     public Post() {
     }
-     private String Describe;
+
 }

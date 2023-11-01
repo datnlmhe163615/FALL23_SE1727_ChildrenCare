@@ -4,25 +4,29 @@
  */
 package Model;
 
-import java.sql.Date;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 /**
  *
- * @author mihxdat
+ * @author hp
  */
+@AllArgsConstructor
+@Getter
+@Setter
 @Builder
 @Data
-@AllArgsConstructor
+@NoArgsConstructor
 
-public class Notification {
-    private int id;
-    private int account_id;
-    private String title;
-    private String content;
-    private Date read_at;
-    private Date created_at;
-    private Date updated_at;
+public class FeedbackImg {
+    private  int imgId;
+    private String thumString;
+    private int feedbackID;
+
+   
+    
 }
