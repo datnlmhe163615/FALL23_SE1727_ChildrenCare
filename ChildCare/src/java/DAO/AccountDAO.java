@@ -6,10 +6,14 @@ package DAO;
 
 import DBContext.DBContext;
 import Model.Account;
+import java.sql.CallableStatement;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Types;
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
@@ -47,6 +51,7 @@ public class AccountDAO extends DBContext {
         return null;
 
     }
+
     public ArrayList<Account> getAccount(int index) {
         ArrayList<Account> list = new ArrayList<>();
         try {
@@ -116,7 +121,26 @@ public class AccountDAO extends DBContext {
         }
         return list;
     }
-     public ArrayList<Account> listAccountdoctor() {
+     public List<Account> getNewestAccount(Date startDate, Date endDate) {
+        List<Account> list = new ArrayList<>();
+        String procedureCall = "{call getNewestAccount(?,?)}";
+        try (
+                 CallableStatement callableStatement = connection.prepareCall(procedureCall)) {
+            callableStatement.setDate(1, startDate);
+            callableStatement.setDate(2, endDate);
+            ResultSet rs = callableStatement.executeQuery();
+            while (rs.next()) {
+                list.add(new Account(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5), rs.getString(6), rs.getString(7),
+                        rs.getBoolean(8), rs.getString(9), rs.getInt(10), rs.getDate(11), rs.getDate(12)));
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return list;
+    }
+
+    public ArrayList<Account> listAccountdoctor() {
         ArrayList<Account> AcountModers = new ArrayList<>();
         String sql = "SELECT [id]\n"
                 + "      ,[email]\n"
@@ -147,4 +171,49 @@ public class AccountDAO extends DBContext {
         }
         return AcountModers;
     }
+
+    public Account getAccountById(String id) {
+        String sql = "SELECT [id], [email], [role], [fullName], [avatar], [status], [createdAt], [updatedAt] FROM [dbo].[Account] WHERE id = ?";
+        Account account = null;
+
+        try ( PreparedStatement pt = connection.prepareStatement(sql)) {
+            pt.setString(1, id);
+            ResultSet rs = pt.executeQuery();
+            if (rs.next()) {
+                Account acountModer = new Account();
+                acountModer.setId(rs.getInt("id"));
+                acountModer.setEmail(rs.getString("email"));
+                acountModer.setRole(rs.getString("role"));
+                acountModer.setFullname(rs.getString("fullName"));
+                acountModer.setAvatar(rs.getString("avatar"));
+                acountModer.setStatus(rs.getInt("status"));
+                acountModer.setUpdated_at(rs.getDate("updatedAt"));
+            }
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+
+        return account;
+    }
+ public int getNumberAccounByDate(Date startDate, Date endDate) {
+        int total = 0;
+        String procedureCall = "{call GetTotalCustomerWithDates(?,?,?)}";
+
+        try (
+                 CallableStatement callableStatement = connection.prepareCall(procedureCall)) {
+
+            callableStatement.setDate(1, startDate);
+            callableStatement.setDate(2, endDate);
+            callableStatement.registerOutParameter(3, Types.INTEGER);
+
+            callableStatement.execute();
+
+            total = callableStatement.getInt(3);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return total;
+    }
+
 }

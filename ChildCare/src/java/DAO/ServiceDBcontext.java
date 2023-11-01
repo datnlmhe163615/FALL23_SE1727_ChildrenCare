@@ -12,7 +12,7 @@ import java.util.ArrayList;
 
 /**
  *
- * @author phung
+ * @author hp
  */
 public class ServiceDBcontext extends DBContext.DBContext {
 
@@ -115,8 +115,5 @@ public ArrayList<Service> getlistService() {
         }
         return Services;
     }
-    public static void main(String[] args) {
-        ServiceDBcontext bcontext = new ServiceDBcontext();
-        System.out.println(bcontext.getlistService());
-    }
+
 }

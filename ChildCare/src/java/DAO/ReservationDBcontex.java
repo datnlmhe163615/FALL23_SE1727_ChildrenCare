@@ -18,7 +18,7 @@ import java.util.Locale;
 
 /**
  *
- * @author 
+ * @author hp
  */
 public class ReservationDBcontex extends DBContext.DBContext {
 
@@ -163,7 +163,7 @@ public class ReservationDBcontex extends DBContext.DBContext {
         }
 
         if (createdAt != null && !createdAt.isEmpty()) {
-            sql += " AND ri.createdAt = ?";
+            sql += " AND ri.createdAt >= ?";
         }
 
         if (customerId != null && !customerId.isEmpty()) {

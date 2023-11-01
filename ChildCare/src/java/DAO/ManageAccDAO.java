@@ -12,15 +12,15 @@ import java.util.*;
  *
  * @author mihxdat
  */
-public class ManageAccDAO {
+public class ManageAccDAO extends DBContext.DBContext{
 
-    Connection conn = DBContext.Dat_DBContext.CreateConnection();
 
     public Account getAccountByLogin(String email, String pass) {
         Account acc = new Account();
         String sql = "select * from account where email = ? and [password] = ?";
         try {
-            PreparedStatement ptmt = conn.prepareStatement(sql);
+            
+            PreparedStatement ptmt = connection.prepareStatement(sql);
             ptmt.setString(1, email);
             ptmt.setString(2, pass);
             ResultSet rs = ptmt.executeQuery();
@@ -51,7 +51,7 @@ public class ManageAccDAO {
         try {
             String sql = "INSERT INTO Account(email, role, password,fullname,gender,status)\n"
                     + "VALUES (?, ?, ?,?, ?, ?);";
-            PreparedStatement stm = conn.prepareStatement(sql);
+            PreparedStatement stm = connection.prepareStatement(sql);
             stm.setString(1, email);
             stm.setString(2, "3");
             stm.setString(3, password);
@@ -69,7 +69,7 @@ public class ManageAccDAO {
         
         try {
             String sql = "select id, email, role, fullname, mobile, gender, address, status from account";
-            PreparedStatement stm = conn.prepareStatement(sql);
+            PreparedStatement stm = connection.prepareStatement(sql);
             ResultSet rs = stm.executeQuery();
             
             while (rs.next()) {
@@ -95,7 +95,7 @@ public class ManageAccDAO {
             String sql = "UPDATE [account] \n"
                     + "   SET [password] = ?\n"
                     + " WHERE id = ?";
-            PreparedStatement stm = conn.prepareStatement(sql);
+            PreparedStatement stm = connection.prepareStatement(sql);
             stm.setString(1, newPass);
             stm.setInt(2, id);
             stm.executeUpdate();
@@ -109,7 +109,7 @@ public class ManageAccDAO {
             String sql = "UPDATE [account] \n"
                     + "   SET [password] = ?\n"
                     + " WHERE email = ?";
-            PreparedStatement stm = conn.prepareStatement(sql);
+            PreparedStatement stm = connection.prepareStatement(sql);
             stm.setString(1, newPass);
             stm.setString(2, email);
             stm.executeUpdate();
@@ -123,7 +123,7 @@ public class ManageAccDAO {
         String sql = "select * from account \n"
                 + "where email = ?";
         try {
-            PreparedStatement stm = conn.prepareStatement(sql);
+            PreparedStatement stm = connection.prepareStatement(sql);
             stm.setString(1, email);
             ResultSet rs = stm.executeQuery();
             if (rs.next()) {
@@ -153,7 +153,7 @@ public class ManageAccDAO {
         Account acc = new Account();
         String sql = "select * from account where id = ?";
         try {
-            PreparedStatement stm = conn.prepareStatement(sql);
+            PreparedStatement stm = connection.prepareStatement(sql);
             stm.setInt(1, id);
             ResultSet rs = stm.executeQuery();
             if (rs.next()) {
@@ -184,7 +184,7 @@ public class ManageAccDAO {
             String sql = "UPDATE Account\n"
                     + "SET email = ?, fullName = ?, avatar = ?, mobile = ?, gender = ?, address = ?\n"
                     + "WHERE id = ?";
-            PreparedStatement stm = conn.prepareStatement(sql);
+            PreparedStatement stm = connection.prepareStatement(sql);
             stm.setString(1, email);
             stm.setString(2, fullname);
             stm.setString(3, avatar);
@@ -203,7 +203,7 @@ public class ManageAccDAO {
             String sql = "UPDATE Account\n"
                     + "SET email = ?, fullName = ?, mobile = ?, gender = ?, address = ?\n"
                     + "WHERE id = ?";
-            PreparedStatement stm = conn.prepareStatement(sql);
+            PreparedStatement stm = connection.prepareStatement(sql);
             stm.setString(1, email);
             stm.setString(2, fullname);
             stm.setString(3, mobile);
@@ -220,7 +220,7 @@ public class ManageAccDAO {
         ArrayList<Account> accounts = new ArrayList<>();
         try {
             String sql = "select distinct [role] from account";
-            PreparedStatement stm = conn.prepareStatement(sql);
+            PreparedStatement stm = connection.prepareStatement(sql);
             ResultSet rs = stm.executeQuery();
             while (rs.next()) {
                 Account acc = new Account();
@@ -237,7 +237,7 @@ public class ManageAccDAO {
         try {
             String sql = "DELETE FROM [account]\n"
                     + "WHERE id =?";
-            PreparedStatement stm = conn.prepareStatement(sql);
+            PreparedStatement stm = connection.prepareStatement(sql);
             stm.setInt(1, id);
             stm.executeUpdate();
         } catch (SQLException e) {
@@ -250,7 +250,7 @@ public class ManageAccDAO {
             String sql = "UPDATE [account] \n"
                     + "   SET [role] = ?\n"
                     + " WHERE id = ?";
-            PreparedStatement stm = conn.prepareStatement(sql);
+            PreparedStatement stm = connection.prepareStatement(sql);
             stm.setString(1, role);
             stm.setString(2, id);
             stm.executeUpdate();
@@ -263,7 +263,7 @@ public class ManageAccDAO {
         ArrayList<Account> accounts = new ArrayList<>();
         try {
             String sql = "select id, email, role, fullname, mobile, gender, address, status from account where fullname like ?";
-            PreparedStatement stm = conn.prepareStatement(sql);
+            PreparedStatement stm = connection.prepareStatement(sql);
             String fullname = "%" + acc_name + "%";
             stm.setString(1, fullname);
             ResultSet rs = stm.executeQuery();
