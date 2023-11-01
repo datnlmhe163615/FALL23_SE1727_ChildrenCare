@@ -22,7 +22,7 @@ import java.util.Date;
 
 /**
  *
- * @author phung
+ * @author hp
  */
 public class CheckoutController extends HttpServlet {
 
