@@ -24,8 +24,4 @@ public class Media {
     private String content_type;
     private Date created_at;
     private Date updated_at;
-
-    public Media() {
-    }
-    
 }

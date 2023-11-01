@@ -8,6 +8,9 @@ import java.sql.Date;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 /**
  *
@@ -16,8 +19,12 @@ import lombok.Data;
 @Builder
 @Data
 @AllArgsConstructor
+@Setter
+@Getter
+@NoArgsConstructor
 
 public class Feedback {
+
     private int id;
     private int customer_id;
     private int service_id;
@@ -25,8 +32,8 @@ public class Feedback {
     private String content;
     private Date created_at;
     private Date updated_at;
+    private String customerName;
+    private String serviceName;
+    private String useremail;
 
-    public Feedback() {
-    }
-    
 }
