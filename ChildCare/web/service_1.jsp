@@ -1,7 +1,7 @@
 <%-- 
     Document   : newjsp
     Created on : Sep 29, 2023, 12:51:54 PM
-    Author     : hp
+    Author     : phung
 --%>
 
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
