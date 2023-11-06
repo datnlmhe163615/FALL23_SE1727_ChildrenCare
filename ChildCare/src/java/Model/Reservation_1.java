@@ -14,45 +14,47 @@ import lombok.Data;
  * @author mihxdat
  */
 @Builder
-//@Data
+@Data
+@AllArgsConstructor
 
-public class Account {
+public class Reservation_1 {
     private int id;
+    private int customer_id;
+    private int staff_id;
     private String email;
-    private String role;
-    private String password;
-    private String fullname;
-    private String avatar;
     private String mobile;
     private boolean gender;
     private String address;
     private int status;
+    private float total;
     private Date created_at;
     private Date updated_at;
-    
+    private ReservationItem_1 reservationItem;
+    private Service_2 service;
+    private Account account;
 
-    public Account() {
+    public Reservation_1() {
     }
 
-    public Account(int id, String email, String role, String password, String fullname, String avatar, String mobile, boolean gender, String address, int status, Date created_at, Date updated_at) {
+    public Reservation_1(int id, int staff_id, String email, String mobile, boolean gender, String address, int status, float total, Date created_at, Date updated_at, Account account) {
         this.id = id;
+        this.staff_id = staff_id;
         this.email = email;
-        this.role = role;
-        this.password = password;
-        this.fullname = fullname;
-        this.avatar = avatar;
         this.mobile = mobile;
         this.gender = gender;
         this.address = address;
         this.status = status;
+        this.total = total;
         this.created_at = created_at;
         this.updated_at = updated_at;
+        this.account = account;
     }
 
-    public Account(String fullname, String avatar) {
-        this.fullname = fullname;
-        this.avatar = avatar;
-    } 
+    public Reservation_1(int id, ReservationItem_1 reservationItem, Service_2 service) {
+        this.id = id;
+        this.reservationItem = reservationItem;
+        this.service = service;
+    }
 
     public int getId() {
         return id;
@@ -62,44 +64,28 @@ public class Account {
         this.id = id;
     }
 
+    public int getCustomer_id() {
+        return customer_id;
+    }
+
+    public void setCustomer_id(int customer_id) {
+        this.customer_id = customer_id;
+    }
+
+    public int getStaff_id() {
+        return staff_id;
+    }
+
+    public void setStaff_id(int staff_id) {
+        this.staff_id = staff_id;
+    }
+
     public String getEmail() {
         return email;
     }
 
     public void setEmail(String email) {
         this.email = email;
-    }
-
-    public String getRole() {
-        return role;
-    }
-
-    public void setRole(String role) {
-        this.role = role;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
-    public String getFullname() {
-        return fullname;
-    }
-
-    public void setFullname(String fullname) {
-        this.fullname = fullname;
-    }
-
-    public String getAvatar() {
-        return avatar;
-    }
-
-    public void setAvatar(String avatar) {
-        this.avatar = avatar;
     }
 
     public String getMobile() {
@@ -134,6 +120,14 @@ public class Account {
         this.status = status;
     }
 
+    public float getTotal() {
+        return total;
+    }
+
+    public void setTotal(float total) {
+        this.total = total;
+    }
+
     public Date getCreated_at() {
         return created_at;
     }
@@ -149,7 +143,28 @@ public class Account {
     public void setUpdated_at(Date updated_at) {
         this.updated_at = updated_at;
     }
-    
-    
-    
+
+    public ReservationItem_1 getReservationItem() {
+        return reservationItem;
+    }
+
+    public void setReservationItem(ReservationItem_1 reservationItem) {
+        this.reservationItem = reservationItem;
+    }
+
+    public Service_2 getService() {
+        return service;
+    }
+
+    public void setService(Service_2 service) {
+        this.service = service;
+    }
+
+    public Account getAccount() {
+        return account;
+    }
+
+    public void setAccount(Account account) {
+        this.account = account;
+    }
 }
