@@ -5,8 +5,8 @@
 package Controller;
 
 import DAO.ServicesDAO;
-import Model.Service;
-import Model.ServiceCategory;
+import Model.ServiceCategory_1;
+import Model.Service_2;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
@@ -28,7 +28,7 @@ public class services extends HttpServlet {
         String mode = request.getParameter("mode");
         if (mode == null) {
             ServicesDAO dao = new ServicesDAO();
-            ArrayList<ServiceCategory> category = dao.getServiceCate();
+            ArrayList<ServiceCategory_1> category = dao.getServiceCate();
             request.setAttribute("category", category);
             request.getRequestDispatcher("servicesCategory.jsp").forward(request, response);
         } else {
@@ -44,8 +44,8 @@ public class services extends HttpServlet {
             } else {
                 index = Integer.parseInt(currentPage);
             }
-            ArrayList<Service> services = dao.getService(cid, index);
-            ArrayList<ServiceCategory> category = dao.getServiceCate();
+            ArrayList<Service_2> services = dao.getService(cid, index);
+            ArrayList<ServiceCategory_1> category = dao.getServiceCate();
             request.setAttribute("category", category);
             request.setAttribute("services", services);
             request.setAttribute("numberPage", numberPage);

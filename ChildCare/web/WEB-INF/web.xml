@@ -72,6 +72,33 @@
         <servlet-name>ReservationDetail</servlet-name>
         <servlet-class>Controller.ReservationDetail</servlet-class>
     </servlet>
+<<<<<<< Updated upstream
+=======
+    <servlet>
+        <servlet-name>EditProfileController</servlet-name>
+        <servlet-class>Controller.EditProfileController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ActionAccountController</servlet-name>
+        <servlet-class>Controller.ActionAccountController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>AccountController</servlet-name>
+        <servlet-class>Controller.AccountController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>SearchManagementController</servlet-name>
+        <servlet-class>Controller.SearchManagementController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>DoctorList</servlet-name>
+        <servlet-class>Controller.DoctorList</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>doctorDetail</servlet-name>
+        <servlet-class>Controller.doctorDetail</servlet-class>
+    </servlet>
+>>>>>>> Stashed changes
     <servlet-mapping>
         <servlet-name>manageUser</servlet-name>
         <url-pattern>/manageUser</url-pattern>
@@ -183,6 +210,33 @@
     <servlet-mapping>
         <servlet-name>ReservationDetail</servlet-name>
         <url-pattern>/ReservationDetail</url-pattern>
+<<<<<<< Updated upstream
+=======
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>EditProfileController</servlet-name>
+        <url-pattern>/edit_profile</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ActionAccountController</servlet-name>
+        <url-pattern>/action_acc</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AccountController</servlet-name>
+        <url-pattern>/user</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>SearchManagementController</servlet-name>
+        <url-pattern>/search_admin</url-pattern>
+>>>>>>> Stashed changes
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>DoctorList</servlet-name>
+        <url-pattern>/DoctorList</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>doctorDetail</servlet-name>
+        <url-pattern>/doctorDetail</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

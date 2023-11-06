@@ -5,8 +5,8 @@
 package Controller;
 
 import DAO.ServicesDAO;
-import Model.Service;
-import Model.ServiceCategory;
+import Model.ServiceCategory_1;
+import Model.Service_2;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
@@ -31,8 +31,8 @@ public class searchService extends HttpServlet {
             throws ServletException, IOException {
         String search = request.getParameter("search");
         ServicesDAO dao = new ServicesDAO();
-        ArrayList<Service> list = dao.searchService(search);
-        ArrayList<ServiceCategory> category = dao.getServiceCate();
+        ArrayList<Service_2> list = dao.searchService(search);
+        ArrayList<ServiceCategory_1> category = dao.getServiceCate();
         request.setAttribute("category", category);
         request.setAttribute("services", list);
         request.setAttribute("check", "hidden");

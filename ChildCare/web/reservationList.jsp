@@ -1,3 +1,9 @@
+<%-- 
+    Document   : about
+    Created on : Sep 22, 2023, 10:04:49 PM
+    Author     : mihxdat
+--%>
+
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"  %>
 <!DOCTYPE html>

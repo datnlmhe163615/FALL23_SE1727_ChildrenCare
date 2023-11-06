@@ -50,10 +50,10 @@ public class AccountDAO extends DBContext {
     public ArrayList<Account> getAccount(int index) {
         ArrayList<Account> list = new ArrayList<>();
         try {
-            String sql = "SELECT * FROM [Account] order by fullName, email\n"
+            String sql = "SELECT * FROM [Account] order by id asc\n"
                     + "OFFSET ? ROWS FETCH NEXT 9 ROWS ONLY";
             PreparedStatement ps = connection.prepareStatement(sql);
-            ps.setInt(1, (index - 1) * 6);
+            ps.setInt(1, (index - 1) * 9);
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
                 list.add(new Account(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5), rs.getString(6), rs.getString(7),
@@ -147,4 +147,48 @@ public class AccountDAO extends DBContext {
         }
         return AcountModers;
     }
+     
+    public ArrayList<Account> getDoctor(){
+        ArrayList<Account> list = new ArrayList<>(); 
+        String sql = "SELECT *  FROM [Account] where role = 'Doctor'";
+        try{         
+            PreparedStatement ps = connection.prepareStatement(sql); 
+            ResultSet rs = ps.executeQuery(); 
+            while(rs.next()){
+                list.add(new Account(rs.getInt(1), rs.getString(2),  rs.getString(3),  rs.getString(4), 
+                         rs.getString(5),  rs.getString(6),  rs.getString(7), rs.getBoolean(8),  rs.getString(9), 
+                        rs.getInt(10), rs.getDate(11), rs.getDate(12))); 
+            }
+        }catch(SQLException e){
+
+        }
+        return list;
+    }
+
+    public Account getDoctorById(int id){
+        try{
+            String sql = "SELECT * FROM [Account] where id = ?"; 
+            PreparedStatement ps = connection.prepareStatement(sql); 
+            ps.setInt(1,id);
+            ResultSet rs = ps.executeQuery(); 
+            while(rs.next()){
+                Account account = new Account(rs.getInt(1), rs.getString(2),  rs.getString(3),  rs.getString(4), 
+                         rs.getString(5),  rs.getString(6),  rs.getString(7), rs.getBoolean(8),  rs.getString(9), 
+                        rs.getInt(10), rs.getDate(11), rs.getDate(12)); 
+                return account; 
+            }           
+        }catch(SQLException e){
+
+        }
+        return null; 
+    }
+
+    public static void main(String[] args) {
+        AccountDAO dao = new AccountDAO(); 
+        ArrayList<Account> list = dao.getDoctor(); 
+        for(Account l : list){
+            System.out.println(l.getId());
+        }
+    }
+
 }

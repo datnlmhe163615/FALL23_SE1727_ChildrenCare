@@ -1,7 +1,7 @@
 package Controller;
 
 import DAO.ReservationDAO;
-import Model.Reservation;
+import Model.Reservation_1;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
@@ -29,7 +29,7 @@ public class ReservationList extends HttpServlet {
         } else {
             index = Integer.parseInt(currentPage);
         }
-        ArrayList<Reservation> list = dao.getReservation(index);
+        ArrayList<Reservation_1> list = dao.getReservation(index);
         request.setAttribute("numberPage", numberPage);
         request.setAttribute("reservation", list);
         request.getRequestDispatcher("reservationList.jsp").forward(request, response);

@@ -153,26 +153,18 @@
                                         <div class="col-lg-12">
                                             <div class="sidebar-item comments">
                                                 <div class="sidebar-heading">
-                                                    <h2>4 comments</h2>
+                                                    <h2>${count} comments</h2>
                                                 </div>
                                                 <div class="content">
                                                     <ul>
-
-                                                        <li>                       
-                                                            <div class="right-content">
-                                                                <h4>Charles Kate<span>May 16, 2020</span></h4>
-                                                                <p>Curabitur a nisl eu lacus convallis eleifend posuere id tellus.</p>
-                                                            </div>
-                                                        </li>
-
-                                                        <li>
-
-                                                            <div class="right-content">
-                                                                <h4>Belisimo Mama<span>May 16, 2020</span></h4>
-                                                                <p>Sed vitae suscipit ligula. Vestibulum id turpis volutpat, lobortis turpis ac, molestie nibh.</p>
-                                                            </div>
-                                                        </li>
-
+                                                        <c:forEach var="f" items="${feedback}">
+                                                            <li>                       
+                                                                <div class="right-content">
+                                                                    <h4>${f.getCustomer().getFullname()}<span>${f.getCreated_at()}</span></h4>
+                                                                    <p>${f.getContent()}</p>
+                                                                </div>
+                                                            </li>                                                          
+                                                        </c:forEach>                                                  
                                                     </ul>
                                                 </div>
                                             </div>
@@ -183,7 +175,8 @@
                                                     <h2>Feedback</h2>
                                                 </div>
                                                 <div class="content">
-                                                    <form id="comment" action="#" method="post">
+                                                    <form id="comment" action="servicesDetail" method="post">
+                                                        <input type="hidden" value="${media.getService().getId()}">
                                                         <div class="row">                                             
                                                             <div class="col-lg-12">
                                                                 <fieldset>

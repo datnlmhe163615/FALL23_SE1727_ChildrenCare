@@ -4,28 +4,20 @@
  */
 package Model;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-
 /**
  *
  * @author mihxdat
  */
 
-public class ServiceMedia {
+public class ServiceMedia_1 {
     private int id;
     private Media media;
-    private Service service;
-<<<<<<< Updated upstream
+    private Service_2 service;
 
-=======
-    
->>>>>>> Stashed changes
-    public ServiceMedia() {
+    public ServiceMedia_1() {
     }
 
-    public ServiceMedia(int id, Media media, Service service) {
+    public ServiceMedia_1(int id, Media media, Service_2 service) {
         this.id = id;
         this.media = media;
         this.service = service;
@@ -47,11 +39,11 @@ public class ServiceMedia {
         this.media = media;
     }
 
-    public Service getService() {
+    public Service_2 getService() {
         return service;
     }
 
-    public void setService(Service service) {
+    public void setService(Service_2 service) {
         this.service = service;
     }
     
