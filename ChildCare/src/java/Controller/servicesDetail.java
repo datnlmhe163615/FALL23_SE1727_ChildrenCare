@@ -5,8 +5,8 @@
 package Controller;
 
 import DAO.ServicesDAO;
-import Model.ServiceCategory;
-import Model.ServiceMedia;
+import Model.ServiceCategory_1;
+import Model.ServiceMedia_1;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
@@ -27,8 +27,8 @@ public class servicesDetail extends HttpServlet {
         ServicesDAO dao = new ServicesDAO();
         String id = request.getParameter("id");
         int sid = Integer.parseInt(id);
-        ServiceMedia media = dao.getServiceById(sid);
-        ArrayList<ServiceCategory> category = dao.getServiceCate();
+        ServiceMedia_1 media = dao.getServiceById(sid);
+        ArrayList<ServiceCategory_1> category = dao.getServiceCate();
         request.setAttribute("category", category);
         request.setAttribute("media", media);
         request.getRequestDispatcher("servicesDetail.jsp").forward(request, response);
