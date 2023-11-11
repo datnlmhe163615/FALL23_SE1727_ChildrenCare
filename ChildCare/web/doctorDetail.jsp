@@ -1,7 +1,7 @@
 <%-- 
-    Document   : doctor
-    Created on : Sep 22, 2023, 10:05:38 PM
-    Author     : mihxdat
+    Document   : doctorDetail
+    Created on : Nov 3, 2023, 4:15:32 PM
+    Author     : asus
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -45,7 +45,7 @@
 
     </head>
 
-    <body class="sub_page">
+    <body>
 
         <div class="hero_area">
             <!-- header section strats -->
@@ -77,10 +77,10 @@
                 <div class="header_bottom">
                     <div class="container-fluid">
                         <nav class="navbar navbar-expand-lg custom_nav-container ">
-                            <a class="navbar-brand" href="index.html">
+                            <a class="navbar-brand" href="index.jsp">
                                 <img src="images/logo.png" alt="">
                             </a>
-                            </a>
+
 
                             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                                 <span class=""> </span>
@@ -89,7 +89,7 @@
                             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                                 <div class="d-flex mr-auto flex-column flex-lg-row align-items-center">
                                     <ul class="navbar-nav  ">
-                                        <li class="nav-item ">
+                                        <li class="nav-item active">
                                             <a class="nav-link" href="index.jsp">Home <span class="sr-only">(current)</span></a>
                                         </li>
                                         <li class="nav-item">
@@ -98,7 +98,7 @@
                                         <li class="nav-item">
                                             <a class="nav-link" href="treatment.jsp">Treatment</a>
                                         </li>
-                                        <li class="nav-item active">
+                                        <li class="nav-item">
                                             <a class="nav-link" href="doctor.jsp">Doctors</a>
                                         </li>
                                         <li class="nav-item">
@@ -110,18 +110,18 @@
                                     </ul>
                                 </div>
                                 <div class="quote_btn-container">
-                                    <a href="">
+                                    <a href="joinwithus.jsp">
                                         <i class="fa fa-user" aria-hidden="true"></i>
                                         <span>
-                                            Login
+                                            Join With Us
                                         </span>
                                     </a>
-                                    <a href="">
-                                        <i class="fa fa-user" aria-hidden="true"></i>
-                                        <span>
-                                            Sign Up
-                                        </span>
-                                    </a>
+                                    <!--                <a href="">
+                                                      <i class="fa fa-user" aria-hidden="true"></i>
+                                                      <span>
+                                                        Sign Up
+                                                      </span>
+                                                    </a>-->
                                     <form class="form-inline">
                                         <button class="btn  my-2 my-sm-0 nav_search-btn" type="submit">
                                             <i class="fa fa-search" aria-hidden="true"></i>
@@ -133,10 +133,8 @@
                     </div>
                 </div>
             </header>
-            <!-- end header section -->
-        </div>
 
-        <!-- team section -->
+        </div>
 
         <section class="team_section layout_padding">
             <div class="container">
@@ -145,45 +143,82 @@
                         Our <span>Doctors</span>
                     </h2>
                 </div>
-                <div class="carousel-wrap ">
-                    <div class="owl-carousel team_carousel">
-                        <c:forEach items="${acc}" var="a">
-                            <div class="item">
-                                <div class="box">
-                                    <a href="doctorDetail?did=${a.getId()}">
-                                    <div class="img-box">
-                                        <img src="${a.getAvatar()}" alt="" />
-                                    </div>
-                                    </a>
-                                    <div class="detail-box">
-                                        <h5>
-                                            ${a.getFullname()}
-                                        </h5>                                      
-                                        <div class="social_box">
-                                            <a href="">
-                                                <i class="fa fa-facebook" aria-hidden="true"></i>
-                                            </a>
-                                            <a href="">
-                                                <i class="fa fa-twitter" aria-hidden="true"></i>
-                                            </a>
-                                            <a href="">
-                                                <i class="fa fa-linkedin" aria-hidden="true"></i>
-                                            </a>
-                                            <a href="">
-                                                <i class="fa fa-instagram" aria-hidden="true"></i>
-                                            </a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </c:forEach>
 
+                <div class="item">
+                    <div class="box" style="background: #00c6a9;">
+                        <div class="img-box">
+                            <img src="${acc.getAvatar()}" alt="" />
+                        </div>
+                        <div class="detail-box">
+                            <h5>
+                                ${acc.getFullname()}
+                            </h5>                   
+                            <div class="social_box">
+                                <a href="">
+                                    <i class="fa fa-facebook" aria-hidden="true"></i>
+                                </a>
+                                <a href="">
+                                    <i class="fa fa-twitter" aria-hidden="true"></i>
+                                </a>
+                                <a href="">
+                                    <i class="fa fa-linkedin" aria-hidden="true"></i>
+                                </a>
+                                <a href="">
+                                    <i class="fa fa-instagram" aria-hidden="true"></i>
+                                </a>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- end team section -->
+        <section class="book_section layout_padding">
+            <div class="container">
+                <div class="row">
+                    <div class="col">
+                        <form>
+                            <h4>
+                                DOCTOR <span>DETAIL</span>
+                            </h4>
+                            <div class="form-row ">
+                                <div class="form-group col-lg-4">
+                                    <label for="inputPatientName">Email </label>
+                                    <input type="text" class="form-control" value="${acc.getEmail()}" readonly>
+                                </div>
+                                <div class="form-group col-lg-4">
+                                    <label for="inputDoctorName">Doctor's Name</label>
+                                    <input type="text" class="form-control" value="${acc.getFullname()}"  readonly>
+                                </div>
+                                <div class="form-group col-lg-4">
+                                    <label for="inputDepartmentName">Address</label>
+                                    <input type="text" class="form-control" value="${acc.getAddress()}"  readonly>
+                                </div>
+                            </div>
+                            <div class="form-row ">
+                                <div class="form-group col-lg-4">
+                                    <label for="inputPhone">Phone Number</label>
+                                    <input type="text" class="form-control" value="${acc.getMobile()}" readonly>
+                                </div>
+                                <div class="form-group col-lg-4">
+                                    <label for="inputSymptoms">Gender</label>
+                                    <div style="display: flex;    padding: 1px 17px;
+                                         font-size: 25px;">
+                                        <input style="height: 39px;" type="radio" class="form-control" name="gender" ${acc.isGender()?'checked':''}>male
+                                        <input style="height: 39px;" type="radio" class="form-control" name="gender" ${acc.isGender()?'':'checked'} >female
+                                    </div>
+                                </div>
+                                <div class="form-group col-lg-4">
+                                    <label for="inputPhone">Role</label>
+                                    <input type="text" class="form-control" value="Doctor" readonly>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </section>
+
 
 
         <!-- info section -->
@@ -251,7 +286,7 @@
                                     Useful link
                                 </h5>
                                 <div class="info_links_menu">
-                                    <a href="index.html">
+                                    <a class="active" href="index.html">
                                         Home
                                     </a>
                                     <a href="about.html">
@@ -260,7 +295,7 @@
                                     <a href="treatment.html">
                                         Treatment
                                     </a>
-                                    <a href="doctor.html" class="active">
+                                    <a href="doctor.html">
                                         Doctors
                                     </a>
                                     <a href="testimonial.html">
