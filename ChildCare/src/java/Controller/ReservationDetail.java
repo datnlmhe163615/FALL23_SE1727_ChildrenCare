@@ -1,8 +1,7 @@
-
 package Controller;
 
 import DAO.ReservationDAO;
-import Model.Reservation;
+import Model.Reservation_1;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
@@ -22,7 +21,7 @@ public class ReservationDetail extends HttpServlet {
             throws ServletException, IOException {
         String id = request.getParameter("id");
         ReservationDAO dao = new ReservationDAO();
-        ArrayList<Reservation> list = dao.getReservationDetail(Integer.parseInt(id));
+        ArrayList<Reservation_1> list = dao.getReservationDetail(Integer.parseInt(id));
         request.setAttribute("reservation", list);
         request.getRequestDispatcher("reservationDetail.jsp").forward(request, response);
     }
