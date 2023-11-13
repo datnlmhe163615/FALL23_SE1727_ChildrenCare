@@ -5,8 +5,8 @@
 package Controller;
 
 import DAO.ServicesDAO;
-import Model.Service;
-import Model.ServiceCategory;
+import Model.ServiceCategory_1;
+import Model.Service_2;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
@@ -39,8 +39,8 @@ public class servicesList extends HttpServlet {
             } else {
                 index = Integer.parseInt(currentPage);
             }
-            ArrayList<Service> services = dao.getService(cid, index);
-            ArrayList<ServiceCategory> category = dao.getServiceCate();
+            ArrayList<Service_2> services = dao.getService(cid, index);
+            ArrayList<ServiceCategory_1> category = dao.getServiceCate();
             request.setAttribute("category", category);
             request.setAttribute("services", services);
             request.setAttribute("numberPage", numberPage);
@@ -59,8 +59,8 @@ public class servicesList extends HttpServlet {
             } else {
                 index = Integer.parseInt(currentPage);
             }
-            ArrayList<Service> services = dao.getService(cid, index);
-            ArrayList<ServiceCategory> category = dao.getServiceCate();
+            ArrayList<Service_2> services = dao.getService(cid, index);
+            ArrayList<ServiceCategory_1> category = dao.getServiceCate();
             request.setAttribute("category", category);
             request.setAttribute("services", services);
             request.setAttribute("numberPage", numberPage);
